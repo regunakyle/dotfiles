@@ -1,0 +1,7 @@
+README.md
+LICENSE.md
+scripts*
+
+{{- if ne .chezmoi.hostname "fedora-desktop" }}
+.looking-glass-client.ini
+{{- end }}

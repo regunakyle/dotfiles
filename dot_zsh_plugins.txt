@@ -1,0 +1,8 @@
+romkatv/powerlevel10k kind:fpath
+
+ohmyzsh/ohmyzsh path:plugins/asdf
+
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search

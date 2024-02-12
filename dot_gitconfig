@@ -1,0 +1,15 @@
+[user]
+email = 60984878+regunakyle@users.noreply.github.com
+name = Reguna
+signingkey = 675CF7D52953746BBBC13243349A2D36A167C308!
+[commit]
+gpgsign = true
+verbose = true
+[tag]
+gpgsign = true
+[init]
+defaultbranch = main
+[merge]
+conflictstyle = diff3
+[pull]
+ff = only
