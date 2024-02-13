@@ -36,7 +36,8 @@ $bloatware = @(
     "Microsoft.ScreenSketch",
     "Microsoft.People",
     "Microsoft.Windows.Photos",
-    "Microsoft.WindowsSoundRecorder"
+    "Microsoft.WindowsSoundRecorder",
+    "Microsoft.WindowsCamera"
 )
 
 foreach ($item in $bloatware) {
@@ -67,7 +68,7 @@ choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepa
 choco install -y powershell-core --install-arguments='"DISABLE_TELEMETRY=1"'
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 choco install -y vscode --params "/NoContextMenuFiles"
-choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoShellHereIntegration /NoOpenSSH /DefaultBranchName:main /Editor:Notepad++'"
+choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Notepad++'"
 
 # Locale Emulator, workaround install method as AHK v2 fails
 # https://github.com/chtof/chocolatey-packages/issues/103

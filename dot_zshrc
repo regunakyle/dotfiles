@@ -16,7 +16,7 @@ bindkey -e
 source "$HOME/.asdf/asdf.sh"
 
 # ASDF java: Set JAVA_HOME
-if [[ "$(command -v java)" ]] ;then
+if [[ $( command -v asdf &> /dev/null && asdf list java 2> /dev/null | grep "^\s*\*" ) ]];then
 source ~/.asdf/plugins/java/set-java-home.zsh
 fi
 

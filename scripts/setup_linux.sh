@@ -68,7 +68,6 @@ sudo dnf install -y \
     git \
     gns3-gui \
     gns3-server \
-    intel-media-driver \
     kate \
     podman-docker \
     solaar \
@@ -91,6 +90,7 @@ fi
 
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
+echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
 
 # Create distrobox and install VSCode
 echo "Creating Debian Sid distrobox..."
@@ -116,6 +116,7 @@ echo "Setting up Flathub and installing flatpaks..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 flatpak install -y flathub \
+    com.borgbase.Vorta \
     com.calibre_ebook.calibre \
     com.google.Chrome \
     com.obsproject.Studio \
@@ -124,6 +125,7 @@ flatpak install -y flathub \
     dev.vencord.Vesktop \
     io.dbeaver.DBeaverCommunity \
     io.podman_desktop.PodmanDesktop \
+    md.obsidian.Obsidian \
     org.filezillaproject.Filezilla \
     org.gnome.Calculator \
     org.gnome.meld \
@@ -136,6 +138,7 @@ flatpak install -y flathub \
     org.qbittorrent.qBittorrent \
     org.sqlitebrowser.sqlitebrowser \
     org.strawberrymusicplayer.strawberry \
+    org.torproject.torbrowser-launcher \
     org.videolan.VLC
 
 if [[ "$is_desktop" != 1 ]]; then
@@ -185,7 +188,7 @@ git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 popd
 
 echo "Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and a Windows 10 VM."
-
+echo "You should create a network bridge (with your primary NIC as slave) for VM-Host communication."
 if [[ "$is_desktop" == 1 ]]; then
     cat <<EOS
 Since you are using desktop, here is a rough guideline for installing VFIO and looking glass: 
