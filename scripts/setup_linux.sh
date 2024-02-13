@@ -92,6 +92,9 @@ fi
 systemctl --user enable --now podman.socket
 echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
 
+# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
+echo "XMODIFIERS=@im=fcitx" >>~/.bash_profile
+
 # Create distrobox and install VSCode
 echo "Creating Debian Sid distrobox..."
 distrobox create \
@@ -105,6 +108,7 @@ distrobox create \
     wget -O code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
     sudo apt install -y ./code.deb ;
     rm ./code.deb ;
+    sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
     }"
@@ -187,21 +191,26 @@ git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 
 popd
 
-echo "Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and a Windows 10 VM."
-echo "You should create a network bridge (with your primary NIC as slave) for VM-Host communication."
+cat <<EOF
+Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and a Windows 10 VM.
+You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
+Export the VSCode inside the Distrobox with the following command:
+\`distrobox-export --bin /usr/bin/code --extra-flags "--foreground" --export-path "\$HOME/.local/bin"\`
+EOF
+
 if [[ "$is_desktop" == 1 ]]; then
     cat <<EOS
 Since you are using desktop, here is a rough guideline for installing VFIO and looking glass: 
 1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then reboot and check IOMMU is enabled"
 2. Add \`options vfio-pci ids=<Your device IDs>\` to /etc/modprobe.d/local.conf"
 (See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci)
-3. Add \`force_drivers+=\" vfio vfio_iommu_type1 vfio_pci \"\` to /etc/dracut.conf.d/local.conf"
-4. Regenerate the dracut initramfs with \"sudo dracut -f --kver \`uname -r\`" and reboot
+3. Add \`force_drivers+=" vfio vfio_iommu_type1 vfio_pci "\` to /etc/dracut.conf.d/local.conf
+4. Regenerate the dracut initramfs with "sudo dracut -f --kver \`uname -r\`" and reboot
 5. Create a Windows 10 VM:
   - Use Q35+UEFI
   - Use host CPU and set cores/threads
   - Use virtio as storage driver
-  - Mount virtio-win.iso from Red Hat
+  - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation 
   - (Optional) Delete NIC
   - Edit the XML:
     - CPU pinning by adding <cputune> section; Add emulatorpin (should use all cores not pinned to VM)
@@ -217,9 +226,8 @@ Since you are using desktop, here is a rough guideline for installing VFIO and l
   - Build the client binary and OBS plugin, symlink them to appropiate locations
   - Build the kernel module, set in \`.looking-glass-client.ini\` to use the shmFile
   - Make selinux audit for kvmfr0
-7. Load SCSI driver during Windows VM installation
-8. In the Windows VM, install virtio-win-guest-tools and Looking Glass host binary
-9. If the VM is using a Nvidia GPU:
+7. In the Windows VM, install virtio-win-guest-tools and Looking Glass host binary
+8. If the VM is using a Nvidia GPU:
   - Install Nvidia GPU drivers
   - Apply Nvidia-Patch (both NvFBC and NvENC)
   - Set Looking Glass to use NvFBC

@@ -45,6 +45,3 @@ autoload -Uz promptinit && promptinit && prompt powerlevel10k
 bindkey '^[[1;5A' history-substring-search-up # Ctrl+Up
 bindkey '^[[1;5B' history-substring-search-down # Ctrl+Down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-
-# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
-alias code='code --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime'
