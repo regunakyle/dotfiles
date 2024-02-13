@@ -126,6 +126,7 @@ flatpak install -y flathub \
     com.obsproject.Studio \
     com.obsproject.Studio.Plugin.DroidCam \
     com.obsproject.Studio.Plugin.InputOverlay \
+    com.usebruno.Bruno \
     dev.vencord.Vesktop \
     io.dbeaver.DBeaverCommunity \
     io.podman_desktop.PodmanDesktop \
