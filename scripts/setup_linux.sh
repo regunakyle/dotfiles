@@ -194,8 +194,9 @@ popd
 cat <<EOF
 Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and a Windows 10 VM.
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
-Export the VSCode inside the Distrobox with the following command:
+Export the VSCode inside the Distrobox with the following commands:
 \`distrobox-export --bin /usr/bin/code --extra-flags "--foreground" --export-path "\$HOME/.local/bin"\`
+\`distrobox-export --app code --extra-flags "--foreground"\`
 EOF
 
 if [[ "$is_desktop" == 1 ]]; then
