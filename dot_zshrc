@@ -42,8 +42,8 @@ autoload -Uz promptinit && promptinit && prompt powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # zsh-users/zsh-history-substring-search
-bindkey '^[[H' history-substring-search-up # `Home` key
-bindkey '^[[F' history-substring-search-down # `End` key
+bindkey '^[[1;5A' history-substring-search-up # Ctrl+Up
+bindkey '^[[1;5B' history-substring-search-down # Ctrl+Down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
