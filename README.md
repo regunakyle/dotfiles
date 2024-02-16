@@ -19,7 +19,7 @@
 - Use [Fcitx5](https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx_5) with Quick Classic as input method
 - Use [Podman](https://podman.io/) with Docker compatibility
   - Use the [docker-compose](https://github.com/docker/compose) binary from upstream as the distro version is out of date
-- Use [Caskaydia Cove Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode)
+- Use [Sarasa Gothic](https://github.com/be5invis/Sarasa-Gothic) and [Nerd Font Symbols](https://github.com/ryanoasis/nerd-fonts)
 - Use the Zsh shell with [Antidote](https://github.com/mattmc3/antidote) and [plugins](dot_zsh_plugins.txt)
 - Use [asdf](https://github.com/asdf-vm/asdf) and plugins
 - Use [Chezmoi](https://github.com/twpayne/chezmoi) as dotfile manager
@@ -40,3 +40,8 @@
     - Note: I do not recommend upgrading the monitor by yourself
 - Use [TLP](https://github.com/linrunner/TLP) instead of [PDD](https://gitlab.freedesktop.org/upower/power-profiles-daemon)
 - Use the OEM Windows 10 key ([how to find](https://www.cyberciti.biz/faq/linux-find-windows-10-oem-product-key-command/)) for the Windows VM
+
+## TODO
+
+- Prepare a Powershell script for bare metal Windows workstation setup
+- Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations

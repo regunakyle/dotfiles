@@ -5,8 +5,18 @@ then run this script
 
 TODO: 
 - Add user prompt instead of hard checks
+- Add error handling
 #>
-Set-Location $HOME\Downloads
+if (Test-Path env:TEMP) {
+    Push-Location $env:TEMP
+}
+elseif (Test-Path env:tmp) {
+    Push-Location $env:TMP
+}
+else {
+    Write-Host "No temp folder in PATH, quitting..."
+    exit 1
+}
 
 # Uninstall bloatware
 Write-Host "Uninstalling bloatware..."
@@ -49,7 +59,7 @@ Write-Host "Installing Chocolatey..."
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 # Install packages
-if ((Get-WmiObject -q "SELECT * FROM win32_computersystem").Manufacturer -eq "QEMU") {
+if ((Get-WmiObject win32_computersystem).Manufacturer -eq "QEMU") {
     Write-Host "Installing virtio guest tools..."
     Invoke-WebRequest https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win-guest-tools.exe `
         -OutFile virtio-win-guest-tools.exe
@@ -67,7 +77,7 @@ choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepa
 
 choco install -y powershell-core --install-arguments='"DISABLE_TELEMETRY=1"'
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-choco install -y vscode --params "/NoContextMenuFiles"
+choco install -y vscode
 choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Notepad++'"
 
 # Locale Emulator, workaround install method as AHK v2 fails
@@ -108,3 +118,5 @@ if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
 else {
     Write-Host "Installation finished! You should reboot now to ensure everything is installed completely."
 }
+
+Pop-Location 

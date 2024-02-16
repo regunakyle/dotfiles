@@ -7,7 +7,7 @@ set -euo pipefail
 
 # TODO:
 # - Automate VFIO and Looking Glass installation
-# - Add user prompt instead of hard checks
+# - Add error handling
 ##########################################################################
 
 # Check desktop or laptop
@@ -31,7 +31,7 @@ else
     echo "Running on laptop..."
 fi
 
-pushd "$HOME"
+pushd /tmp
 
 # Setup RPMFusion
 echo "Enabling RPMFusion and install media codecs..."
@@ -103,11 +103,10 @@ distrobox create \
     --pull \
     --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh build-essential 
     libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev 
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev" \
+    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev apt-listbugs apt-listchanges" \
     --init-hooks "command -v code >/dev/null 2>&1 || {
-    wget -O code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
-    sudo apt install -y ./code.deb ;
-    rm ./code.deb ;
+    wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
+    sudo apt install -y /tmp/code.deb ;
     sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
@@ -152,16 +151,22 @@ if [[ "$is_desktop" != 1 ]]; then
         com.github.wwmm.easyeffects
 fi
 
-# Setup CaskaydiaCove Nerd Font
+# Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
-echo "Setting up CaskaydiaCove Nerd Font..."
-wget -O CaskaydiaCoveNerdFont.tar.xz https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.tar.xz
-mkdir CaskaydiaCoveNerdFont
-tar -xf CaskaydiaCoveNerdFont.tar.xz -C CaskaydiaCoveNerdFont
+echo "Setting up Sarasa Fixed Slab HC..."
+filename=$(curl -fsSL "https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest" |
+    jq -c '.assets | map(select(.name | test("SarasaFixedSlabHC-TTF-[0-9\\.]+") ))[0].browser_download_url' |
+    xargs curl -JLOw '%{filename_effective}')
+7z x -o"$HOME/.local/share/fonts/${filename%.*}" SarasaFixedSlabHC-TTF-1.0.5.7z
+
+filename=NerdFontsSymbolsOnly.tar.xz
+wget -O $filename https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$filename
+mkdir ${filename%%.*}
+tar -xf $filename -C ${filename%%.*}
 mkdir -p "$HOME/.local/share/fonts"
-mv ./CaskaydiaCoveNerdFont/ "$_"
-fc-cache
-rm ./CaskaydiaCoveNerdFont.tar.xz
+mv ./${filename%%.*}/ "$_"
+
+fc-cache -vf
 
 # Setup Docker Compose
 echo "Setting up docker-compose..."
@@ -222,6 +227,7 @@ Since you are using desktop, here is a rough guideline for installing VFIO and l
       - Add iothread to disk driver
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
+  - Dynamically isolate CPU cores with QEMU hooks
 6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
   - Edit XML as written in guide (Skip the IVSHMEM section as we want to use the kernel \`kvmfr\` module)
   - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">

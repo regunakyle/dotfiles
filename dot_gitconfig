@@ -5,6 +5,8 @@ signingkey = 675CF7D52953746BBBC13243349A2D36A167C308!
 [commit]
 gpgsign = true
 verbose = true
+[push]
+gpgSign = if-asked
 [tag]
 gpgsign = true
 [init]
@@ -13,3 +15,5 @@ defaultbranch = main
 conflictstyle = diff3
 [pull]
 ff = only
+[alias]
+pushf = push --force-with-lease
