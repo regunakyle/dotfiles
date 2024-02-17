@@ -227,7 +227,7 @@ Here is a rough guideline for installing VFIO and looking glass:
   - Edit the XML:
     - CPU pinning by adding <cputune> section; Add emulatorpin (should use all cores not pinned to VM)
     - Add PCIe devices
-    - Add \`<feature policy='require' name='topoext'/>\` inside <CPU>
+    - Add \`<feature policy='require' name='topoext'/>\` inside <CPU> if you are using an AMD CPU
   - If you are not going to install Windows on a passed through storage device:
     - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation 
     - Edit the XML:
