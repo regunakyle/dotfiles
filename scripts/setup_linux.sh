@@ -42,7 +42,6 @@ sudo dnf upgrade -y
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
-
 sudo dnf install -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 if [[ "$is_desktop" != 1 ]]; then
@@ -51,7 +50,7 @@ if [[ "$is_desktop" != 1 ]]; then
     sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
     sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 
-    # Replace power-profiles-daemon with tlp
+    # Replace power-profiles-daemon with TLP
     sudo dnf remove -y power-profiles-daemon
 fi
 
@@ -96,7 +95,7 @@ echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_pr
 echo "XMODIFIERS=@im=fcitx" >>~/.bash_profile
 
 # Create distrobox and install VSCode
-echo "Creating Debian Sid distrobox..."
+echo "Creating Debian Unstable distrobox..."
 distrobox create \
     --image quay.io/toolbx-images/debian-toolbox:unstable \
     --name toolbox \
@@ -153,29 +152,36 @@ fi
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
-echo "Setting up Sarasa Fixed Slab HC..."
+echo "Setting up Sarasa Fixed Slab HC and Nerd Font..."
 filename=$(curl -fsSL "https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest" |
     jq -c '.assets | map(select(.name | test("SarasaFixedSlabHC-TTF-[0-9\\.]+") ))[0].browser_download_url' |
     xargs curl -JLOw '%{filename_effective}')
-7z x -o"$HOME/.local/share/fonts/${filename%.*}" SarasaFixedSlabHC-TTF-1.0.5.7z
+7z x -o"$HOME/.local/share/fonts/${filename%.*}" "$filename"
 
 filename=NerdFontsSymbolsOnly.tar.xz
 wget -O $filename https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$filename
 mkdir ${filename%%.*}
 tar -xf $filename -C ${filename%%.*}
-mkdir -p "$HOME/.local/share/fonts"
-mv ./${filename%%.*}/ "$_"
+mv ./${filename%%.*}/ "$HOME/.local/share/fonts"
 
-fc-cache -vf
+fc-cache -f
 
-# Setup Docker Compose
+# Setup binaries from various sources
+local_bin="$HOME/.local/bin"
+mkdir -p "$local_bin"
+
+# docker-compose
 echo "Setting up docker-compose..."
-wget -O docker-compose https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
-chmod u+x ./docker-compose
-mkdir -p "$HOME/.local/bin"
-mv ./docker-compose "$_"
+wget -O "$local_bin/docker-compose" https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
+chmod u+x "$local_bin/docker-compose"
+
+# google-java-format
+echo "Setting up google-java-format..."
+wget -O "$local_bin/google-java-format" https://github.com/google/google-java-format/releases/download/v1.20.0/google-java-format_linux-x86-64
+chmod u+x "$local_bin/google-java-format"
 
 # Get asdf
+echo "Setting up asdf and Chezmoi..."
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
     "$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/asdf-vm/asdf.git '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)"
 
@@ -198,7 +204,7 @@ git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 popd
 
 cat <<EOF
-Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and a Windows 10 VM.
+Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
 Export the VSCode inside the Distrobox with the following commands:
 \`distrobox-export --bin /usr/bin/code --extra-flags "--foreground" --export-path "\$HOME/.local/bin"\`
@@ -207,7 +213,7 @@ EOF
 
 if [[ "$is_desktop" == 1 ]]; then
     cat <<EOS
-Since you are using desktop, here is a rough guideline for installing VFIO and looking glass: 
+Here is a rough guideline for installing VFIO and looking glass: 
 1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then reboot and check IOMMU is enabled"
 2. Add \`options vfio-pci ids=<Your device IDs>\` to /etc/modprobe.d/local.conf"
 (See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci)
@@ -215,21 +221,22 @@ Since you are using desktop, here is a rough guideline for installing VFIO and l
 4. Regenerate the dracut initramfs with "sudo dracut -f --kver \`uname -r\`" and reboot
 5. Create a Windows 10 VM:
   - Use Q35+UEFI
-  - Use host CPU and set cores/threads
+  - Use host-passthrough and set CPU cores/threads
   - Use virtio as storage driver
-  - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation 
   - (Optional) Delete NIC
   - Edit the XML:
     - CPU pinning by adding <cputune> section; Add emulatorpin (should use all cores not pinned to VM)
     - Add PCIe devices
     - Add \`<feature policy='require' name='topoext'/>\` inside <CPU>
-    - If you are not going to install Windows on a passed through storage device:
+  - If you are not going to install Windows on a passed through storage device:
+    - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation 
+    - Edit the XML:
       - Add iothread to disk driver
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
   - Dynamically isolate CPU cores with QEMU hooks
 6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
-  - Edit XML as written in guide (Skip the IVSHMEM section as we want to use the kernel \`kvmfr\` module)
+  - Edit XML as written in the docs (Skip the IVSHMEM section as we want to use the kernel \`kvmfr\` module)
   - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
   - Build the client binary and OBS plugin, symlink them to appropiate locations
   - Build the kernel module, set in \`.looking-glass-client.ini\` to use the shmFile
@@ -241,5 +248,9 @@ Since you are using desktop, here is a rough guideline for installing VFIO and l
   - Set Looking Glass to use NvFBC
 EOS
 fi
+
+unset is_desktop
+unset filename
+unset local_bin
 
 exit 0

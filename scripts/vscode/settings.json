@@ -13,8 +13,14 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "[java]": {
-    // Waiting for google-java-format...
+  // Running google-java-format manually with the Run On Save extension
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.java$",
+        "cmd": "google-java-format --replace ${file}"
+      }
+    ]
   },
   "java.checkstyle.configuration": "/google_checks.xml",
   "[markdown]": {

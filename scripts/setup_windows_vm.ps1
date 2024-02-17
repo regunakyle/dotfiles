@@ -4,7 +4,7 @@
 then run this script
 
 TODO: 
-- Add user prompt instead of hard checks
+- Automate Nvidia driver and Nvidia-Patch installation
 - Add error handling
 #>
 if (Test-Path env:TEMP) {

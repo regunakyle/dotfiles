@@ -1,4 +1,4 @@
-# Dotfiles of my Linux setup
+# Dotfiles of my workstation setup
 
 ## Content
 
@@ -13,9 +13,9 @@
 - Windows 10 VM with [setup script](scripts/setup_windows.ps1)
 - RPM Fusion enabled, uses patent-encumbered codecs
 - Use [Distrobox](https://github.com/89luca89/distrobox) container as primary development environment
-  - [Debian Unstable](https://wiki.debian.org/DebianUnstable) (Sid) container for [Playwright](https://playwright.dev/) compatibility and rolling updates (no need to upgrade between versions)
+  - [Debian Unstable](https://wiki.debian.org/DebianUnstable) container for [Playwright](https://playwright.dev/) compatibility and rolling updates (thus no need to upgrade between major versions)
   - VSCode installed and exported to host
-- Install most application (as flatpak) from [Flathub](https://flathub.org/) instead of DNF
+- Install most GUI application as flatpak from [Flathub](https://flathub.org/) instead of DNF
 - Use [Fcitx5](https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx_5) with Quick Classic as input method
 - Use [Podman](https://podman.io/) with Docker compatibility
   - Use the [docker-compose](https://github.com/docker/compose) binary from upstream as the distro version is out of date
@@ -45,3 +45,4 @@
 
 - Prepare a Powershell script for bare metal Windows workstation setup
 - Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
+- Reimplement the installation scripts with Ansible
