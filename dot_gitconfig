@@ -16,4 +16,4 @@ conflictstyle = diff3
 [pull]
 ff = only
 [alias]
-pushf = push --force-with-lease
+fpush = push --force-with-lease
