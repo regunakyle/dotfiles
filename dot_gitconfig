@@ -1,19 +1,35 @@
+[alias]
+fpush = push --force-with-lease
+[branch]
+sort = -committerdate
+[commit]
+gpgsign = true
+verbose = true
+[diff]
+algorithm = histogram
+[fetch]
+fsckobjects = true
+[init]
+defaultbranch = main
+[merge]
+conflictstyle = zdiff3
+[pull]
+ff = only
+[push]
+gpgsign = if-asked
+followtags = true
+[receive]
+fsckobjects = true
+[submodule]
+recurse = true
+[tag]
+gpgsign = true
+sort = -v:refname
+[transfer]
+fsckobjects = true
+[url "git@github.com:"]
+insteadOf = "https://github.com/"
 [user]
 email = 60984878+regunakyle@users.noreply.github.com
 name = Reguna
 signingkey = 675CF7D52953746BBBC13243349A2D36A167C308!
-[commit]
-gpgsign = true
-verbose = true
-[push]
-gpgSign = if-asked
-[tag]
-gpgsign = true
-[init]
-defaultbranch = main
-[merge]
-conflictstyle = diff3
-[pull]
-ff = only
-[alias]
-fpush = push --force-with-lease

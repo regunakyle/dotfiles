@@ -43,6 +43,6 @@
 
 ## TODO
 
-- Prepare a Powershell script for bare metal Windows workstation setup
+- Prepare a Powershell script for bare metal Windows and WSL setup
 - Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
 - Reimplement the installation scripts with Ansible

@@ -100,9 +100,9 @@ distrobox create \
     --image quay.io/toolbx-images/debian-toolbox:unstable \
     --name toolbox \
     --pull \
-    --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh build-essential 
-    libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev 
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev apt-listbugs apt-listchanges" \
+    --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
+    build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
+    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
     --init-hooks "command -v code >/dev/null 2>&1 || {
     wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
     sudo apt install -y /tmp/code.deb ;
@@ -110,7 +110,6 @@ distrobox create \
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
     }"
-
 podman start toolbox
 
 # Setup flatpak
@@ -177,7 +176,7 @@ chmod u+x "$local_bin/docker-compose"
 
 # google-java-format
 echo "Setting up google-java-format..."
-wget -O "$local_bin/google-java-format" https://github.com/google/google-java-format/releases/download/v1.20.0/google-java-format_linux-x86-64
+wget -O "$local_bin/google-java-format" https://github.com/google/google-java-format/releases/latest/download/google-java-format_linux-x86-64
 chmod u+x "$local_bin/google-java-format"
 
 # Get asdf
