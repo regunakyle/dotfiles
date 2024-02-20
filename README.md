@@ -10,7 +10,7 @@
 ### General
 
 - Fedora KDE (installed with the [Fedora Everything](https://alt.fedoraproject.org/) image) with minimum bloat
-- Windows 10 VM with [setup script](scripts/setup_windows.ps1)
+- Windows 10 VM with [setup script](scripts/setup_windows_vm.ps1)
 - RPM Fusion enabled, uses patent-encumbered codecs
 - Use [Distrobox](https://github.com/89luca89/distrobox) container as primary development environment
   - [Debian Unstable](https://wiki.debian.org/DebianUnstable) container for [Playwright](https://playwright.dev/) compatibility and rolling updates (thus no need to upgrade between major versions)
@@ -45,4 +45,4 @@
 
 - Prepare a Powershell script for bare metal Windows and WSL setup
 - Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
-- Reimplement the installation scripts with Ansible
+- Reimplement the installation scripts as Ansible Playbooks
