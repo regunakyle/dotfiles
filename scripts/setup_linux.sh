@@ -33,11 +33,51 @@ fi
 
 pushd /tmp
 
+{
+    # Setup flatpak in background
+    echo "Setting up Flathub and installing flatpaks..."
+    flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    flatpak install -y flathub \
+        com.borgbase.Vorta \
+        com.calibre_ebook.calibre \
+        com.google.Chrome \
+        com.obsproject.Studio \
+        com.obsproject.Studio.Plugin.DroidCam \
+        com.obsproject.Studio.Plugin.InputOverlay \
+        com.usebruno.Bruno \
+        dev.vencord.Vesktop \
+        io.dbeaver.DBeaverCommunity \
+        io.podman_desktop.PodmanDesktop \
+        md.obsidian.Obsidian \
+        org.filezillaproject.Filezilla \
+        org.gnome.Calculator \
+        org.gnome.meld \
+        org.kde.gwenview \
+        org.kde.kleopatra \
+        org.kde.kolourpaint \
+        org.kde.okular \
+        org.mozilla.Thunderbird \
+        org.onlyoffice.desktopeditors \
+        org.qbittorrent.qBittorrent \
+        org.sqlitebrowser.sqlitebrowser \
+        org.strawberrymusicplayer.strawberry \
+        org.torproject.torbrowser-launcher \
+        org.videolan.VLC
+
+    if [[ "$is_desktop" != 1 ]]; then
+        flatpak install -y flathub \
+            com.github.d4nj1.tlpui \
+            com.github.wwmm.easyeffects
+    fi
+} &
+
 # Setup RPMFusion
 echo "Enabling RPMFusion and install media codecs..."
 sudo dnf install -y \
     "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
 sudo dnf upgrade -y
 
 # Multimedia related
@@ -72,6 +112,33 @@ sudo dnf install -y \
     solaar \
     zsh
 
+# Enable Podman socket for Docker compatiblity
+systemctl --user enable --now podman.socket
+echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
+
+# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
+echo "XMODIFIERS=@im=fcitx" >>~/.bash_profile
+
+# Create distrobox and install VSCode (in background)
+{
+    echo "Creating Debian Unstable distrobox..."
+    distrobox create \
+        --image quay.io/toolbx-images/debian-toolbox:unstable \
+        --name toolbox \
+        --pull \
+        --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
+    build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
+    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
+        --init-hooks "command -v code >/dev/null 2>&1 || {
+    wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
+    sudo apt install -y /tmp/code.deb ;
+    sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
+    }"
+    podman start toolbox
+} &
+
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
         dkms \
@@ -85,68 +152,6 @@ else
 
     sudo systemctl enable --now tlp.service
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
-fi
-
-# Enable Podman socket for Docker compatiblity
-systemctl --user enable --now podman.socket
-echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
-
-# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
-echo "XMODIFIERS=@im=fcitx" >>~/.bash_profile
-
-# Create distrobox and install VSCode
-echo "Creating Debian Unstable distrobox..."
-distrobox create \
-    --image quay.io/toolbx-images/debian-toolbox:unstable \
-    --name toolbox \
-    --pull \
-    --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
-    build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
-    --init-hooks "command -v code >/dev/null 2>&1 || {
-    wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
-    sudo apt install -y /tmp/code.deb ;
-    sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
-    }"
-podman start toolbox
-
-# Setup flatpak
-echo "Setting up Flathub and installing flatpaks..."
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-flatpak install -y flathub \
-    com.borgbase.Vorta \
-    com.calibre_ebook.calibre \
-    com.google.Chrome \
-    com.obsproject.Studio \
-    com.obsproject.Studio.Plugin.DroidCam \
-    com.obsproject.Studio.Plugin.InputOverlay \
-    com.usebruno.Bruno \
-    dev.vencord.Vesktop \
-    io.dbeaver.DBeaverCommunity \
-    io.podman_desktop.PodmanDesktop \
-    md.obsidian.Obsidian \
-    org.filezillaproject.Filezilla \
-    org.gnome.Calculator \
-    org.gnome.meld \
-    org.kde.gwenview \
-    org.kde.kleopatra \
-    org.kde.kolourpaint \
-    org.kde.okular \
-    org.mozilla.Thunderbird \
-    org.onlyoffice.desktopeditors \
-    org.qbittorrent.qBittorrent \
-    org.sqlitebrowser.sqlitebrowser \
-    org.strawberrymusicplayer.strawberry \
-    org.torproject.torbrowser-launcher \
-    org.videolan.VLC
-
-if [[ "$is_desktop" != 1 ]]; then
-    flatpak install -y flathub \
-        com.github.d4nj1.tlpui \
-        com.github.wwmm.easyeffects
 fi
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
@@ -195,12 +200,15 @@ asdf plugin-add pipx
 asdf install chezmoi latest
 asdf global chezmoi latest
 
-chezmoi init --apply regunakyle
-
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 
+chezmoi init --apply regunakyle
+
 popd
+
+echo "Waiting for flatpak and distrobox installation to finish..."
+wait
 
 cat <<EOF
 Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.

@@ -40,9 +40,9 @@ code --install-extension tomoki1207.pdf
 code --install-extension usernamehw.errorlens
 code --install-extension vincaslt.highlight-matching-tag
 code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension vitest.explorer
 code --install-extension vmware.vscode-boot-dev-pack
 code --install-extension vscjava.vscode-java-pack
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension YoavBls.pretty-ts-errors
 code --install-extension yzhang.markdown-all-in-one
-code --install-extension ZixuanChen.vitest-explorer
