@@ -33,6 +33,12 @@ fi
 
 pushd /tmp
 
+# Setup RPMFusion
+echo "Enabling RPMFusion and install media codecs..."
+sudo dnf install -y \
+    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+    "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
 {
     # Setup flatpak in background
     echo "Setting up Flathub and installing flatpaks..."
@@ -71,12 +77,6 @@ pushd /tmp
             com.github.wwmm.easyeffects
     fi
 } &
-
-# Setup RPMFusion
-echo "Enabling RPMFusion and install media codecs..."
-sudo dnf install -y \
-    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
-    "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
 sudo dnf upgrade -y
 
