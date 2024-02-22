@@ -6,6 +6,7 @@ set -euo pipefail
 # and only Firefox as additional package.
 
 # TODO:
+# - Automate the post installation tasks
 # - Automate VFIO and Looking Glass installation
 # - Add error handling
 ##########################################################################
@@ -33,16 +34,14 @@ fi
 
 pushd /tmp
 
-# Setup RPMFusion
-echo "Enabling RPMFusion and install media codecs..."
-sudo dnf install -y \
-    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
-    "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+sudo dnf upgrade -y
 
 {
     # Setup flatpak in background
     echo "Setting up Flathub and installing flatpaks..."
     flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    flatpak install -y flathub io.podman_desktop.PodmanDesktop
 
     flatpak install -y flathub \
         com.borgbase.Vorta \
@@ -54,7 +53,6 @@ sudo dnf install -y \
         com.usebruno.Bruno \
         dev.vencord.Vesktop \
         io.dbeaver.DBeaverCommunity \
-        io.podman_desktop.PodmanDesktop \
         md.obsidian.Obsidian \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
@@ -78,7 +76,40 @@ sudo dnf install -y \
     fi
 } &
 
-sudo dnf upgrade -y
+sudo dnf install -y \
+    podman-docker \
+    distrobox
+
+# Create distrobox and install VSCode (in background)
+{
+    echo "Creating Debian Unstable distrobox..."
+    distrobox create \
+        --image quay.io/toolbx-images/debian-toolbox:unstable \
+        --name toolbox \
+        --pull \
+        --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
+    build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
+    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
+        --init-hooks "command -v code >/dev/null 2>&1 || {
+    wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
+    sudo apt install -y /tmp/code.deb ;
+    sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
+    }"
+    podman start toolbox
+} &
+
+# Enable Podman socket for Docker compatiblity
+systemctl --user enable --now podman.socket
+echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
+
+# Setup RPMFusion
+echo "Enabling RPMFusion and install media codecs..."
+sudo dnf install -y \
+    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+    "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
@@ -101,43 +132,17 @@ sudo dnf install -y \
     @sound-and-video \
     @virtualization \
     akmod-v4l2loopback \
-    distrobox \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     git \
     gns3-gui \
     gns3-server \
     kate \
-    podman-docker \
     solaar \
     zsh
 
-# Enable Podman socket for Docker compatiblity
-systemctl --user enable --now podman.socket
-echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
-
 # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
 echo "XMODIFIERS=@im=fcitx" >>~/.bash_profile
-
-# Create distrobox and install VSCode (in background)
-{
-    echo "Creating Debian Unstable distrobox..."
-    distrobox create \
-        --image quay.io/toolbx-images/debian-toolbox:unstable \
-        --name toolbox \
-        --pull \
-        --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
-    build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
-        --init-hooks "command -v code >/dev/null 2>&1 || {
-    wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
-    sudo apt install -y /tmp/code.deb ;
-    sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
-    }"
-    podman start toolbox
-} &
 
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
@@ -200,10 +205,10 @@ asdf plugin-add pipx
 asdf install chezmoi latest
 asdf global chezmoi latest
 
+chezmoi init --apply regunakyle
+
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
-
-chezmoi init --apply regunakyle
 
 popd
 
@@ -213,19 +218,26 @@ wait
 cat <<EOF
 Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
-Export the VSCode inside the Distrobox with the following commands:
-\`distrobox-export --bin /usr/bin/code --extra-flags "--foreground" --export-path "\$HOME/.local/bin"\`
-\`distrobox-export --app code --extra-flags "--foreground"\`
+
+NOTE: 
+The distrobox probably is still initializing. After it finishes, 
+enter it and export the VSCode inside the Distrobox with the following commands:
+
+distrobox-export --bin /usr/bin/code --extra-flags "--foreground" --export-path "\$HOME/.local/bin"
+distrobox-export --app code --extra-flags "--foreground"
+
 EOF
 
 if [[ "$is_desktop" == 1 ]]; then
     cat <<EOS
 Here is a rough guideline for installing VFIO and looking glass: 
+
 1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then reboot and check IOMMU is enabled"
 2. Add \`options vfio-pci ids=<Your device IDs>\` to /etc/modprobe.d/local.conf"
-(See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci)
 3. Add \`force_drivers+=" vfio vfio_iommu_type1 vfio_pci "\` to /etc/dracut.conf.d/local.conf
 4. Regenerate the dracut initramfs with "sudo dracut -f --kver \`uname -r\`" and reboot
+(See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci if black screen after reboot)
+
 5. Create a Windows 10 VM:
   - Use Q35+UEFI
   - Use host-passthrough and set CPU cores/threads
@@ -242,12 +254,14 @@ Here is a rough guideline for installing VFIO and looking glass:
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
   - Dynamically isolate CPU cores with QEMU hooks
+
 6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
   - Edit XML as written in the docs (Skip the IVSHMEM section as we want to use the kernel \`kvmfr\` module)
   - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
   - Build the client binary and OBS plugin, symlink them to appropiate locations
   - Build the kernel module, set in \`.looking-glass-client.ini\` to use the shmFile
   - Make selinux audit for kvmfr0
+
 7. In the Windows VM, install virtio-win-guest-tools and Looking Glass host binary
 8. If the VM is using a Nvidia GPU:
   - Install Nvidia GPU drivers
@@ -260,4 +274,5 @@ unset is_desktop
 unset filename
 unset local_bin
 
-exit 0
+# Start Zsh
+zsh
