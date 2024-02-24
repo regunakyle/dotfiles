@@ -223,9 +223,9 @@ NOTE:
 The distrobox probably is still initializing. After it finishes, 
 enter it and export the VSCode inside the Distrobox with the following commands:
 
-(You may need to change the launch shell to bash manually in application menu)
-distrobox-export --bin /usr/bin/code --extra-flags "--foreground" --export-path "\$HOME/.local/bin"
-distrobox-export --app code --extra-flags "--foreground"
+distrobox-export --bin /usr/bin/code --export-path "\$HOME/.local/bin"
+distrobox-export --app code
+(You may need to change the launch shell to bash to have correct paths)
 
 EOF
 
