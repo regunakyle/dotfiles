@@ -138,7 +138,6 @@ sudo dnf install -y \
     gns3-gui \
     gns3-server \
     kate \
-    solaar \
     zsh
 
 # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
@@ -239,7 +238,7 @@ Here is a rough guideline for installing VFIO and looking glass:
 (See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci if black screen after reboot)
 
 5. Create a Windows 10 VM:
-  - Use Q35+UEFI
+  - Use Q35+UEFI (Cannot make live snapshot of VM using UEFI)
   - Use host-passthrough and set CPU cores/threads
   - Use virtio as storage driver
   - (Optional) Delete NIC
@@ -248,7 +247,8 @@ Here is a rough guideline for installing VFIO and looking glass:
     - Add PCIe devices
     - Add \`<feature policy='require' name='topoext'/>\` inside <CPU> if you are using an AMD CPU
   - If you are not going to install Windows on a passed through storage device:
-    - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation 
+    - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation
+    (Download from https://github.com/virtio-win/virtio-win-pkg-scripts)
     - Edit the XML:
       - Add iothread to disk driver
       - Add <iothreads>1</iothreads> under <domain>
