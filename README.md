@@ -46,5 +46,4 @@
 - Prepare a Powershell script for bare metal Windows and WSL setup
 - Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
 - Fix potential conflicts between TLP and KDE
-- Figure out why VSCode launched inside the distrobox has incorrect paths and fix it
 - Reimplement the installation scripts as Ansible Playbooks

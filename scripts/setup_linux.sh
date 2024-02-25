@@ -77,8 +77,9 @@ sudo dnf upgrade -y
 } &
 
 sudo dnf install -y \
-    podman-docker \
-    distrobox
+    distrobox \
+    git \
+    podman-docker
 
 # Create distrobox and install VSCode (in background)
 {
@@ -103,7 +104,7 @@ sudo dnf install -y \
 
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
-echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bash_profile
+echo "export DOCKER_HOST=unix:///run/user/\$UID/podman/podman.sock" >>~/.bashrc
 
 # Setup RPMFusion
 echo "Enabling RPMFusion and install media codecs..."
@@ -134,7 +135,6 @@ sudo dnf install -y \
     akmod-v4l2loopback \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
-    git \
     gns3-gui \
     gns3-server \
     kate \
@@ -193,6 +193,15 @@ chmod u+x "$local_bin/google-java-format"
 echo "Setting up asdf and Chezmoi..."
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
     "$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/asdf-vm/asdf.git '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)"
+
+echo "source \"\$HOME/.asdf/asdf.sh\"" >>~/.bashrc
+echo "source \"\$HOME/.asdf/completions/asdf.bash\"" >>~/.bashrc
+cat <<'EOF' >>~/.bashrc
+# ASDF java: Set JAVA_HOME
+if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]];then
+source ~/.asdf/plugins/java/set-java-home.zsh
+fi
+EOF
 
 source "$HOME/.asdf/asdf.sh"
 
