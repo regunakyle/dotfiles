@@ -38,12 +38,10 @@
   - SSD upgraded to 1TB
   - Monitor upgraded to a 100% sRGB, 120Hz, 2560×1600 panel ([N140GLE-GT1](https://www.panelook.com/N140GLE-GT1_Innolux_14.0_LCM_parameter_59738.html))
     - Note: I do not recommend upgrading the monitor by yourself
-- Use [TLP](https://github.com/linrunner/TLP) instead of [PDD](https://gitlab.freedesktop.org/upower/power-profiles-daemon)
 - Use the OEM Windows 10 key ([how to find](https://www.cyberciti.biz/faq/linux-find-windows-10-oem-product-key-command/)) for the Windows VM
 
 ## TODO
 
 - Prepare a Powershell script for bare metal Windows and WSL setup
 - Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
-- Fix potential conflicts between TLP and KDE
 - Reimplement the installation scripts as Ansible Playbooks

@@ -68,12 +68,6 @@ sudo dnf upgrade -y
         org.strawberrymusicplayer.strawberry \
         org.torproject.torbrowser-launcher \
         org.videolan.VLC
-
-    if [[ "$is_desktop" != 1 ]]; then
-        flatpak install -y flathub \
-            com.github.d4nj1.tlpui \
-            com.github.wwmm.easyeffects
-    fi
 } &
 
 sudo dnf install -y \
@@ -148,11 +142,7 @@ if [[ "$is_desktop" == 1 ]]; then
         solaar
 else
     sudo dnf install -y \
-        steam \
-        tlp-rdw
-
-    sudo systemctl enable --now tlp.service
-    sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
+        steam
 fi
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
