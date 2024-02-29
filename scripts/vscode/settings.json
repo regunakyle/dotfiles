@@ -78,9 +78,11 @@
     "excel",
     "po"
   ],
+  "discord.removeRemoteRepository": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.fontFamily": "'Sarasa Fixed Slab HC', 'Symbols Nerd Font Mono', monospace",
   "editor.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
   "editor.renderWhitespace": "all",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
