@@ -85,7 +85,7 @@ sudo dnf install -y \
         --image quay.io/toolbx-images/debian-toolbox:unstable \
         --name toolbox \
         --pull \
-        --additional-packages "hugo maven scrcpy shellcheck texlive-full apt-listbugs apt-listchanges 
+        --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
     build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
     xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
         --init-hooks "command -v code >/dev/null 2>&1 || {
@@ -224,7 +224,8 @@ echo "Waiting for flatpak and distrobox installation to finish..."
 wait
 
 cat <<EOF
-Install finished! You may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
+Install finished! You should restart now to ensure everything works correctly.
+After that, you may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
 
 NOTE: 
@@ -233,6 +234,9 @@ enter it and export the VSCode inside the Distrobox with the following commands:
 
 distrobox-export --bin /usr/bin/code --export-path "\$HOME/.local/bin"
 distrobox-export --app code
+
+Note: 
+Do not run distrobox-enter on host (in Konsole), this will load /etc/profile in the distrobox and mess up \$PATH
 
 EOF
 
