@@ -36,6 +36,9 @@ pushd /tmp
 
 sudo dnf upgrade -y
 
+# Disable searching for missing programs from DNF repo
+sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/PackageKit/CommandNotFound.conf
+
 {
     # Setup flatpak in background
     echo "Setting up Flathub and installing flatpaks..."
@@ -134,6 +137,9 @@ sudo dnf install -y \
     libavcodec-freeworld \
     zsh
 
+# Change default shell to Zsh
+sudo chsh -s "$(which zsh)" "$(whoami)"
+
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
         dkms \
@@ -180,8 +186,11 @@ echo "Setting up asdf and Chezmoi..."
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
     "$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/asdf-vm/asdf.git '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)"
 
+# Add variables to Bash start files in case Bash is called for some unknown reason
+cat <<'EOF' >>~/.bash_profile
 # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
-echo "XMODIFIERS=@im=fcitx" >>~/.bash_profile
+export XMODIFIERS=@im=fcitx
+EOF
 
 cat <<'EOF' >>~/.bashrc
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
@@ -224,7 +233,6 @@ enter it and export the VSCode inside the Distrobox with the following commands:
 
 distrobox-export --bin /usr/bin/code --export-path "\$HOME/.local/bin"
 distrobox-export --app code
-(You may need to change the launch shell to bash to have correct paths)
 
 EOF
 
