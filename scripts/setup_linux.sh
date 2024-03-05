@@ -85,7 +85,7 @@ sudo dnf install -y \
         --image quay.io/toolbx-images/debian-toolbox:unstable \
         --name toolbox \
         --pull \
-        --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
+        --additional-packages "hugo maven scrcpy shellcheck texlive-full apt-listbugs apt-listchanges 
     build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
     xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
         --init-hooks "command -v code >/dev/null 2>&1 || {
