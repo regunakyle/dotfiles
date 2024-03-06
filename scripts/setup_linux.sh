@@ -76,7 +76,11 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 sudo dnf install -y \
     distrobox \
     git \
-    podman-docker
+    podman-docker \
+    zsh
+
+# Change default shell to Zsh
+sudo chsh -s "$(which zsh)" "$(whoami)"
 
 # Create distrobox and install VSCode (in background)
 {
@@ -85,6 +89,7 @@ sudo dnf install -y \
         --image quay.io/toolbx-images/debian-toolbox:unstable \
         --name toolbox \
         --pull \
+        --no-entry \
         --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
     build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
     xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
@@ -134,11 +139,7 @@ sudo dnf install -y \
     gns3-gui \
     gns3-server \
     kate \
-    libavcodec-freeworld \
-    zsh
-
-# Change default shell to Zsh
-sudo chsh -s "$(which zsh)" "$(whoami)"
+    libavcodec-freeworld
 
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
@@ -186,22 +187,6 @@ echo "Setting up asdf and Chezmoi..."
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
     "$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/asdf-vm/asdf.git '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)"
 
-# Add variables to Bash start files in case Bash is called for some unknown reason
-cat <<'EOF' >>~/.bash_profile
-# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
-export XMODIFIERS=@im=fcitx
-EOF
-
-cat <<'EOF' >>~/.bashrc
-export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
-source "$HOME/.asdf/asdf.sh"
-source "$HOME/.asdf/completions/asdf.bash"
-# ASDF java: Set JAVA_HOME
-if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]];then
-source "$HOME/.asdf/plugins/java/set-java-home.bash"
-fi
-EOF
-
 source "$HOME/.asdf/asdf.sh"
 
 asdf plugin-add python
@@ -218,13 +203,29 @@ chezmoi init --apply regunakyle
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 
+# Add variables to Bash start files in case Bash is called for some unknown reason
+cat <<'EOF' >>~/.bash_profile
+# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
+export XMODIFIERS=@im=fcitx
+EOF
+
+cat <<'EOF' >>~/.bashrc
+export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+source "$HOME/.asdf/asdf.sh"
+source "$HOME/.asdf/completions/asdf.bash"
+# ASDF java: Set JAVA_HOME
+if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]];then
+source "$HOME/.asdf/plugins/java/set-java-home.bash"
+fi
+EOF
+
 popd
 
 echo "Waiting for flatpak and distrobox installation to finish..."
 wait
 
 cat <<EOF
-Install finished! You should restart now to ensure everything works correctly.
+Install finished! You should reboot now to ensure everything works correctly.
 After that, you may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
 

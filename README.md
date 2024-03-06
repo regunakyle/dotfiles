@@ -42,7 +42,6 @@
 
 ## TODO
 
-- Find a way to mitigate PATH problem when running `distrobox-enter` on host (in Konsole)
 - Prepare a Powershell script for bare metal Windows and WSL setup
 - Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
 - Reimplement the installation scripts as Ansible Playbooks
