@@ -13,7 +13,7 @@
 - Windows 10 VM with [setup script](scripts/setup_windows_vm.ps1)
 - RPM Fusion enabled, uses patent-encumbered codecs
 - Use [Distrobox](https://github.com/89luca89/distrobox) container as primary development environment
-  - [Debian Unstable](https://wiki.debian.org/DebianUnstable) container for [Playwright](https://playwright.dev/) compatibility and rolling updates (thus no need to upgrade between major versions)
+  - Debian container for [Playwright](https://playwright.dev/) compatibility
   - VSCode installed and exported to host
 - Install most GUI application as flatpak from [Flathub](https://flathub.org/) instead of DNF
 - Use [Fcitx5](https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx_5) with Quick Classic as input method

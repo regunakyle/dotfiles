@@ -82,15 +82,18 @@ sudo dnf install -y \
 # Change default shell to Zsh
 sudo chsh -s "$(which zsh)" "$(whoami)"
 
+# Enable Podman socket for Docker compatiblity
+systemctl --user enable --now podman.socket
+
 # Create distrobox and install VSCode (in background)
 {
-    echo "Creating Debian Unstable distrobox..."
+    echo "Creating Debian distrobox..."
     distrobox create \
-        --image quay.io/toolbx-images/debian-toolbox:unstable \
+        --image quay.io/toolbx-images/debian-toolbox:12 \
         --name toolbox \
         --pull \
         --no-entry \
-        --additional-packages "hugo maven scrcpy shellcheck texlive-full zsh apt-listbugs apt-listchanges 
+        --additional-packages "hugo maven shellcheck texlive-full zsh 
     build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
     xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
         --init-hooks "command -v code >/dev/null 2>&1 || {
@@ -104,14 +107,14 @@ sudo chsh -s "$(which zsh)" "$(whoami)"
     podman start toolbox
 } &
 
-# Enable Podman socket for Docker compatiblity
-systemctl --user enable --now podman.socket
-
 # Setup RPMFusion
 echo "Enabling RPMFusion and install media codecs..."
 sudo dnf install -y \
     "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
+# Add scrcpy repo
+sudo dnf copr enable -y zeno/scrcpy
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
@@ -139,7 +142,8 @@ sudo dnf install -y \
     gns3-gui \
     gns3-server \
     kate \
-    libavcodec-freeworld
+    libavcodec-freeworld \
+    scrcpy
 
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
@@ -189,11 +193,11 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
 
 source "$HOME/.asdf/asdf.sh"
 
-asdf plugin-add python
-asdf plugin-add nodejs
 asdf plugin-add chezmoi
 asdf plugin-add java
+asdf plugin-add nodejs
 asdf plugin-add pipx
+asdf plugin-add python
 
 asdf install chezmoi latest
 asdf global chezmoi latest
@@ -221,7 +225,7 @@ EOF
 
 popd
 
-echo "Waiting for flatpak and distrobox installation to finish..."
+echo "Waiting for flatpak installation and distrobox creation to finish..."
 wait
 
 cat <<EOF
@@ -235,9 +239,6 @@ enter it and export the VSCode inside the Distrobox with the following commands:
 
 distrobox-export --bin /usr/bin/code --export-path "\$HOME/.local/bin"
 distrobox-export --app code
-
-Note: 
-Do not run distrobox-enter on host (in Konsole), this will load /etc/profile in the distrobox and mess up \$PATH
 
 EOF
 

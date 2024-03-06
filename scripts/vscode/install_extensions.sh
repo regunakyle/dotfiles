@@ -27,6 +27,7 @@ code --install-extension ms-toolsai.jupyter
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 code --install-extension pflannery.vscode-versionlens
 code --install-extension pranaygp.vscode-css-peek
+code --install-extension redhat.fabric8-analytics
 code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
 code --install-extension rogalmic.bash-debug
