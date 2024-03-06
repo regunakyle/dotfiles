@@ -102,6 +102,7 @@ systemctl --user enable --now podman.socket
     sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/pipx ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
     }"
     podman start toolbox
@@ -143,6 +144,7 @@ sudo dnf install -y \
     gns3-server \
     kate \
     libavcodec-freeworld \
+    pipx \
     scrcpy
 
 if [[ "$is_desktop" == 1 ]]; then
@@ -196,13 +198,13 @@ source "$HOME/.asdf/asdf.sh"
 asdf plugin-add chezmoi
 asdf plugin-add java
 asdf plugin-add nodejs
-asdf plugin-add pipx
 asdf plugin-add python
 
 asdf install chezmoi latest
 asdf global chezmoi latest
 
 chezmoi init --apply regunakyle
+pipx ensurepath
 
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
