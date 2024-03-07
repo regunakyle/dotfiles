@@ -12,27 +12,6 @@ then
 fi
 export PATH
 
-function fix_distrobox_enter()
-{
-  # Running `distrobox enter` on host would append PATH entries.
-  # This causes problems, for example the JDK from Debian would override
-  # the JDK from ASDF.
-  # This function un-export PATH before `distrobox enter`, then re-export
-  # it after exiting distrobox. So far it seems to work.
-
-  if [[ "$1" == "enter" ]]; then
-    echo "Entering distrobox. Un-exporting PATH..."
-    typeset +x PATH
-    distrobox "$@"
-    echo "Exiting distrobox. Exporting PATH..."
-    export PATH
-  else
-    distrobox "$@"
-  fi
-}
-
-alias distrobox=fix_distrobox_enter
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000

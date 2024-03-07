@@ -76,6 +76,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 sudo dnf install -y \
     distrobox \
     git \
+    pipx \
     podman-docker \
     zsh
 
@@ -141,7 +142,6 @@ sudo dnf install -y \
     gns3-server \
     kate \
     libavcodec-freeworld \
-    pipx \
     scrcpy
 
 if [[ "$is_desktop" == 1 ]]; then
