@@ -126,9 +126,6 @@ if [[ "$is_desktop" != 1 ]]; then
     sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
     sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
     sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
-
-    # Replace power-profiles-daemon with TLP
-    sudo dnf remove -y power-profiles-daemon
 fi
 
 # DNF install
