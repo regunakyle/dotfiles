@@ -76,6 +76,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 sudo dnf install -y \
     distrobox \
     git \
+    hadolint \
     pipx \
     podman-docker \
     zsh
@@ -94,17 +95,18 @@ systemctl --user enable --now podman.socket
         --name toolbox \
         --pull \
         --no-entry \
-        --additional-packages "hugo maven shellcheck texlive-full zsh 
+        --additional-packages "maven shellcheck texlive-full zsh 
     build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
     xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
         --init-hooks "command -v code >/dev/null 2>&1 || {
     wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
     sudo apt install -y /tmp/code.deb ;
     sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/pipx ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/hadolint ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/pipx ;
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     }"
     podman start toolbox
 } &
@@ -193,6 +195,7 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
 source "$HOME/.asdf/asdf.sh"
 
 asdf plugin-add chezmoi
+asdf plugin-add hugo
 asdf plugin-add java
 asdf plugin-add nodejs
 asdf plugin-add python
