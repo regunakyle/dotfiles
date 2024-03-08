@@ -138,15 +138,15 @@ sudo dnf install -y \
     akmod-v4l2loopback \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
-    gns3-gui \
-    gns3-server \
+    iperf3 \
     kate \
-    libavcodec-freeworld \
     scrcpy
 
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
         dkms \
+        gns3-gui \
+        gns3-server \
         intel-media-driver \
         libXpresent-devel \
         solaar

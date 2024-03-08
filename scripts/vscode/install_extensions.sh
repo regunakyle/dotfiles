@@ -33,6 +33,7 @@ code --install-extension redhat.vscode-yaml
 code --install-extension rogalmic.bash-debug
 code --install-extension ryu1kn.partial-diff
 code --install-extension shengchen.vscode-checkstyle
+code --install-extension stkb.rewrap
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension stylelint.vscode-stylelint
 code --install-extension tamasfe.even-better-toml
