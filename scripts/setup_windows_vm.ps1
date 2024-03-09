@@ -75,9 +75,7 @@ Write-Host "Installing common packages..."
 choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepadplusplus `
     onlyoffice qbittorrent vlc powertoys foobar2000 itunes microsoft-windows-terminal gsudo
 
-choco install -y powershell-core --install-arguments='"DISABLE_TELEMETRY=1"'
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-choco install -y vscode
 choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Notepad++'"
 
 # Locale Emulator, workaround install method as AHK v2 fails

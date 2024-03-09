@@ -3,7 +3,12 @@ set -euo pipefail
 
 ##########################################################################
 # This script assumes you installed Fedora KDE with the netinstaller
-# and only Firefox as additional package.
+# and unticked all additional packages (except Firefox).
+
+# The desktop option targets a desktop with two GPUs (one Intel and one Nvidia),
+# of which the Nvidia one would be passed through into a Windows 10 VM for gaming.
+
+# The laptop option targets a Lenovo Thinkpad with AMD APU.
 
 # TODO:
 # - Automate the post installation tasks
