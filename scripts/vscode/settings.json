@@ -111,5 +111,9 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "vsicons.dontShowNewVersionMessage": true,
+  "workbench.colorCustomizations": {
+    "statusBar.debuggingBackground": "#cc6633",
+    "statusBar.debuggingForeground": "#ffffff"
+  },
   "workbench.iconTheme": "vscode-icons"
 }
