@@ -48,3 +48,9 @@ code --install-extension vscjava.vscode-java-pack
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension YoavBls.pretty-ts-errors
 code --install-extension yzhang.markdown-all-in-one
+
+# Uninstall useless extensions
+code --uninstall-extension ms-vscode.remote-server
+code --uninstall-extension ms-vscode-remote.remote-wsl
+
+code --install-extension ms-vscode.remote-explorer
