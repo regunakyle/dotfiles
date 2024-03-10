@@ -2,6 +2,10 @@
 fpush = push --force-with-lease
 [branch]
 sort = -committerdate
+[branch "main"]
+mergeOptions = --no-ff --no-commit
+[branch "dev"]
+mergeOptions = --squash --no-commit
 [commit]
 gpgsign = true
 verbose = true
