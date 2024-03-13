@@ -62,6 +62,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         dev.vencord.Vesktop \
         io.dbeaver.DBeaverCommunity \
         md.obsidian.Obsidian \
+        org.fedoraproject.MediaWriter \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
         org.gnome.meld \

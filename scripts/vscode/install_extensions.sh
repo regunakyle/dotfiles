@@ -9,6 +9,7 @@ code --install-extension eamodio.gitlens
 code --install-extension ecmel.vscode-html-css
 code --install-extension emeraldwalk.RunOnSave
 code --install-extension esbenp.prettier-vscode
+code --install-extension exiasr.hadolint
 code --install-extension foxundermoon.shell-format
 code --install-extension github.vscode-github-actions
 code --install-extension GrapeCity.gc-excelviewer
