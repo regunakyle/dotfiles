@@ -62,6 +62,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         dev.vencord.Vesktop \
         io.dbeaver.DBeaverCommunity \
         md.obsidian.Obsidian \
+        org.davmail.DavMail \
         org.fedoraproject.MediaWriter \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
@@ -81,9 +82,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 
 sudo dnf install -y \
     distrobox \
-    git \
-    hadolint \
-    pipx \
     podman-docker \
     zsh
 
@@ -146,8 +144,11 @@ sudo dnf install -y \
     akmod-v4l2loopback \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
+    git \
+    hadolint \
     iperf3 \
     kate \
+    pipx \
     scrcpy
 
 if [[ "$is_desktop" == 1 ]]; then
