@@ -54,6 +54,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
     flatpak install -y flathub \
         com.borgbase.Vorta \
         com.calibre_ebook.calibre \
+        com.github.dynobo.normcap \
         com.google.Chrome \
         com.obsproject.Studio \
         com.obsproject.Studio.Plugin.DroidCam \
