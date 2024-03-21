@@ -72,10 +72,11 @@
     "!rust",
     "!scala",
     "!scss",
+    "!typescript",
     "!typescriptreact",
     "!yaml",
     "!yml",
-    "excel",
+    "!excel",
     "po"
   ],
   "discord.removeRemoteRepository": true,
