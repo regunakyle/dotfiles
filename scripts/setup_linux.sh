@@ -79,6 +79,11 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         org.strawberrymusicplayer.strawberry \
         org.torproject.torbrowser-launcher \
         org.videolan.VLC
+
+    if [[ "$is_desktop" != 1 ]]; then
+        # For snappier control of Windows VM (using RDP)
+        flatpak install -y flathub org.remmina.Remmina
+    fi
 } &
 
 sudo dnf install -y \
@@ -241,7 +246,11 @@ wait
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
 After that, you may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
+
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
+If you are on laptop, create a QEMU hook that port forward 3389 instead:
+https://www.reddit.com/r/VFIO/comments/1blu8tk/comment/kwstktq/
+Also, use \`Virtio\` video driver (after installing virtio drivers in the VM) for higher resolution.
 
 NOTE: 
 The distrobox probably is still initializing. After it finishes, 
@@ -252,9 +261,8 @@ distrobox-export --app code
 
 EOF
 
-if [[ "$is_desktop" == 1 ]]; then
-    cat <<EOS
-Here is a rough guideline for installing VFIO and looking glass: 
+cat <<EOS
+Here is a rough guideline for installing VFIO and Looking Glass: 
 
 1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then reboot and check IOMMU is enabled"
 2. Add \`options vfio-pci ids=<Your device IDs>\` to /etc/modprobe.d/local.conf"
@@ -263,7 +271,7 @@ Here is a rough guideline for installing VFIO and looking glass:
 (See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci if black screen after reboot)
 
 5. Create a Windows 10 VM:
-  - Use Q35+UEFI (Cannot make live snapshot of VM using UEFI)
+  - Use Q35+UEFI (Note: Cannot make live snapshot of VM when using UEFI)
   - Use host-passthrough and set CPU cores/threads
   - Use virtio as storage driver
   - (Optional) Delete NIC
@@ -278,7 +286,7 @@ Here is a rough guideline for installing VFIO and looking glass:
       - Add iothread to disk driver
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
-  - Dynamically isolate CPU cores with QEMU hooks
+  - (Optional) Dynamically isolate CPU cores with QEMU hooks
 
 6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
   - Edit XML as written in the docs (Skip the IVSHMEM section as we want to use the kernel \`kvmfr\` module)
@@ -293,7 +301,6 @@ Here is a rough guideline for installing VFIO and looking glass:
   - Apply Nvidia-Patch (both NvFBC and NvENC)
   - Set Looking Glass to use NvFBC
 EOS
-fi
 
 unset is_desktop
 unset filename
