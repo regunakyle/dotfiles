@@ -55,7 +55,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         com.borgbase.Vorta \
         com.calibre_ebook.calibre \
         com.github.dynobo.normcap \
-        com.google.Chrome \
         com.obsproject.Studio \
         com.obsproject.Studio.Plugin.DroidCam \
         com.obsproject.Studio.Plugin.InputOverlay \
@@ -63,7 +62,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         dev.vencord.Vesktop \
         io.dbeaver.DBeaverCommunity \
         md.obsidian.Obsidian \
-        org.davmail.DavMail \
         org.fedoraproject.MediaWriter \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
@@ -127,8 +125,10 @@ sudo dnf install -y \
     "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
-# Add scrcpy repo
+# Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
+sudo dnf copr enable -y mguessan/davmail
+sudo dnf config-manager --set-enabled google-chrome
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
@@ -148,14 +148,20 @@ sudo dnf install -y \
     @sound-and-video \
     @virtualization \
     akmod-v4l2loopback \
+    davmail \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     git \
+    google-chrome-stable \
     hadolint \
     iperf3 \
     kate \
     pipx \
-    scrcpy
+    scrcpy \
+    wireshark
+
+# Add user to Wireshark group for non-root usage
+sudo usermod -aG wireshark "$(whoami)"
 
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
@@ -217,7 +223,6 @@ asdf install chezmoi latest
 asdf global chezmoi latest
 
 chezmoi init --apply regunakyle
-pipx ensurepath
 
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
