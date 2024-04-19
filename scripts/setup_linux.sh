@@ -80,7 +80,9 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 
     if [[ "$is_desktop" != 1 ]]; then
         # For snappier control of Windows VM (using RDP)
-        flatpak install -y flathub org.remmina.Remmina
+        flatpak install -y flathub \
+            com.moonlight_stream.Moonlight \
+            org.remmina.Remmina
     fi
 } &
 
