@@ -4,7 +4,6 @@
 then run this script
 
 TODO: 
-- Automate Nvidia driver and Nvidia-Patch installation
 - Add error handling
 #>
 if (Test-Path env:TEMP) {
@@ -61,7 +60,16 @@ Remove-Item .\tws-latest-windows-x64.exe
 if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
     # Desktop specific scripts; Assume only desktop uses Nvidia GPU
     Write-Host "Detected Nvidia GPU. Installing desktop specific apps..."
-    choco install -y geforce-experience steam discord
+    choco install -y discord geforce-experience
+
+    Invoke-WebRequest https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe `
+        -OutFile SteamSetup.exe
+    $STEAM = Start-Process -FilePath .\SteamSetup.exe -ArgumentList "/S" -PassThru
+    while (!$STEAM.HasExited) {
+        Write-Host "Waiting for steam install to complete..."
+        Start-Sleep -Seconds 3
+    }
+    Remove-Item .\SteamSetup.exe
 
     Invoke-WebRequest https://looking-glass.io/artifact/stable/host -OutFile LG.zip
     Expand-Archive .\LG.zip
@@ -74,8 +82,7 @@ if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
     Remove-Item .\LG -Force -Recurse
 
     Write-Host "Installation finished! You should reboot now to ensure everything is installed completely."
-    Write-Host "You may want to install Nvidia-Patch from Github manually."
-    Write-Host "Also, set Looking Glass host to use NVFBC."
+    Write-Host "Also, set Looking Glass host to use DX12 backend."
 }
 else {
     Write-Host "Installation finished! You should reboot now to ensure everything is installed completely."
