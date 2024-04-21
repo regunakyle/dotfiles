@@ -278,7 +278,7 @@ Here is a rough guideline for installing VFIO and Looking Glass:
 (See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci if black screen after reboot)
 
 5. Create a Windows 10 VM:
-  - Use Q35+UEFI (Note: Cannot make live snapshot of VM when using UEFI)
+  - Use Q35+UEFI (Note: Cannot make LIVE snapshot of VM when using UEFI)
   - Use host-passthrough and set CPU cores/threads
   - Use virtio as storage driver
   - (Optional) Delete NIC

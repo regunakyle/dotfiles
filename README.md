@@ -10,7 +10,7 @@
 ### General
 
 - Fedora KDE (installed with the [Fedora Everything](https://alt.fedoraproject.org/) image) with minimum bloat
-- Windows 10 VM with [setup script](scripts/setup_windows_vm.ps1)
+- Windows 10 LTSC VM with [setup script](scripts/setup_windows_vm.ps1)
 - RPM Fusion enabled, uses patent-encumbered codecs
 - Use [Distrobox](https://github.com/89luca89/distrobox) container as primary development environment
   - Debian container for [Playwright](https://playwright.dev/) compatibility
@@ -38,7 +38,6 @@
   - SSD upgraded to 1TB
   - Monitor upgraded to a 100% sRGB, 120Hz, 2560×1600 panel ([N140GLE-GT1](https://www.panelook.com/N140GLE-GT1_Innolux_14.0_LCM_parameter_59738.html))
     - Note: I do not recommend upgrading the monitor by yourself
-- Use the OEM Windows 10 key ([how to find](https://www.cyberciti.biz/faq/linux-find-windows-10-oem-product-key-command/)) for the Windows VM
 
 ## TODO
 

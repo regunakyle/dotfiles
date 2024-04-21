@@ -18,42 +18,6 @@ else {
     exit 1
 }
 
-# Uninstall bloatware
-Write-Host "Uninstalling bloatware..."
-$bloatware = @(
-    "Microsoft.Microsoft3DViewer",
-    "Microsoft.WindowsAlarms",
-    # Mail, Calendar
-    "Microsoft.windowscommunicationsapps",
-    # Cortana
-    "Microsoft.549981C3F5F10",
-    "Microsoft.WindowsFeedbackHub",
-    # Groove Music
-    "Microsoft.ZuneMusic",
-    # Movies & TV
-    "Microsoft.ZuneVideo",
-    # Paint 3D
-    "Microsoft.MSPaint",
-    "Microsoft.WindowsMaps",
-    "Microsoft.MicrosoftSolitaireCollection",
-    "Microsoft.MixedReality.Portal",
-    "Microsoft.Office.OneNote",
-    "Microsoft.MicrosoftOfficeHub",
-    "Microsoft.XboxApp",
-    "Microsoft.BingWeather",
-    "Microsoft.MicrosoftStickyNotes",
-    "Microsoft.SkypeApp",
-    "Microsoft.ScreenSketch",
-    "Microsoft.People",
-    "Microsoft.Windows.Photos",
-    "Microsoft.WindowsSoundRecorder",
-    "Microsoft.WindowsCamera"
-)
-
-foreach ($item in $bloatware) {
-    Get-AppxPackage $item | Remove-AppxPackage
-}
-
 # Install Chocolatey
 Write-Host "Installing Chocolatey..."
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
