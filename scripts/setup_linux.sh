@@ -160,6 +160,7 @@ sudo dnf install -y \
     kate \
     pipx \
     scrcpy \
+    tmux \
     wireshark
 
 # Add user to Wireshark group for non-root usage
@@ -280,17 +281,18 @@ Here is a rough guideline for installing VFIO and Looking Glass:
 5. Create a Windows 10 VM:
   - Use Q35+UEFI (Note: Cannot make LIVE snapshot of VM when using UEFI)
   - Use host-passthrough and set CPU cores/threads
-  - Use virtio as storage driver
-  - (Optional) Delete NIC
+  - (Optional) Delete the default NIC so that Windows won't force you to login (Add one after Windows installation)
   - Edit the XML:
     - CPU pinning by adding <cputune> section; Add emulatorpin (should use all cores not pinned to VM)
     - Add PCIe devices
     - Add \`<feature policy='require' name='topoext'/>\` inside <CPU> if you are using an AMD CPU
   - If you are not going to install Windows on a passed through storage device:
-    - Mount virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation
+    - Do not create storage when asked: Instead manually add storage of bus type \`SCSI\` and a \`VirtIO SCSI\` controller
+    - Mount the latest virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation
     (Download from https://github.com/virtio-win/virtio-win-pkg-scripts)
+    - You may need to manually change the boot order after installation (make the storage device the first option)
     - Edit the XML:
-      - Add iothread to disk driver
+      - Add iothread driver to disk controller
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
   - (Optional) Dynamically isolate CPU cores with QEMU hooks
