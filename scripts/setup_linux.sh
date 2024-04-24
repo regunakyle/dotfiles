@@ -70,8 +70,8 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         org.kde.kleopatra \
         org.kde.kolourpaint \
         org.kde.okular \
+        org.libreoffice.LibreOffice \
         org.mozilla.Thunderbird \
-        org.onlyoffice.desktopeditors \
         org.qbittorrent.qBittorrent \
         org.sqlitebrowser.sqlitebrowser \
         org.strawberrymusicplayer.strawberry \
@@ -280,7 +280,7 @@ Here is a rough guideline for installing VFIO and Looking Glass:
 
 5. Create a Windows 10 VM:
   - Use Q35+UEFI (Note: Cannot make LIVE snapshot of VM when using UEFI)
-  - Use host-passthrough and set CPU cores/threads
+  - Use host-passthrough and set CPU cores/threads topology to match host
   - (Optional) Delete the default NIC so that Windows won't force you to login (Add one after Windows installation)
   - Edit the XML:
     - CPU pinning by adding <cputune> section; Add emulatorpin (should use all cores not pinned to VM)
@@ -298,17 +298,12 @@ Here is a rough guideline for installing VFIO and Looking Glass:
   - (Optional) Dynamically isolate CPU cores with QEMU hooks
 
 6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
-  - Edit XML as written in the docs (Skip the IVSHMEM section as we want to use the kernel \`kvmfr\` module)
-  - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+  - Edit XML as written in the docs (we want to use the kernel \`kvmfr\` module)
   - Build the client binary and OBS plugin, symlink them to appropiate locations
-  - Build the kernel module, set in \`.looking-glass-client.ini\` to use the shmFile
-  - Make selinux audit for kvmfr0
+  - Build the kernel module, use the shmFile in \`.looking-glass-client.ini\`
+  - Make SELinux audit for kvmfr0
 
 7. In the Windows VM, install virtio-win-guest-tools and Looking Glass host binary
-8. If the VM is using a Nvidia GPU:
-  - Install Nvidia GPU drivers
-  - Apply Nvidia-Patch (both NvFBC and NvENC)
-  - Set Looking Glass to use NvFBC
 EOS
 
 unset is_desktop
