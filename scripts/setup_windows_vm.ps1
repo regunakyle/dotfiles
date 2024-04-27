@@ -71,11 +71,11 @@ if ((Get-WmiObject win32_computersystem).Manufacturer -eq "QEMU") {
 }
 
 Write-Host "Installing common packages..."
-choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepadplusplus `
+choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepadplusplus nano-win `
     libreoffice-fresh qbittorrent vlc powertoys foobar2000 itunes microsoft-windows-terminal gsudo
 
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
-choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Notepad++'"
+choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Nano'"
 
 # Locale Emulator, workaround install method as AHK v2 fails
 # https://github.com/chtof/chocolatey-packages/issues/103
@@ -96,7 +96,16 @@ Remove-Item .\tws-latest-windows-x64.exe
 if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
     # Desktop specific scripts; Assume only desktop uses Nvidia GPU
     Write-Host "Detected Nvidia GPU. Installing desktop specific apps..."
-    choco install -y geforce-experience steam discord
+    choco install -y discord geforce-experience
+
+    Invoke-WebRequest https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe `
+        -OutFile SteamSetup.exe
+    $STEAM = Start-Process -FilePath .\SteamSetup.exe -ArgumentList "/S" -PassThru
+    while (!$STEAM.HasExited) {
+        Write-Host "Waiting for steam install to complete..."
+        Start-Sleep -Seconds 3
+    }
+    Remove-Item .\SteamSetup.exe
 
     Invoke-WebRequest https://looking-glass.io/artifact/stable/host -OutFile LG.zip
     Expand-Archive .\LG.zip

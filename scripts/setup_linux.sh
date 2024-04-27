@@ -154,6 +154,8 @@ sudo dnf install -y \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     git \
+    gns3-gui \
+    gns3-server \
     google-chrome-stable \
     hadolint \
     iperf3 \
@@ -169,8 +171,6 @@ sudo usermod -aG wireshark "$(whoami)"
 if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
         dkms \
-        gns3-gui \
-        gns3-server \
         intel-media-driver \
         libXpresent-devel \
         solaar
