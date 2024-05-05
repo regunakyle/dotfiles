@@ -111,6 +111,8 @@ systemctl --user enable --now podman.socket
         --init-hooks "command -v code >/dev/null 2>&1 || {
     wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
     sudo apt install -y /tmp/code.deb ;
+    wget -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb ;
+    sudo apt install -y /tmp/google-chrome-stable_current_amd64.deb ;
     sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
@@ -130,7 +132,6 @@ sudo dnf install -y \
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
 sudo dnf copr enable -y mguessan/davmail
-sudo dnf config-manager --set-enabled google-chrome
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
@@ -156,7 +157,6 @@ sudo dnf install -y \
     git \
     gns3-gui \
     gns3-server \
-    google-chrome-stable \
     hadolint \
     iperf3 \
     kate \
@@ -262,10 +262,11 @@ Also, use \`Virtio\` video driver (after installing virtio drivers in the VM) fo
 
 NOTE: 
 The distrobox probably is still initializing. After it finishes, 
-enter it and export the VSCode inside the Distrobox with the following commands:
+enter it and export the VSCode and Chrome inside the Distrobox with the following commands:
 
 distrobox-export --bin /usr/bin/code --export-path "\$HOME/.local/bin"
 distrobox-export --app code
+distrobox-export --app google-chrome
 
 EOF
 
