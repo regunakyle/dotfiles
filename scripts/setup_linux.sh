@@ -163,6 +163,7 @@ sudo dnf install -y \
     pipx \
     scrcpy \
     tmux \
+    wireguard-tools \
     wireshark
 
 # Add user to Wireshark group for non-root usage
