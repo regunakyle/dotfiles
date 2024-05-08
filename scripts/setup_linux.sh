@@ -151,7 +151,9 @@ sudo dnf install -y \
     @sound-and-video \
     @virtualization \
     akmod-v4l2loopback \
+    btop \
     davmail \
+    fastfetch \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     git \
