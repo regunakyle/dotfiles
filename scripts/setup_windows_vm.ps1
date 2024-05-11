@@ -72,7 +72,7 @@ if ((Get-WmiObject win32_computersystem).Manufacturer -eq "QEMU") {
 
 Write-Host "Installing common packages..."
 choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepadplusplus nano-win `
-    libreoffice-fresh qbittorrent vlc powertoys foobar2000 itunes microsoft-windows-terminal gsudo
+    libreoffice-still qbittorrent vlc powertoys foobar2000 itunes microsoft-windows-terminal gsudo
 
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0

@@ -115,7 +115,6 @@ systemctl --user enable --now podman.socket
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/hadolint ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/pipx ;
     sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
     }"
     podman start toolbox
@@ -161,7 +160,6 @@ sudo dnf install -y \
     iperf3 \
     kate \
     nmap \
-    pipx \
     scrcpy \
     tmux \
     wireguard-tools \
@@ -222,6 +220,7 @@ asdf plugin-add chezmoi
 asdf plugin-add hugo
 asdf plugin-add java
 asdf plugin-add nodejs
+asdf plugin-add pipx
 asdf plugin-add python
 
 asdf install chezmoi latest
