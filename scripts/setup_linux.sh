@@ -58,10 +58,8 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         com.obsproject.Studio \
         com.obsproject.Studio.Plugin.DroidCam \
         com.obsproject.Studio.Plugin.InputOverlay \
-        com.usebruno.Bruno \
         dev.vencord.Vesktop \
         io.dbeaver.DBeaverCommunity \
-        md.obsidian.Obsidian \
         org.fedoraproject.MediaWriter \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
@@ -162,6 +160,7 @@ sudo dnf install -y \
     hadolint \
     iperf3 \
     kate \
+    nmap \
     pipx \
     scrcpy \
     tmux \
