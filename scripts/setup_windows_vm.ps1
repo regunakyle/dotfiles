@@ -59,15 +59,15 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://com
 
 # Install packages
 if ((Get-WmiObject win32_computersystem).Manufacturer -eq "QEMU") {
-    Write-Host "Installing virtio guest tools..."
-    Invoke-WebRequest https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win-guest-tools.exe `
-        -OutFile virtio-win-guest-tools.exe
-    $VIRTIO = Start-Process -FilePath .\virtio-win-guest-tools.exe -ArgumentList "/S /norestart" -PassThru
-    while (!$VIRTIO.HasExited) {
-        Write-Host "Waiting for virtio tool install to complete..."
+    Write-Host "Installing spice guest tools..."
+    Invoke-WebRequest https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe `
+        -OutFile spice-guest-tools-latest.exe
+    $SPICE = Start-Process -FilePath .\spice-guest-tools-latest.exe -ArgumentList "/S" -PassThru
+    while (!$SPICE.HasExited) {
+        Write-Host "Waiting for spice guest tool install to complete..."
         Start-Sleep -Seconds 3
     }
-    Remove-Item .\virtio-win-guest-tools.exe
+    Remove-Item .\spice-guest-tools-latest.exe
 }
 
 Write-Host "Installing common packages..."

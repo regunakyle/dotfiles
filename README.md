@@ -12,9 +12,6 @@
 - Fedora KDE (installed with the [Fedora Everything](https://alt.fedoraproject.org/) image) with minimum bloat
 - Windows 10 VM with [setup script](scripts/setup_windows_vm.ps1)
 - RPM Fusion enabled, uses patent-encumbered codecs
-- Use [Distrobox](https://github.com/89luca89/distrobox) container as primary development environment
-  - Debian container for [Playwright](https://playwright.dev/) compatibility
-  - VSCode installed and exported to host
 - Install most GUI application as flatpak from [Flathub](https://flathub.org/) instead of DNF
 - Use [Fcitx5](https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx_5) with Quick Classic as input method
 - Use [Podman](https://podman.io/) with Docker compatibility
@@ -43,5 +40,3 @@
 ## TODO
 
 - Prepare a Powershell script for bare metal Windows and WSL setup
-- Use [Wezterm](https://github.com/wez/wezterm) and [Starship](https://github.com/starship/starship) for all installations
-- Reimplement the installation scripts as Ansible Playbooks

@@ -52,7 +52,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
     flatpak install -y flathub io.podman_desktop.PodmanDesktop
 
     flatpak install -y flathub \
-        com.borgbase.Vorta \
         com.calibre_ebook.calibre \
         com.github.dynobo.normcap \
         com.obsproject.Studio \
@@ -73,7 +72,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         org.qbittorrent.qBittorrent \
         org.sqlitebrowser.sqlitebrowser \
         org.strawberrymusicplayer.strawberry \
-        org.torproject.torbrowser-launcher \
         org.videolan.VLC
 
     if [[ "$is_desktop" != 1 ]]; then
@@ -103,20 +101,9 @@ systemctl --user enable --now podman.socket
         --name toolbox \
         --pull \
         --no-entry \
-        --additional-packages "maven shellcheck texlive-full zsh 
+        --additional-packages "texlive-full zsh 
     build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev" \
-        --init-hooks "command -v code >/dev/null 2>&1 || {
-    wget -O /tmp/code.deb \"https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64\" ;
-    sudo apt install -y /tmp/code.deb ;
-    wget -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb ;
-    sudo apt install -y /tmp/google-chrome-stable_current_amd64.deb ;
-    sudo apt install -y --no-install-recommends fcitx5 fcitx5-chinese-addons fcitx5-frontend-gtk3 fcitx5-frontend-qt5 fcitx5-module-xorg kde-config-fcitx5 im-config ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/git ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/hadolint ;
-    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman ;
-    }"
+    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev"
     podman start toolbox
 } &
 
@@ -129,6 +116,10 @@ sudo dnf install -y \
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
 sudo dnf copr enable -y mguessan/davmail
+sudo dnf config-manager --set-enabled google-chrome
+# VSCode repo
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
@@ -149,6 +140,7 @@ sudo dnf install -y \
     @virtualization \
     akmod-v4l2loopback \
     btop \
+    code \
     davmail \
     fastfetch \
     fcitx5-chinese-addons \
@@ -156,13 +148,17 @@ sudo dnf install -y \
     git \
     gns3-gui \
     gns3-server \
+    google-chrome-stable \
     hadolint \
+    hugo \
     iperf3 \
     kate \
+    maven \
     nmap \
+    pipx \
     scrcpy \
+    shellcheck \
     tmux \
-    wireguard-tools \
     wireshark
 
 # Add user to Wireshark group for non-root usage
@@ -172,8 +168,11 @@ if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
         dkms \
         intel-media-driver \
-        libXpresent-devel \
+        selinux-policy-devel \
         solaar
+
+    # Enable libvirtd for VM autoboot
+    sudo systemctl enable libvirtd
 else
     sudo dnf install -y \
         steam
@@ -217,10 +216,8 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
 source "$HOME/.asdf/asdf.sh"
 
 asdf plugin-add chezmoi
-asdf plugin-add hugo
 asdf plugin-add java
 asdf plugin-add nodejs
-asdf plugin-add pipx
 asdf plugin-add python
 
 asdf install chezmoi latest
@@ -254,38 +251,28 @@ wait
 
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
-After that, you may want to config fcitx5, SSH/GPG, VSCode, Distrobox and Windows 10 VM.
+After that, you may want to config fcitx5, SSH/GPG, VSCode and Windows 10 VM.
 
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
 If you are on laptop, create a QEMU hook that port forward 3389 instead:
 https://www.reddit.com/r/VFIO/comments/1blu8tk/comment/kwstktq/
 Also, use \`Virtio\` video driver (after installing virtio drivers in the VM) for higher resolution.
 
-NOTE: 
-The distrobox probably is still initializing. After it finishes, 
-enter it and export the VSCode and Chrome inside the Distrobox with the following commands:
+=====================================================================================================
 
-distrobox-export --bin /usr/bin/code --export-path "\$HOME/.local/bin"
-distrobox-export --app code
-distrobox-export --app google-chrome
-
-EOF
-
-cat <<EOS
 Here is a rough guideline for installing VFIO and Looking Glass: 
 
-1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then reboot and check IOMMU is enabled"
-2. Add \`options vfio-pci ids=<Your device IDs>\` to /etc/modprobe.d/local.conf"
+1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then regenerate grub config, reboot and check IOMMU is enabled"
+2. Add \`options vfio-pci ids=<Device 1 ID>,<Device 2 ID>\` to /etc/modprobe.d/local.conf"
 3. Add \`force_drivers+=" vfio vfio_iommu_type1 vfio_pci "\` to /etc/dracut.conf.d/local.conf
 4. Regenerate the dracut initramfs with "sudo dracut -f --kver \`uname -r\`" and reboot
 (See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci if black screen after reboot)
 
 5. Create a Windows 10 VM:
   - Use Q35+UEFI (Note: Cannot make LIVE snapshot of VM when using UEFI)
-  - Use host-passthrough and set CPU cores/threads topology to match host
-  - (Optional) Delete the default NIC so that Windows won't force you to login (Add one after Windows installation)
+  - Use host-passthrough and manually set CPU cores/threads topology to match host
   - Edit the XML:
-    - CPU pinning by adding <cputune> section; Add emulatorpin (should use all cores not pinned to VM)
+    - CPU pinning by adding <cputune> section; Also add emulatorpin (should use all cores not pinned to VM)
     - Add PCIe devices
     - Add \`<feature policy='require' name='topoext'/>\` inside <CPU> if you are using an AMD CPU
   - If you are not going to install Windows on a passed through storage device:
@@ -297,16 +284,44 @@ Here is a rough guideline for installing VFIO and Looking Glass:
       - Add iothread driver to disk controller
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
-  - (Optional) Dynamically isolate CPU cores with QEMU hooks
+  - Optional: Dynamically isolate CPU cores with QEMU hooks
 
 6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
   - Edit XML as written in the docs (we want to use the kernel \`kvmfr\` module)
   - Build the client binary and OBS plugin, symlink them to appropiate locations
-  - Build the kernel module, use the shmFile in \`.looking-glass-client.ini\`
-  - Make SELinux audit for kvmfr0
+  - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+  - Install the kernel module with DKMS, create \`.looking-glass-client.ini\` and set \`shmFile\` to \`/dev/kvmfr0\`
+  - Create SELinux module for \`kvmfr0\`:
+    1. Create a \`kvmfr0.te\` file with the following content:
 
-7. In the Windows VM, install virtio-win-guest-tools and Looking Glass host binary
-EOS
+        \`\`\`
+
+        module kvmfr0 1.0;
+        
+        require {
+        	type svirt_t;
+        	type device_t;
+        	class chr_file { map open read write };
+        }
+        
+        #============= svirt_t ==============
+        allow svirt_t device_t:chr_file { map open read write };
+        
+        \`\`\`
+
+    2. Install \`selinux-policy-devel\`
+    3. Run \`make -f /usr/share/selinux/devel/Makefile kvmfr0.pp\` in the same directory
+    4. Run \`sudo semodule -X 300 -i kvmfr0.pp\`
+
+7. In the Windows VM, install spice-guest-tools and Looking Glass host binary
+
+8. Optional: As the \`vfio-pci\` driver might draw a lot of power when attached to a GPU, create another low resource VM (e.g. Debian):
+    1. Autostart this VM on boot (you need to enable libvirtd service), shut it down before booting Windows VM, boot it again after shutting down the Windows VM
+    2. Tell libvirtd to wait for bridge network if your VM is using bridged connection (https://www.reddit.com/r/Fedora/comments/14t8hhj/comment/jx2jzz2/)
+    3. Attach GPU to this VM
+
+You can join the VFIO Discord and find more optimization tips in the \`wiki-and-psa\` channel.
+EOF
 
 unset is_desktop
 unset filename
