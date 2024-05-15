@@ -23,7 +23,7 @@
 
 ### Desktop setup
 
-- [PCPartPicker list](https://pcpartpicker.com/list/bq4NZJ)
+- [PCPartPicker list](https://pcpartpicker.com/list/TPWsN6)
 - [Solaar](https://github.com/pwr-Solaar/Solaar) for my G703 gaming mouse
 - Play games on a high performance VFIO Windows 10 VM ([blog entry in Chinese](https://regunakyle.github.io/regunakyle/posts/002_win10_to_linux/))
   - Use [Looking Glass](https://looking-glass.io/) to control the VM

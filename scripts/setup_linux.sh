@@ -262,19 +262,23 @@ Also, use \`Virtio\` video driver (after installing virtio drivers in the VM) fo
 
 Here is a rough guideline for installing VFIO and Looking Glass: 
 
-1. Add \`iommu=pt\` to \`/etc/sysconfig/grub\`, then regenerate grub config, reboot and check IOMMU is enabled"
-2. Add \`options vfio-pci ids=<Device 1 ID>,<Device 2 ID>\` to /etc/modprobe.d/local.conf"
-3. Add \`force_drivers+=" vfio vfio_iommu_type1 vfio_pci "\` to /etc/dracut.conf.d/local.conf
-4. Regenerate the dracut initramfs with "sudo dracut -f --kver \`uname -r\`" and reboot
-(See https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#X_does_not_start_after_enabling_vfio_pci if black screen after reboot)
+1. (If you are using an Intel CPU) Add \`intel_iommu=pt\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`, then regenerate grub config, reboot and check IOMMU is enabled
+2. Load drivers:
+    - Add \`vfio_pci.ids=<Device 1 ID>,<Device 2 ID>\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`
+    - Add to \`/etc/dracut.conf.d/local.conf\`:
+        \`\`\`
+        add_drivers+=" vfio vfio_iommu_type1 vfio_pci vfio_pci_core " 
+        force_drivers+=" vfio_pci "
+        \`\`\`
+    - Run as root: \`grub2-mkconfig -o /etc/grub2-efi.cfg && dracut -fv\`, then reboot
 
-5. Create a Windows 10 VM:
+3. Create a Windows 10 VM:
   - Use Q35+UEFI (Note: Cannot make LIVE snapshot of VM when using UEFI)
   - Use host-passthrough and manually set CPU cores/threads topology to match host
   - Edit the XML:
     - CPU pinning by adding <cputune> section; Also add emulatorpin (should use all cores not pinned to VM)
     - Add PCIe devices
-    - Add \`<feature policy='require' name='topoext'/>\` inside <CPU> if you are using an AMD CPU
+    - Add \`<feature policy='require' name='topoext'/>\` and \`<cache mode='passthrough'/>\` inside <CPU> if you are using an AMD CPU
   - If you are not going to install Windows on a passed through storage device:
     - Do not create storage when asked: Instead manually add storage of bus type \`SCSI\` and a \`VirtIO SCSI\` controller
     - Mount the latest virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation
@@ -284,10 +288,41 @@ Here is a rough guideline for installing VFIO and Looking Glass:
       - Add iothread driver to disk controller
       - Add <iothreads>1</iothreads> under <domain>
       - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
+      - Add these:
+        \`\`\`
+        <features>
+            ...
+            <hyperv mode='custom'>
+            <relaxed state='on'/>
+            <vapic state='on'/>
+            <spinlocks state='on' retries='8191'/>
+            <vpindex state='on'/>
+            <runtime state='on'/>
+            <synic state='on'/>
+            <stimer state="on"/>
+            <vendor_id state='on' value='whatever'/>
+            <frequencies state='on'/>
+            <tlbflush state='on'/>
+            <ipi state='on'/>
+            </hyperv>
+            <kvm>
+            <hidden state="on"/>
+            </kvm>
+            ...
+        </features>
+        \`\`\`
+        \`\`\`
+        <clock offset="localtime">
+            <timer name="rtc" tickpolicy="catchup"/>
+            <timer name="pit" tickpolicy="delay"/>
+            <timer name="hpet" present="no"/>
+            <timer name="hypervclock" present="yes"/>
+        </clock>
+        \`\`\`
   - Optional: Dynamically isolate CPU cores with QEMU hooks
 
-6. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
-  - Edit XML as written in the docs (we want to use the kernel \`kvmfr\` module)
+4. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
+  - Edit XML as written in the docs (we want to use the kernel module)
   - Build the client binary and OBS plugin, symlink them to appropiate locations
   - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
   - Install the kernel module with DKMS, create \`.looking-glass-client.ini\` and set \`shmFile\` to \`/dev/kvmfr0\`
@@ -313,9 +348,9 @@ Here is a rough guideline for installing VFIO and Looking Glass:
     3. Run \`make -f /usr/share/selinux/devel/Makefile kvmfr0.pp\` in the same directory
     4. Run \`sudo semodule -X 300 -i kvmfr0.pp\`
 
-7. In the Windows VM, install spice-guest-tools and Looking Glass host binary
+5. In the Windows VM, install spice-guest-tools and Looking Glass host binary
 
-8. Optional: As the \`vfio-pci\` driver might draw a lot of power when attached to a GPU, create another low resource VM (e.g. Debian):
+6. Optional: As the \`vfio-pci\` driver might draw a lot of power when attached to a GPU, create another low resource VM (e.g. Debian):
     1. Autostart this VM on boot (you need to enable libvirtd service), shut it down before booting Windows VM, boot it again after shutting down the Windows VM
     2. Tell libvirtd to wait for bridge network if your VM is using bridged connection (https://www.reddit.com/r/Fedora/comments/14t8hhj/comment/jx2jzz2/)
     3. Attach GPU to this VM
