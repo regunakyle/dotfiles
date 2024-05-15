@@ -58,7 +58,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         com.obsproject.Studio.Plugin.DroidCam \
         com.obsproject.Studio.Plugin.InputOverlay \
         dev.vencord.Vesktop \
-        io.dbeaver.DBeaverCommunity \
         org.fedoraproject.MediaWriter \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
@@ -139,7 +138,6 @@ sudo dnf install -y \
     @sound-and-video \
     @virtualization \
     akmod-v4l2loopback \
-    btop \
     code \
     davmail \
     fastfetch \
@@ -235,12 +233,17 @@ export XMODIFIERS=@im=fcitx
 EOF
 
 cat <<'EOF' >>~/.bashrc
+
+# Point all Docker services to the Podman socket
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+
+# Source asdf
 source "$HOME/.asdf/asdf.sh"
 source "$HOME/.asdf/completions/asdf.bash"
+
 # ASDF java: Set JAVA_HOME
-if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]];then
-source "$HOME/.asdf/plugins/java/set-java-home.bash"
+if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]]; then
+  source ~/.asdf/plugins/java/set-java-home.zsh
 fi
 EOF
 

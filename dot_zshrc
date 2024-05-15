@@ -6,9 +6,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # User specific environment; Mimic Fedora Bash behavior
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+  PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
@@ -23,8 +22,8 @@ bindkey -e
 source "$HOME/.asdf/asdf.sh"
 
 # ASDF java: Set JAVA_HOME
-if [[ $( command -v asdf &> /dev/null && asdf list java 2> /dev/null | grep "^\s*\*" ) ]];then
-source ~/.asdf/plugins/java/set-java-home.zsh
+if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]]; then
+  source ~/.asdf/plugins/java/set-java-home.zsh
 fi
 
 # Point all Docker services to the Podman socket
@@ -44,7 +43,7 @@ compinit
 antidote load
 
 # zsh-users/zsh-history-substring-search
-bindkey '^[[1;5A' history-substring-search-up # Ctrl+Up
+bindkey '^[[1;5A' history-substring-search-up   # Ctrl+Up
 bindkey '^[[1;5B' history-substring-search-down # Ctrl+Down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
