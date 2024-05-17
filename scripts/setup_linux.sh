@@ -138,6 +138,7 @@ sudo dnf install -y \
     @sound-and-video \
     @virtualization \
     akmod-v4l2loopback \
+    btop \
     code \
     davmail \
     fastfetch \
