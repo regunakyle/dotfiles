@@ -98,15 +98,16 @@ if [[ "$is_desktop" == 1 ]]; then
         echo "Creating distrobox container for Looking Glass build..."
         distrobox create \
             --image registry.fedoraproject.org/fedora-toolbox \
-            --name build \
+            --name toolbox \
             --pull \
             --no-entry \
-            --additional-packages "zsh cmake gcc gcc-c++ libglvnd-devel fontconfig-devel spice-protocol make nettle-devel 
+            --additional-packages "zsh texlive-scheme-full cmake gcc gcc-c++ libglvnd-devel fontconfig-devel spice-protocol make nettle-devel 
                                     pkgconf-pkg-config binutils-devel libXi-devel libXinerama-devel libXcursor-devel 
                                     libXpresent-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel 
-                                    libXScrnSaver-devel libXrandr-devel dejavu-sans-mono-fonts obs-studio-devel"
+                                    libXScrnSaver-devel libXrandr-devel dejavu-sans-mono-fonts 
+                                    libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel"
 
-        podman start build
+        podman start toolbox
     } &
 fi
 
@@ -120,6 +121,7 @@ sudo dnf install -y \
 sudo dnf copr enable -y zeno/scrcpy
 sudo dnf copr enable -y mguessan/davmail
 sudo dnf config-manager --set-enabled google-chrome
+
 # VSCode repo
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
@@ -184,9 +186,8 @@ else
         steam
 fi
 
-# Install asdf python build dependencies and LaTeX (which takes a long time)
+# Install asdf Python build dependencies
 sudo dnf install -y \
-    texlive-scheme-full \
     make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
@@ -281,11 +282,13 @@ Here is a rough guideline for installing VFIO and Looking Glass:
 1. (If you are using an Intel CPU) Add \`intel_iommu=pt\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`, then regenerate grub config, reboot and check IOMMU is enabled
 2. Load drivers:
     - Add \`vfio_pci.ids=<Device 1 ID>,<Device 2 ID>\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`
-    - Add to \`/etc/dracut.conf.d/local.conf\`:
+    - Add to \`/etc/dracut.conf.d/vfio.conf\`:
+
         \`\`\`
-        add_drivers+=" vfio vfio_iommu_type1 vfio_pci vfio_pci_core " 
-        force_drivers+=" vfio_pci "
+add_drivers+=" vfio vfio_iommu_type1 vfio_pci vfio_pci_core " 
+force_drivers+=" vfio_pci "
         \`\`\`
+
     - Run as root: \`grub2-mkconfig -o /etc/grub2-efi.cfg && dracut -fv\`, then reboot
 
 3. Create a Windows 10 VM:
@@ -308,6 +311,7 @@ Here is a rough guideline for installing VFIO and Looking Glass:
         - Add <iothreads>1</iothreads> under <domain>
         - Add <iothreadpin> in <cputune> (should use all cores not pinned to VM)
   - Add these to the XML:
+
   \`\`\`
 <features>
     ...
@@ -330,6 +334,7 @@ Here is a rough guideline for installing VFIO and Looking Glass:
     ...
 </features>
   \`\`\`
+
   \`\`\`
 <clock offset="localtime">
     <timer name="rtc" tickpolicy="catchup"/>
@@ -338,9 +343,16 @@ Here is a rough guideline for installing VFIO and Looking Glass:
     <timer name="hypervclock" present="yes"/>
 </clock>
   \`\`\`
+
   - Optional: Dynamically isolate CPU cores with QEMU hooks
 
-4. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
+4. In the Windows VM:
+  - Install virtio-win-gt-x64.msi in the attached virtio-win.iso
+  - Install spice-guest-tools (from https://www.spice-space.org/download.html#windows-binaries)
+  (Note: Clipboard sync should work now)
+  - Reboot
+
+5. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
   - Git clone the repo (with submodules), checkout the version tag you want (with)
   - Edit XML as written in the docs (we want to use the kernel module)
   - Build the client binary and OBS plugin, symlink them to appropiate locations
@@ -365,18 +377,14 @@ allow svirt_t device_t:chr_file { map open read write };
     2. Install \`selinux-policy-devel\`
     3. Run \`make -f /usr/share/selinux/devel/Makefile kvmfr0.pp\` in the same directory
     4. Run \`sudo semodule -X 300 -i kvmfr0.pp\`
-
-5. In the Windows VM:
-  - Install virtio-win-gt-x64.msi in the attached virtio-win.iso
-  - Install spice-guest-tools (from https://www.spice-space.org/download.html#windows-binaries)
-  (Note: Clipboard sync should work after installing the two items above)
-  - Install Looking Glass host binary
-  - Reboot
+    5. Install Looking Glass host binary in the Windows VM
+    6. Done!
 
 6. Optional: As the \`vfio-pci\` driver might draw a lot of power when attached to a GPU, create another low resource VM (e.g. Debian):
-    1. Autostart this VM on boot (you need to enable libvirtd service), shut it down before booting Windows VM, boot it again after shutting down the Windows VM
+    1. Autostart this VM on boot (you need to enable libvirtd service)
     2. Tell libvirtd to wait for bridge network if your VM is using bridged connection (https://www.reddit.com/r/Fedora/comments/14t8hhj/comment/jx2jzz2/)
     3. Attach the gaming GPU to this VM
+    4. Shut the idle VM down before booting Windows VM, boot it again after shutting down the Windows VM (automate this with my scripts)
 
 You can join the VFIO Discord and find more optimization tips in the \`wiki-and-psa\` channel.
 EOF

@@ -24,6 +24,7 @@ code --install-extension mikestead.dotenv
 code --install-extension ms-python.mypy-type-checker
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
+code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension pflannery.vscode-versionlens
 code --install-extension pranaygp.vscode-css-peek
