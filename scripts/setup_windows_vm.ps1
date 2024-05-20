@@ -58,21 +58,9 @@ Write-Host "Installing Chocolatey..."
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 # Install packages
-if ((Get-WmiObject win32_computersystem).Manufacturer -eq "QEMU") {
-    Write-Host "Installing spice guest tools..."
-    Invoke-WebRequest https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe `
-        -OutFile spice-guest-tools-latest.exe
-    $SPICE = Start-Process -FilePath .\spice-guest-tools-latest.exe -ArgumentList "/S" -PassThru
-    while (!$SPICE.HasExited) {
-        Write-Host "Waiting for spice guest tool install to complete..."
-        Start-Sleep -Seconds 3
-    }
-    Remove-Item .\spice-guest-tools-latest.exe
-}
-
 Write-Host "Installing common packages..."
-choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepadplusplus nano-win `
-    libreoffice-still qbittorrent vlc powertoys foobar2000 itunes microsoft-windows-terminal gsudo
+choco install -y openjdk python 7zip chocolateygui cheatengine imageglass notepadplusplus nano-win discord `
+    libreoffice-fresh qbittorrent vlc powertoys foobar2000 itunes microsoft-windows-terminal gsudo geforce-experience
 
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
@@ -92,6 +80,16 @@ choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSS
 choco install -y autohotkey.portable --version=1.1.37.1
 choco install -y locale-emulator
 
+# Steam
+Invoke-WebRequest https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe `
+    -OutFile SteamSetup.exe
+$STEAM = Start-Process -FilePath .\SteamSetup.exe -ArgumentList "/S" -PassThru
+while (!$STEAM.HasExited) {
+    Write-Host "Waiting for steam install to complete..."
+    Start-Sleep -Seconds 3
+}
+Remove-Item .\SteamSetup.exe
+
 # Trader Workstation from IBKR
 Write-Host "Installing Trader Workstation..."
 Invoke-WebRequest https://download2.interactivebrokers.com/installers/tws/latest/tws-latest-windows-x64.exe `
@@ -103,35 +101,6 @@ while (!$TWD.HasExited) {
 }
 Remove-Item .\tws-latest-windows-x64.exe
 
-if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
-    # Desktop specific scripts; Assume only desktop uses Nvidia GPU
-    Write-Host "Detected Nvidia GPU. Installing desktop specific apps..."
-    choco install -y discord geforce-experience
-
-    Invoke-WebRequest https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe `
-        -OutFile SteamSetup.exe
-    $STEAM = Start-Process -FilePath .\SteamSetup.exe -ArgumentList "/S" -PassThru
-    while (!$STEAM.HasExited) {
-        Write-Host "Waiting for steam install to complete..."
-        Start-Sleep -Seconds 3
-    }
-    Remove-Item .\SteamSetup.exe
-
-    Invoke-WebRequest https://looking-glass.io/artifact/stable/host -OutFile LG.zip
-    Expand-Archive .\LG.zip
-    $LG = Start-Process -FilePath .\LG\looking-glass-host-setup.exe -ArgumentList "/S" -PassThru
-    while (!$LG.HasExited) {
-        Write-Host "Waiting for Looking Glass host install to complete..."
-        Start-Sleep -Seconds 3
-    }
-    Remove-Item .\LG.zip
-    Remove-Item .\LG -Force -Recurse
-
-    Write-Host "Installation finished! You should reboot now to ensure everything is installed completely."
-    Write-Host "Also, set Looking Glass host to use DX12 backend."
-}
-else {
-    Write-Host "Installation finished! You should reboot now to ensure everything is installed completely."
-}
+Write-Host "Installation finished! You should reboot now to avoid stability problems."
 
 Pop-Location 

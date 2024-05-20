@@ -85,6 +85,7 @@
   "editor.fontSize": 16,
   "terminal.integrated.fontSize": 16,
   "editor.renderWhitespace": "all",
+  "editor.wordWrap": "on",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {

@@ -16,7 +16,6 @@ code --install-extension GrapeCity.gc-excelviewer
 code --install-extension Gruntfuggly.todo-tree
 code --install-extension IBM.output-colorizer
 code --install-extension icrawl.discord-vscode
-code --install-extension James-Yu.latex-workshop
 code --install-extension lokalise.i18n-ally
 code --install-extension mechatroner.rainbow-csv
 code --install-extension medo64.render-crlf
@@ -25,7 +24,7 @@ code --install-extension mikestead.dotenv
 code --install-extension ms-python.mypy-type-checker
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension pflannery.vscode-versionlens
 code --install-extension pranaygp.vscode-css-peek
 code --install-extension redhat.vscode-xml
@@ -48,9 +47,3 @@ code --install-extension vscjava.vscode-java-pack
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension YoavBls.pretty-ts-errors
 code --install-extension yzhang.markdown-all-in-one
-
-# Uninstall useless extensions
-code --uninstall-extension ms-vscode.remote-server
-code --uninstall-extension ms-vscode-remote.remote-wsl
-
-code --install-extension ms-vscode.remote-explorer

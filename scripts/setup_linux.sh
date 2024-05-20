@@ -92,19 +92,23 @@ sudo chsh -s "$(which zsh)" "$(whoami)"
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
 
-# Create distrobox and install VSCode (in background)
-{
-    echo "Creating Debian distrobox..."
-    distrobox create \
-        --image quay.io/toolbx-images/debian-toolbox:12 \
-        --name toolbox \
-        --pull \
-        --no-entry \
-        --additional-packages "texlive-full zsh 
-    build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl 
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libncursesw5-dev"
-    podman start toolbox
-} &
+# Create distrobox for Looking Glass (in background)
+if [[ "$is_desktop" == 1 ]]; then
+    {
+        echo "Creating distrobox container for Looking Glass build..."
+        distrobox create \
+            --image registry.fedoraproject.org/fedora-toolbox \
+            --name build \
+            --pull \
+            --no-entry \
+            --additional-packages "zsh cmake gcc gcc-c++ libglvnd-devel fontconfig-devel spice-protocol make nettle-devel 
+                                    pkgconf-pkg-config binutils-devel libXi-devel libXinerama-devel libXcursor-devel 
+                                    libXpresent-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel 
+                                    libXScrnSaver-devel libXrandr-devel dejavu-sans-mono-fonts obs-studio-devel"
+
+        podman start build
+    } &
+fi
 
 # Setup RPMFusion
 echo "Enabling RPMFusion and install media codecs..."
@@ -167,6 +171,9 @@ if [[ "$is_desktop" == 1 ]]; then
     sudo dnf install -y \
         dkms \
         intel-media-driver \
+        kernel-devel \
+        kernel-headers \
+        libvirt-devel \
         selinux-policy-devel \
         solaar
 
@@ -176,6 +183,11 @@ else
     sudo dnf install -y \
         steam
 fi
+
+# Install asdf python build dependencies and LaTeX (which takes a long time)
+sudo dnf install -y \
+    texlive-scheme-full \
+    make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
@@ -250,7 +262,7 @@ EOF
 
 popd
 
-echo "Waiting for flatpak installation and distrobox creation to finish..."
+echo "Waiting for flatpak installation to finish..."
 wait
 
 cat <<EOF
@@ -277,55 +289,59 @@ Here is a rough guideline for installing VFIO and Looking Glass:
     - Run as root: \`grub2-mkconfig -o /etc/grub2-efi.cfg && dracut -fv\`, then reboot
 
 3. Create a Windows 10 VM:
+  - Open virt-manager and enable XML editing (under Edit->Preferences)
+  - Create a Windows 10 VM. Do not create storage when asked
   - Use Q35+UEFI (Note: Cannot make LIVE snapshot of VM when using UEFI)
   - Use host-passthrough and manually set CPU cores/threads topology to match host
+  - Mount the latest virtio-win.iso from Red Hat
+  (Download from https://github.com/virtio-win/virtio-win-pkg-scripts)
   - Edit the XML:
-    - CPU pinning by adding <cputune> section; Also add emulatorpin (should use all cores not pinned to VM)
-    - Add PCIe devices
+    - CPU pinning by adding <cputune> section (under <domain>); Also add <emulatorpin> (should use all cores not pinned to VM)
+    - Add PCIe devices (if you add a storage device here for installing Windows, you can skip the next section)
     - Add \`<feature policy='require' name='topoext'/>\` and \`<cache mode='passthrough'/>\` inside <CPU> if you are using an AMD CPU
   - If you are not going to install Windows on a passed through storage device:
-    - Do not create storage when asked: Instead manually add storage of bus type \`SCSI\` and a \`VirtIO SCSI\` controller
-    - Mount the latest virtio-win.iso from Red Hat and load the SCSI driver during Windows VM installation
-    (Download from https://github.com/virtio-win/virtio-win-pkg-scripts)
+    - Add storage of bus type \`SCSI\` and a \`VirtIO SCSI\` controller
+    - Install the SCSI driver from virtio-win.iso during Windows VM installation
     - You may need to manually change the boot order after installation (make the storage device the first option)
     - Edit the XML:
-      - Add iothread driver to disk controller
-      - Add <iothreads>1</iothreads> under <domain>
-      - Add iothreadpin in <cputune> (should use all cores not pinned to VM)
-      - Add these:
-        \`\`\`
-        <features>
-            ...
-            <hyperv mode='custom'>
-            <relaxed state='on'/>
-            <vapic state='on'/>
-            <spinlocks state='on' retries='8191'/>
-            <vpindex state='on'/>
-            <runtime state='on'/>
-            <synic state='on'/>
-            <stimer state="on"/>
-            <vendor_id state='on' value='whatever'/>
-            <frequencies state='on'/>
-            <tlbflush state='on'/>
-            <ipi state='on'/>
-            </hyperv>
-            <kvm>
-            <hidden state="on"/>
-            </kvm>
-            ...
-        </features>
-        \`\`\`
-        \`\`\`
-        <clock offset="localtime">
-            <timer name="rtc" tickpolicy="catchup"/>
-            <timer name="pit" tickpolicy="delay"/>
-            <timer name="hpet" present="no"/>
-            <timer name="hypervclock" present="yes"/>
-        </clock>
-        \`\`\`
+        - Add iothread driver to disk controller
+        - Add <iothreads>1</iothreads> under <domain>
+        - Add <iothreadpin> in <cputune> (should use all cores not pinned to VM)
+  - Add these to the XML:
+  \`\`\`
+<features>
+    ...
+    <hyperv mode='custom'>
+    <relaxed state='on'/>
+    <vapic state='on'/>
+    <spinlocks state='on' retries='8191'/>
+    <vpindex state='on'/>
+    <runtime state='on'/>
+    <synic state='on'/>
+    <stimer state="on"/>
+    <vendor_id state='on' value='whatever'/>
+    <frequencies state='on'/>
+    <tlbflush state='on'/>
+    <ipi state='on'/>
+    </hyperv>
+    <kvm>
+    <hidden state="on"/>
+    </kvm>
+    ...
+</features>
+  \`\`\`
+  \`\`\`
+<clock offset="localtime">
+    <timer name="rtc" tickpolicy="catchup"/>
+    <timer name="pit" tickpolicy="delay"/>
+    <timer name="hpet" present="no"/>
+    <timer name="hypervclock" present="yes"/>
+</clock>
+  \`\`\`
   - Optional: Dynamically isolate CPU cores with QEMU hooks
 
 4. Add support for Looking Glass: (Start from https://looking-glass.io/docs/stable/install/)
+  - Git clone the repo (with submodules), checkout the version tag you want (with)
   - Edit XML as written in the docs (we want to use the kernel module)
   - Build the client binary and OBS plugin, symlink them to appropiate locations
   - Change the domain tag to <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
@@ -334,30 +350,33 @@ Here is a rough guideline for installing VFIO and Looking Glass:
     1. Create a \`kvmfr0.te\` file with the following content:
 
         \`\`\`
+module kvmfr0 1.0;
 
-        module kvmfr0 1.0;
-        
-        require {
-        	type svirt_t;
-        	type device_t;
-        	class chr_file { map open read write };
-        }
-        
-        #============= svirt_t ==============
-        allow svirt_t device_t:chr_file { map open read write };
-        
+require {
+    type svirt_t;
+    type device_t;
+    class chr_file { map open read write };
+}
+
+#============= svirt_t ==============
+allow svirt_t device_t:chr_file { map open read write };
         \`\`\`
 
     2. Install \`selinux-policy-devel\`
     3. Run \`make -f /usr/share/selinux/devel/Makefile kvmfr0.pp\` in the same directory
     4. Run \`sudo semodule -X 300 -i kvmfr0.pp\`
 
-5. In the Windows VM, install spice-guest-tools and Looking Glass host binary
+5. In the Windows VM:
+  - Install virtio-win-gt-x64.msi in the attached virtio-win.iso
+  - Install spice-guest-tools (from https://www.spice-space.org/download.html#windows-binaries)
+  (Note: Clipboard sync should work after installing the two items above)
+  - Install Looking Glass host binary
+  - Reboot
 
 6. Optional: As the \`vfio-pci\` driver might draw a lot of power when attached to a GPU, create another low resource VM (e.g. Debian):
     1. Autostart this VM on boot (you need to enable libvirtd service), shut it down before booting Windows VM, boot it again after shutting down the Windows VM
     2. Tell libvirtd to wait for bridge network if your VM is using bridged connection (https://www.reddit.com/r/Fedora/comments/14t8hhj/comment/jx2jzz2/)
-    3. Attach GPU to this VM
+    3. Attach the gaming GPU to this VM
 
 You can join the VFIO Discord and find more optimization tips in the \`wiki-and-psa\` channel.
 EOF
