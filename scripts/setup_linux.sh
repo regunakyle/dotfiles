@@ -58,6 +58,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         com.obsproject.Studio.Plugin.DroidCam \
         com.obsproject.Studio.Plugin.InputOverlay \
         dev.vencord.Vesktop \
+        io.dbeaver.DBeaverCommunity \
         org.fedoraproject.MediaWriter \
         org.filezillaproject.Filezilla \
         org.gnome.Calculator \
@@ -67,7 +68,6 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         org.kde.kolourpaint \
         org.kde.okular \
         org.libreoffice.LibreOffice \
-        org.mozilla.Thunderbird \
         org.qbittorrent.qBittorrent \
         org.sqlitebrowser.sqlitebrowser \
         org.strawberrymusicplayer.strawberry \
@@ -119,7 +119,6 @@ sudo dnf install -y \
 
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
-sudo dnf copr enable -y mguessan/davmail
 sudo dnf config-manager --set-enabled google-chrome
 
 # VSCode repo
@@ -146,7 +145,6 @@ sudo dnf install -y \
     akmod-v4l2loopback \
     btop \
     code \
-    davmail \
     fastfetch \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
@@ -307,7 +305,8 @@ force_drivers+=" vfio_pci "
     - Install the SCSI driver from virtio-win.iso during Windows VM installation
     - You may need to manually change the boot order after installation (make the storage device the first option)
     - Edit the XML:
-        - Add iothread driver to disk controller
+        - Add \`io='threads'\` in <driver> inside <disk>
+        - Set <driver iothread='1' queues='4'/> inside the disk controller we added 
         - Add <iothreads>1</iothreads> under <domain>
         - Add <iothreadpin> in <cputune> (should use all cores not pinned to VM)
   - Add these to the XML:
@@ -323,7 +322,7 @@ force_drivers+=" vfio_pci "
     <runtime state='on'/>
     <synic state='on'/>
     <stimer state="on"/>
-    <vendor_id state='on' value='whatever'/>
+    <vendor_id state='on' value='randomid'/>
     <frequencies state='on'/>
     <tlbflush state='on'/>
     <ipi state='on'/>
@@ -346,7 +345,7 @@ force_drivers+=" vfio_pci "
 
   - Optional: Dynamically isolate CPU cores with QEMU hooks
 
-4. In the Windows VM:
+4. Install Windows and perform basic setup, then:
   - Install virtio-win-gt-x64.msi in the attached virtio-win.iso
   - Install spice-guest-tools (from https://www.spice-space.org/download.html#windows-binaries)
   (Note: Clipboard sync should work now)
@@ -382,9 +381,8 @@ allow svirt_t device_t:chr_file { map open read write };
 
 6. Optional: As the \`vfio-pci\` driver might draw a lot of power when attached to a GPU, create another low resource VM (e.g. Debian):
     1. Autostart this VM on boot (you need to enable libvirtd service)
-    2. Tell libvirtd to wait for bridge network if your VM is using bridged connection (https://www.reddit.com/r/Fedora/comments/14t8hhj/comment/jx2jzz2/)
-    3. Attach the gaming GPU to this VM
-    4. Shut the idle VM down before booting Windows VM, boot it again after shutting down the Windows VM (automate this with my scripts)
+    2. Attach the gaming GPU to this VM
+    3. Shut the idle VM down before booting Windows VM, boot it again after shutting down the Windows VM (automate this with my scripts)
 
 You can join the VFIO Discord and find more optimization tips in the \`wiki-and-psa\` channel.
 EOF
