@@ -145,6 +145,7 @@ sudo dnf install -y \
     akmod-v4l2loopback \
     btop \
     code \
+    dynamips \
     fastfetch \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
@@ -269,7 +270,8 @@ Install finished! You should reboot now to ensure everything works correctly.
 After that, you may want to config fcitx5, SSH/GPG, VSCode and Windows 10 VM.
 
 You should create a network bridge (with your primary NIC as slave) for VM-Host communication.
-If you are on laptop, create a QEMU hook that port forward 3389 instead:
+Disable STP unless you need it, as it will slow down your boot time.
+If you use WiFi only, create a QEMU hook that port forward 3389 instead:
 https://www.reddit.com/r/VFIO/comments/1blu8tk/comment/kwstktq/
 Also, use \`Virtio\` video driver (after installing virtio drivers in the VM) for higher resolution.
 
@@ -277,7 +279,7 @@ Also, use \`Virtio\` video driver (after installing virtio drivers in the VM) fo
 
 Here is a rough guideline for installing VFIO and Looking Glass: 
 
-1. (If you are using an Intel CPU) Add \`intel_iommu=pt\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`, then regenerate grub config, reboot and check IOMMU is enabled
+1. (If you are using an Intel CPU) Add \`intel_iommu=pt\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`, then run (as root) \`grub2-mkconfig -o /etc/grub2-efi.cfg\`, reboot and check IOMMU is enabled
 2. Load drivers:
     - Add \`vfio_pci.ids=<Device 1 ID>,<Device 2 ID>\` to \`GRUB_CMDLINE_LINUX\` in \`/etc/sysconfig/grub\`
     - Add to \`/etc/dracut.conf.d/vfio.conf\`:
