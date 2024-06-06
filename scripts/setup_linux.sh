@@ -14,6 +14,7 @@ set -euo pipefail
 # - Automate the post installation tasks
 # - Automate VFIO and Looking Glass installation
 # - Add error handling
+# - Handle sudo timeout
 ##########################################################################
 
 # Check desktop or laptop
@@ -47,31 +48,24 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 {
     # Setup flatpak in background
     echo "Setting up Flathub and installing flatpaks..."
-    flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak remote-add --user --if-not-exists --subset=verified flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
     flatpak install -y flathub io.podman_desktop.PodmanDesktop
 
     flatpak install -y flathub \
-        com.calibre_ebook.calibre \
         com.github.dynobo.normcap \
         com.obsproject.Studio \
-        com.obsproject.Studio.Plugin.DroidCam \
-        com.obsproject.Studio.Plugin.InputOverlay \
         dev.vencord.Vesktop \
-        io.dbeaver.DBeaverCommunity \
+        md.obsidian.Obsidian \
         org.fedoraproject.MediaWriter \
-        org.filezillaproject.Filezilla \
         org.gnome.Calculator \
-        org.gnome.meld \
         org.kde.gwenview \
         org.kde.kleopatra \
         org.kde.kolourpaint \
         org.kde.okular \
         org.libreoffice.LibreOffice \
         org.qbittorrent.qBittorrent \
-        org.sqlitebrowser.sqlitebrowser \
-        org.strawberrymusicplayer.strawberry \
-        org.videolan.VLC
+        org.strawberrymusicplayer.strawberry
 
     if [[ "$is_desktop" != 1 ]]; then
         # For snappier control of Windows VM (using RDP)
@@ -92,8 +86,8 @@ sudo chsh -s "$(which zsh)" "$(whoami)"
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
 
-# Create distrobox for Looking Glass (in background)
 if [[ "$is_desktop" == 1 ]]; then
+    # Create distrobox (in background) for building softwares
     {
         echo "Creating distrobox container for Looking Glass build..."
         distrobox create \
@@ -105,7 +99,8 @@ if [[ "$is_desktop" == 1 ]]; then
                                     pkgconf-pkg-config binutils-devel libXi-devel libXinerama-devel libXcursor-devel 
                                     libXpresent-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel 
                                     libXScrnSaver-devel libXrandr-devel dejavu-sans-mono-fonts 
-                                    libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel"
+                                    libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel 
+                                    patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2"
 
         podman start toolbox
     } &
@@ -144,11 +139,14 @@ sudo dnf install -y \
     @virtualization \
     akmod-v4l2loopback \
     btop \
+    calibre \
     code \
+    docker-compose \
     dynamips \
     fastfetch \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
+    filezilla \
     git \
     gns3-gui \
     gns3-server \
@@ -158,11 +156,14 @@ sudo dnf install -y \
     iperf3 \
     kate \
     maven \
+    meld \
     nmap \
     pipx \
     scrcpy \
     shellcheck \
+    sqlitebrowser \
     tmux \
+    vlc \
     wireshark
 
 # Add user to Wireshark group for non-root usage
@@ -174,8 +175,6 @@ if [[ "$is_desktop" == 1 ]]; then
         intel-media-driver \
         kernel-devel \
         kernel-headers \
-        libvirt-devel \
-        selinux-policy-devel \
         solaar
 
     # Enable libvirtd for VM autoboot
@@ -184,10 +183,6 @@ else
     sudo dnf install -y \
         steam
 fi
-
-# Install asdf Python build dependencies
-sudo dnf install -y \
-    make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
@@ -208,11 +203,6 @@ fc-cache -f
 # Setup binaries from various sources
 local_bin="$HOME/.local/bin"
 mkdir -p "$local_bin"
-
-# docker-compose
-echo "Setting up docker-compose..."
-wget -O "$local_bin/docker-compose" https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
-chmod u+x "$local_bin/docker-compose"
 
 # google-java-format
 echo "Setting up google-java-format..."
