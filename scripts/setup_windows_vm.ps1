@@ -59,8 +59,8 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://com
 
 # Install packages
 Write-Host "Installing common packages..."
-choco install -y python qbittorrent 7zip vlc geforce-experience imageglass notepadplusplus nano-win discord rpi-imager `
-    libreoffice-fresh openjdk powertoys foobar2000 itunes microsoft-windows-terminal gsudo cheatengine chocolateygui
+choco install -y python 7zip.install vlc.install geforce-experience imageglass notepadplusplus.install nano-win discord.install `
+    libreoffice-fresh zulu powertoys foobar2000 itunes microsoft-windows-terminal gsudo cheatengine chocolateygui qbittorrent
 
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
@@ -73,7 +73,7 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
     Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
 }
 
-choco install -y git --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Nano'"
+choco install -y git.install --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Nano'"
 
 # Locale Emulator, workaround install method as AHK v2 fails
 # https://github.com/chtof/chocolatey-packages/issues/103

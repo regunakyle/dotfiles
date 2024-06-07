@@ -99,7 +99,7 @@ if [[ "$is_desktop" == 1 ]]; then
                                     pkgconf-pkg-config binutils-devel libXi-devel libXinerama-devel libXcursor-devel 
                                     libXpresent-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel 
                                     libXScrnSaver-devel libXrandr-devel dejavu-sans-mono-fonts 
-                                    libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel 
+                                    libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel selinux-policy-devel 
                                     patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2"
 
         podman start toolbox
@@ -157,6 +157,7 @@ sudo dnf install -y \
     kate \
     maven \
     meld \
+    neovim \
     nmap \
     pipx \
     scrcpy \
@@ -175,6 +176,7 @@ if [[ "$is_desktop" == 1 ]]; then
         intel-media-driver \
         kernel-devel \
         kernel-headers \
+        libvirt-devel \
         solaar
 
     # Enable libvirtd for VM autoboot
