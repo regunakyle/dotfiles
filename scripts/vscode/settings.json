@@ -7,22 +7,14 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.linkedEditing": true,
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "[dockerfile][gitignore][ignore][properties][shellscript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  // Running google-java-format manually with the Run On Save extension
-  "emeraldwalk.runonsave": {
-    "commands": [
-      {
-        "match": "\\.java$",
-        "cmd": "google-java-format --replace ${file}"
-      }
-    ]
+  "[lua]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "sumneko.lua"
   },
-  "java.checkstyle.configuration": "/google_checks.xml",
   "[markdown]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
@@ -34,7 +26,6 @@
       "source.organizeImports": "explicit"
     }
   },
-  "mypy-type-checker.reportingScope": "workspace",
   "[toml]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "tamasfe.even-better-toml"
@@ -79,13 +70,12 @@
     "!excel",
     "po"
   ],
-  "discord.removeRemoteRepository": true,
   "diffEditor.ignoreTrimWhitespace": false,
+  "discord.removeRemoteRepository": true,
   "editor.fontFamily": "'Sarasa Fixed Slab HC', 'Symbols Nerd Font Mono', monospace",
   "editor.fontSize": 16,
-  "terminal.integrated.fontSize": 16,
+  "editor.linkedEditing": true,
   "editor.renderWhitespace": "all",
-  "editor.wordWrap": "on",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -95,6 +85,19 @@
         }
       }
     ]
+  },
+  "editor.wordWrap": "on",
+  // Running google-java-format manually with the Run On Save extension
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.java$",
+        "cmd": "google-java-format --replace ${file}"
+      }
+    ]
+  },
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
   },
   "extensions.ignoreRecommendations": true,
   "files.exclude": {
@@ -106,13 +109,17 @@
     "**/.ruff_cache": true
   },
   "gitlens.telemetry.enabled": false,
+  "java.checkstyle.configuration": "/google_checks.xml",
   "jupyter.askForKernelRestart": false,
+  "mypy-type-checker.reportingScope": "workspace",
   "notebook.formatOnSave.enabled": true,
   "partialDiff.enableTelemetry": false,
   "redhat.telemetry.enabled": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontSize": 16,
   "terminal.integrated.persistentSessionReviveProcess": "never",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "vsicons.dontShowNewVersionMessage": true,
   "workbench.colorCustomizations": {
     "statusBar.debuggingBackground": "#cc6633",
@@ -120,8 +127,5 @@
     "statusBarItem.remoteBackground": "#16825d",
     "statusBarItem.remoteForeground": "#ffffff"
   },
-  "workbench.iconTheme": "vscode-icons",
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  }
+  "workbench.iconTheme": "vscode-icons"
 }
