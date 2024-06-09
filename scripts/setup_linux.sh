@@ -89,14 +89,13 @@ systemctl --user enable --now podman.socket
 if [[ "$is_desktop" == 1 ]]; then
     # Create distrobox (in background) for building softwares
     {
-        echo "Creating distrobox container for Looking Glass build..."
+        echo "Creating distrobox container..."
         distrobox create \
             --image registry.fedoraproject.org/fedora-toolbox \
             --name toolbox \
             --pull \
             --no-entry \
-            --additional-packages "zsh texlive-scheme-full 
-                                    cmake gcc gcc-c++ libglvnd-devel fontconfig-devel spice-protocol make nettle-devel 
+            --additional-packages "cmake gcc gcc-c++ libglvnd-devel fontconfig-devel spice-protocol make nettle-devel 
                                     pkgconf-pkg-config binutils-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel 
                                     dejavu-sans-mono-fonts libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel 
                                     patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2"
@@ -111,14 +110,6 @@ sudo dnf install -y \
     "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
     "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
-# Add 3rd party repos
-sudo dnf copr enable -y zeno/scrcpy
-sudo dnf config-manager --set-enabled google-chrome
-
-# VSCode repo
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
-
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 sudo dnf install -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
@@ -129,6 +120,14 @@ if [[ "$is_desktop" != 1 ]]; then
     sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
     sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 fi
+
+# Add 3rd party repos
+sudo dnf copr enable -y zeno/scrcpy
+sudo dnf config-manager --set-enabled google-chrome
+
+# VSCode repo
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
 
 # DNF install
 echo "Installing packages from DNF..."
@@ -162,6 +161,10 @@ sudo dnf install -y \
     scrcpy \
     shellcheck \
     sqlitebrowser \
+    texlive-latexindent \
+    texlive-lipsum \
+    texlive-nth \
+    texlive-scheme-small \
     tmux \
     vlc \
     wireshark
