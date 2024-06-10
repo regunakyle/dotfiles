@@ -91,7 +91,7 @@ if [[ "$is_desktop" == 1 ]]; then
     {
         echo "Creating distrobox container..."
         distrobox create \
-            --image registry.fedoraproject.org/fedora-toolbox \
+            --image quay.io/fedora/fedora-toolbox \
             --name toolbox \
             --pull \
             --no-entry \
