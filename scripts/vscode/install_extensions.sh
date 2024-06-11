@@ -23,7 +23,6 @@ code --install-extension mechatroner.rainbow-csv
 code --install-extension medo64.render-crlf
 code --install-extension mhutchie.git-graph
 code --install-extension mikestead.dotenv
-code --install-extension ms-python.mypy-type-checker
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
 code --install-extension pflannery.vscode-versionlens
