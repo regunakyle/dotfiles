@@ -147,12 +147,15 @@ packages="@core \
     scrcpy \
     shellcheck \
     sqlitebrowser \
+    tmux \
+    vlc"
+
+# LaTeX related items
+packages="${packages} \
     texlive-latexindent \
     texlive-lipsum \
     texlive-nth \
-    texlive-scheme-small \
-    tmux \
-    vlc"
+    texlive-scheme-small"
 
 # ASDF Python build dependencies
 packages="${packages} \
