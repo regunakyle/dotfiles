@@ -14,7 +14,6 @@ set -euo pipefail
 # - Automate the post installation tasks
 # - Automate VFIO and Looking Glass installation
 # - Add error handling
-# - Handle sudo timeout
 ##########################################################################
 
 # Check desktop or laptop
@@ -75,33 +74,21 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
     fi
 } &
 
+# Install packages (that need configurations with root) early
 sudo dnf install -y \
-    distrobox \
-    podman-docker \
+    @virtualization \
+    wireshark \
     zsh
 
 # Change default shell to Zsh
 sudo chsh -s "$(which zsh)" "$(whoami)"
 
-# Enable Podman socket for Docker compatiblity
-systemctl --user enable --now podman.socket
+# Add user to Wireshark group for non-root usage
+sudo usermod -aG wireshark "$(whoami)"
 
 if [[ "$is_desktop" == 1 ]]; then
-    # Create distrobox (in background) for building softwares
-    {
-        echo "Creating distrobox container..."
-        distrobox create \
-            --image quay.io/fedora/fedora-toolbox \
-            --name toolbox \
-            --pull \
-            --no-entry \
-            --additional-packages "cmake gcc gcc-c++ libglvnd-devel fontconfig-devel spice-protocol make nettle-devel 
-                                    pkgconf-pkg-config binutils-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel 
-                                    dejavu-sans-mono-fonts libdecor-devel pipewire-devel libsamplerate-devel obs-studio-devel 
-                                    patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2"
-
-        podman start toolbox
-    } &
+    # Enable libvirtd for VM autoboot
+    sudo systemctl enable libvirtd
 fi
 
 # Setup RPMFusion
@@ -131,10 +118,8 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 
 # DNF install
 echo "Installing packages from DNF..."
-sudo dnf install -y \
-    @core \
+packages="@core \
     @sound-and-video \
-    @virtualization \
     akmod-v4l2loopback \
     btop \
     calibre \
@@ -158,6 +143,7 @@ sudo dnf install -y \
     neovim \
     nmap \
     pipx \
+    podman-docker \
     scrcpy \
     shellcheck \
     sqlitebrowser \
@@ -166,27 +152,34 @@ sudo dnf install -y \
     texlive-nth \
     texlive-scheme-small \
     tmux \
-    vlc \
-    wireshark
+    vlc"
 
-# Add user to Wireshark group for non-root usage
-sudo usermod -aG wireshark "$(whoami)"
+# ASDF Python build dependencies
+packages="${packages} \
+    make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel \
+    libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2"
 
 if [[ "$is_desktop" == 1 ]]; then
-    sudo dnf install -y \
-        dkms \
+    packages="${packages} \
         intel-media-driver \
-        kernel-devel \
-        kernel-headers \
         libvirt-devel \
-        solaar
+        solaar"
 
-    # Enable libvirtd for VM autoboot
-    sudo systemctl enable libvirtd
+    # Looking Glass dependencies
+    packages="${packages} \
+        cmake gcc-c++ libglvnd-devel fontconfig-devel spice-protocol nettle-devel \
+        pkgconf-pkg-config binutils-devel libxkbcommon-x11-devel wayland-devel wayland-protocols-devel \
+        dejavu-sans-mono-fonts libdecor-devel pipewire-devel libsamplerate-devel \
+        dkms kernel-devel kernel-headers obs-studio-devel"
 else
-    sudo dnf install -y \
-        steam
+    packages="${packages} \
+        steam"
 fi
+
+sudo dnf install -y $packages
+
+# Enable Podman socket for Docker compatiblity
+systemctl --user enable --now podman.socket
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
@@ -266,6 +259,7 @@ EOF
 
 unset is_desktop
 unset filename
+unset packages
 unset local_bin
 
 # Start Zsh

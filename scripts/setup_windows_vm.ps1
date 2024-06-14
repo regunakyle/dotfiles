@@ -59,8 +59,8 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://com
 
 # Install packages
 Write-Host "Installing common packages..."
-choco install -y python 7zip.install vlc.install geforce-experience imageglass notepadplusplus.install nano-win discord.install `
-    libreoffice-fresh zulu powertoys foobar2000 itunes microsoft-windows-terminal gsudo cheatengine chocolateygui qbittorrent
+choco install -y python 7zip.install vlc.install microsoft-windows-terminal imageglass notepadplusplus.install nano-win `
+    libreoffice-fresh zulu powertoys foobar2000 itunes gsudo cheatengine chocolateygui qbittorrent
 
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
@@ -80,16 +80,6 @@ choco install -y git.install --params "'/GitOnlyOnPath /WindowsTerminalProfile /
 choco install -y autohotkey.portable --version=1.1.37.1
 choco install -y locale-emulator
 
-# Steam
-Invoke-WebRequest https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe `
-    -OutFile SteamSetup.exe
-$STEAM = Start-Process -FilePath .\SteamSetup.exe -ArgumentList "/S" -PassThru
-while (!$STEAM.HasExited) {
-    Write-Host "Waiting for steam install to complete..."
-    Start-Sleep -Seconds 3
-}
-Remove-Item .\SteamSetup.exe
-
 # Trader Workstation from IBKR
 Write-Host "Installing Trader Workstation..."
 Invoke-WebRequest https://download2.interactivebrokers.com/installers/tws/latest/tws-latest-windows-x64.exe `
@@ -100,6 +90,23 @@ while (!$TWD.HasExited) {
     Start-Sleep -Seconds 3
 }
 Remove-Item .\tws-latest-windows-x64.exe
+
+if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
+    # Desktop specific scripts; Assume only desktop uses Nvidia GPU
+    Write-Host "Detected Nvidia GPU. Installing desktop specific apps..."
+    choco install -y discord.install geforce-experience
+
+    # Steam
+    Invoke-WebRequest https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe `
+        -OutFile SteamSetup.exe
+    $STEAM = Start-Process -FilePath .\SteamSetup.exe -ArgumentList "/S" -PassThru
+    while (!$STEAM.HasExited) {
+        Write-Host "Waiting for steam install to complete..."
+        Start-Sleep -Seconds 3
+    }
+    Remove-Item .\SteamSetup.exe
+
+}
 
 Write-Host "Installation finished! You should reboot now to avoid stability problems."
 

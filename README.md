@@ -15,7 +15,6 @@
 - Install most GUI application as flatpak from [Flathub](https://flathub.org/) instead of DNF
 - Use [Fcitx5](https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx_5) with Quick Classic as input method
 - Use [Podman](https://podman.io/) with Docker compatibility
-  - Use the [docker-compose](https://github.com/docker/compose) binary from upstream as the Fedora version is out of date
 - Use [Sarasa Gothic](https://github.com/be5invis/Sarasa-Gothic) and [Nerd Font Symbols](https://github.com/ryanoasis/nerd-fonts)
 - Use the Zsh shell with [Antidote](https://github.com/mattmc3/antidote) and [plugins](dot_zsh_plugins.txt)
 - Use [asdf](https://github.com/asdf-vm/asdf) and plugins
