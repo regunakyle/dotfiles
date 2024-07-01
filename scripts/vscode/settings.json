@@ -70,6 +70,7 @@
     "!excel",
     "po"
   ],
+  "diffEditor.hideUnchangedRegions.enabled": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "discord.removeRemoteRepository": true,
   "editor.fontFamily": "'Sarasa Fixed Slab HC', 'Symbols Nerd Font Mono', monospace",
