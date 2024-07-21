@@ -65,6 +65,7 @@ choco install -y python 7zip.install vlc.install microsoft-windows-terminal imag
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
 # Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
 if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
     Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
@@ -74,11 +75,6 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 }
 
 choco install -y git.install --params "'/GitOnlyOnPath /WindowsTerminalProfile /NoOpenSSH /DefaultBranchName:main /Editor:Nano'"
-
-# Locale Emulator, workaround install method as AHK v2 fails
-# https://github.com/chtof/chocolatey-packages/issues/103
-choco install -y autohotkey.portable --version=1.1.37.1
-choco install -y locale-emulator
 
 # Trader Workstation from IBKR
 Write-Host "Installing Trader Workstation..."
