@@ -129,5 +129,6 @@
     "statusBarItem.remoteBackground": "#16825d",
     "statusBarItem.remoteForeground": "#ffffff"
   },
+  "workbench.editor.revealIfOpen": true,
   "workbench.iconTheme": "vscode-icons"
 }
