@@ -5,6 +5,9 @@ set -euo pipefail
 # This script assumes you installed Fedora KDE with the netinstaller
 # and unticked all additional packages (except Firefox).
 
+# Requires a good internet connection, otherwise you might need to input password
+# for sudo multiple times.
+
 # The desktop option targets a desktop with two GPUs (one Intel and one Nvidia),
 # of which the Nvidia one would be passed through into a Windows 10 VM for gaming.
 
@@ -58,6 +61,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
         md.obsidian.Obsidian \
         org.fedoraproject.MediaWriter \
         org.gnome.Calculator \
+        org.inkscape.Inkscape \
         org.kde.gwenview \
         org.kde.kleopatra \
         org.kde.kolourpaint \
@@ -111,6 +115,7 @@ fi
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
 sudo dnf config-manager --set-enabled google-chrome
+sudo dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 
 # VSCode repo
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -122,6 +127,7 @@ packages="@core \
     @sound-and-video \
     akmod-v4l2loopback \
     btop \
+    btrfs-assistant \
     calibre \
     code \
     docker-compose \
@@ -147,6 +153,7 @@ packages="@core \
     scrcpy \
     shellcheck \
     sqlitebrowser \
+    tailscale \
     tmux \
     vlc"
 
@@ -176,6 +183,7 @@ if [[ "$is_desktop" == 1 ]]; then
         dkms kernel-devel kernel-headers obs-studio-devel"
 else
     packages="${packages} \
+        rpi-imager \
         steam"
 fi
 
@@ -218,6 +226,7 @@ source "$HOME/.asdf/asdf.sh"
 
 asdf plugin-add chezmoi
 asdf plugin-add java
+asdf plugin-add k9s
 asdf plugin-add nodejs
 asdf plugin-add python
 
@@ -248,6 +257,10 @@ source "$HOME/.asdf/completions/asdf.bash"
 if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]]; then
   source ~/.asdf/plugins/java/set-java-home.zsh
 fi
+
+# History substring search 
+bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
+bind '"\e[1;5B":history-substring-search-forward' # Ctrl+Down
 EOF
 
 popd
