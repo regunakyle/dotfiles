@@ -130,6 +130,7 @@ packages="@core \
     btrfs-assistant \
     calibre \
     code \
+    distrobox \
     docker-compose \
     dynamips \
     fastfetch \

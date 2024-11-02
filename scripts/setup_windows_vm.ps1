@@ -59,11 +59,8 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://com
 
 # Install packages
 Write-Host "Installing common packages..."
-choco install -y 7zip.install vlc.install microsoft-windows-terminal imageglass notepadplusplus.install nano-win `
-    libreoffice-fresh powertoys foobar2000 itunes gsudo cheatengine chocolateygui qbittorrent
-
-winget install vfox
-if (-not (Test-Path -Path $PROFILE)) { New-Item -Type File -Path $PROFILE -Force }; Add-Content -Path $PROFILE -Value 'Invoke-Expression "$(vfox activate pwsh)"'
+choco install -y 7zip.install vlc.install imageglass notepadplusplus.install nano-win firefox `
+    libreoffice-fresh powertoys foobar2000 temurin itunes gsudo python chocolateygui qbittorrent
 
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
