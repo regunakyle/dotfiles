@@ -137,7 +137,7 @@ packages="@core \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
-    git \
+    git-all \
     gns3-gui \
     gns3-server \
     google-chrome-stable \
@@ -256,7 +256,7 @@ source "$HOME/.asdf/completions/asdf.bash"
 
 # ASDF java: Set JAVA_HOME
 if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]]; then
-  source ~/.asdf/plugins/java/set-java-home.zsh
+  source ~/.asdf/plugins/java/set-java-home.bash
 fi
 
 # History substring search 

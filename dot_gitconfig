@@ -1,5 +1,7 @@
 [alias]
 fpush = push --force-with-lease
+# https://orbital.rodeo/~mike/20130302-git-serve/
+quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 [branch]
 sort = -committerdate
 [branch "main"]
