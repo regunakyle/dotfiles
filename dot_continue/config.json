@@ -2,23 +2,25 @@
   "allowAnonymousTelemetry": false,
   "models": [
     {
-      "title": "qwen2.5-coder 7b",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct-q6_K",
-      "apiBase": "http://192.168.1.51:11434"
+      "title": "qwen2.5-coder 32b instruct",
+      "provider": "openai",
+      "model": "Qwen_Qwen2.5-Coder-32B-Instruct-exl2",
+      "apiBase": "http://192.168.1.51:11434/v1"
     }
   ],
-  "tabAutocompleteModel": {
-    "title": "qwen2.5-coder 7b",
-    "provider": "ollama",
-    "model": "qwen2.5-coder:7b-instruct-q6_K",
-    "apiBase": "http://192.168.1.51:11434"
-  },
+  "tabAutocompleteModel": [
+    {
+      "title": "qwen2.5-coder 32b instruct",
+      "provider": "openai",
+      "model": "Qwen_Qwen2.5-Coder-32B-Instruct-exl2",
+      "apiBase": "http://192.168.1.51:11434/v1"
+    }
+  ],
   "embeddingsProvider": {
     "title": "nomic-embed-text",
-    "provider": "ollama",
-    "model": "nomic-embed-text:latest",
-    "apiBase": "http://192.168.1.51:11435"
+    "provider": "openai",
+    "model": "nomic-embed-text-v1.5",
+    "apiBase": "http://192.168.1.51:11434/v1"
   },
   "customCommands": [
     {

@@ -26,6 +26,8 @@ code --install-extension mhutchie.git-graph
 code --install-extension mikestead.dotenv
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension pflannery.vscode-versionlens
 code --install-extension pranaygp.vscode-css-peek
 code --install-extension redhat.vscode-xml
@@ -49,3 +51,6 @@ code --install-extension vscjava.vscode-java-pack
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension YoavBls.pretty-ts-errors
 code --install-extension yzhang.markdown-all-in-one
+
+# Uninstall useless extensions
+code --uninstall-extension vscjava.vscode-gradle
