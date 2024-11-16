@@ -32,6 +32,7 @@ code --install-extension pflannery.vscode-versionlens
 code --install-extension pranaygp.vscode-css-peek
 code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
+code --install-extension ritwickdey.liveserver
 code --install-extension rogalmic.bash-debug
 code --install-extension ryu1kn.partial-diff
 code --install-extension shengchen.vscode-checkstyle
@@ -40,6 +41,7 @@ code --install-extension stkb.rewrap
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension stylelint.vscode-stylelint
 code --install-extension tamasfe.even-better-toml
+code --install-extension tht13.rst-vscode
 code --install-extension timonwong.shellcheck
 code --install-extension tomoki1207.pdf
 code --install-extension usernamehw.errorlens
@@ -51,6 +53,3 @@ code --install-extension vscjava.vscode-java-pack
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension YoavBls.pretty-ts-errors
 code --install-extension yzhang.markdown-all-in-one
-
-# Uninstall useless extensions
-code --uninstall-extension vscjava.vscode-gradle
