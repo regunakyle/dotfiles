@@ -3,7 +3,7 @@ set -euo pipefail
 
 ##########################################################################
 # This script assumes you installed Fedora KDE with the netinstaller
-# and unticked all additional packages (except Firefox).
+# and unticked all additional packages (except Firefox and LibreOffice).
 
 # Requires a good internet connection, otherwise you might need to input password
 # for sudo multiple times.
@@ -99,8 +99,8 @@ fi
 
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
-sudo dnf config-manager --set-enabled google-chrome
-sudo dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+sudo dnf config-manager setopt google-chrome.enabled=1
+sudo dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 
 # VSCode repo
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc

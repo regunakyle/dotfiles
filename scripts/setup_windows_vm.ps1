@@ -79,6 +79,7 @@ $packages = @(
     "Mozilla.Firefox",
     "Notepad++.Notepad++",
     "okibcn.nano",
+    "PeterPawlowski.foobar2000",
     "qBittorrent.qBittorrent",
     "TheDocumentFoundation.LibreOffice",
     "version-fox.vfox",
