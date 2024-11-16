@@ -52,35 +52,19 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
     echo "Setting up Flathub and installing flatpaks..."
     flatpak remote-add --user --if-not-exists --subset=verified flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-    flatpak install -y flathub io.podman_desktop.PodmanDesktop
-
     flatpak install -y flathub \
         com.github.dynobo.normcap \
-        com.obsproject.Studio \
+        com.moonlight_stream.Moonlight \
         dev.vencord.Vesktop \
-        md.obsidian.Obsidian \
-        org.fedoraproject.MediaWriter \
-        org.gnome.Calculator \
-        org.inkscape.Inkscape \
-        org.kde.gwenview \
-        org.kde.kleopatra \
-        org.kde.kolourpaint \
-        org.kde.okular \
-        org.libreoffice.LibreOffice \
-        org.qbittorrent.qBittorrent \
-        org.strawberrymusicplayer.strawberry
+        io.podman_desktop.PodmanDesktop \
+        md.obsidian.Obsidian
 
-    if [[ "$is_desktop" != 1 ]]; then
-        # For snappier control of Windows VM (using RDP)
-        flatpak install -y flathub \
-            com.moonlight_stream.Moonlight \
-            org.remmina.Remmina
-    fi
 } &
 
 # Install packages (that need configurations with root) early
 sudo dnf install -y \
     @virtualization \
+    fedora-workstation-repositories \
     wireshark \
     zsh
 
@@ -103,7 +87,8 @@ sudo dnf install -y \
 
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
-sudo dnf install -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 if [[ "$is_desktop" != 1 ]]; then
     sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
@@ -124,7 +109,6 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 # DNF install
 echo "Installing packages from DNF..."
 packages="@core \
-    @sound-and-video \
     akmod-v4l2loopback \
     btop \
     btrfs-assistant \
@@ -137,23 +121,36 @@ packages="@core \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
+    gnome-calculator \
     git-all \
     gns3-gui \
     gns3-server \
     google-chrome-stable \
+    gstreamer1-plugin-openh264 \
+    gwenview \
     hadolint \
     hugo \
+    inkscape \
     iperf3 \
     kate \
+    kleopatra \
+    kolourpaint \
     maven \
+    mediawriter \
     meld \
+    mozilla-openh264 \
     neovim \
     nmap \
+    obs-studio \
+    okular \
     pipx \
     podman-docker \
+    qbittorrent \
+    rpi-imager \
     scrcpy \
     shellcheck \
     sqlitebrowser \
+    strawberry \
     tailscale \
     tmux \
     vlc"
@@ -184,7 +181,6 @@ if [[ "$is_desktop" == 1 ]]; then
         dkms kernel-devel kernel-headers obs-studio-devel"
 else
     packages="${packages} \
-        rpi-imager \
         steam"
 fi
 
