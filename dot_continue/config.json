@@ -16,6 +16,10 @@
       "apiBase": "http://192.168.1.51:11434/v1"
     }
   ],
+  "tabAutocompleteOptions": {
+    "maxPromptTokens": 2048,
+    "multilineCompletions": "never"
+  },
   "embeddingsProvider": {
     "title": "nomic-embed-text",
     "provider": "openai",
