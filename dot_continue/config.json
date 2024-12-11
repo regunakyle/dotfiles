@@ -18,7 +18,8 @@
   ],
   "tabAutocompleteOptions": {
     "maxPromptTokens": 2048,
-    "multilineCompletions": "never"
+    "multilineCompletions": "never",
+    "debounceDelay": 700
   },
   "embeddingsProvider": {
     "title": "nomic-embed-text",
