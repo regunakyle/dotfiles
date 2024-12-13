@@ -116,6 +116,7 @@
   "partialDiff.enableTelemetry": false,
   "python.analysis.typeCheckingMode": "strict",
   "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.languageServerMode": "full",
   "redhat.telemetry.enabled": false,
   "rst.preview.pythonPath": "~/.asdf/shims/python",
   "telemetry.telemetryLevel": "off",
