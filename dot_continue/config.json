@@ -16,16 +16,24 @@
       "apiBase": "http://192.168.1.51:11434/v1"
     }
   ],
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text",
+    "apiBase": "http://192.168.1.51:11435"
+  },
+  // Very slow, disable if needed
+  "reranker": {
+    "name": "huggingface-tei",
+    "params": {
+      "apiBase": "http://192.168.1.51:8080",
+      "truncate": true,
+      "truncation_direction": "Right"
+    }
+  },
   "tabAutocompleteOptions": {
     "maxPromptTokens": 2048,
     "multilineCompletions": "never",
     "debounceDelay": 700
-  },
-  "embeddingsProvider": {
-    "title": "nomic-embed-text",
-    "provider": "openai",
-    "model": "nomic-embed-text-v1.5",
-    "apiBase": "http://192.168.1.51:11434/v1"
   },
   "customCommands": [
     {
