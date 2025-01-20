@@ -24,6 +24,8 @@ ff = only
 [push]
 gpgsign = if-asked
 followtags = true
+[rebase]
+abbreviateCommands = true
 [receive]
 fsckobjects = true
 [submodule]
