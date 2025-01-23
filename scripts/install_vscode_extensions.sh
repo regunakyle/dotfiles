@@ -9,7 +9,6 @@ code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension eamodio.gitlens
 code --install-extension ecmel.vscode-html-css
-code --install-extension emeraldwalk.RunOnSave
 code --install-extension esbenp.prettier-vscode
 code --install-extension exiasr.hadolint
 code --install-extension foxundermoon.shell-format
@@ -19,6 +18,7 @@ code --install-extension Gruntfuggly.todo-tree
 code --install-extension IBM.output-colorizer
 code --install-extension icrawl.discord-vscode
 code --install-extension james-yu.latex-workshop
+code --install-extension josevseb.google-java-format-for-vs-code
 code --install-extension lokalise.i18n-ally
 code --install-extension mechatroner.rainbow-csv
 code --install-extension medo64.render-crlf

@@ -12,6 +12,10 @@
     // Note to self: shfmt does not support zsh syntax
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
+  "[java]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code"
+  },
   "[lua]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "sumneko.lua"
@@ -89,15 +93,6 @@
     ]
   },
   "editor.wordWrap": "on",
-  // Running google-java-format manually with the Run On Save extension
-  "emeraldwalk.runonsave": {
-    "commands": [
-      {
-        "match": "\\.java$",
-        "cmd": "google-java-format --replace ${file}"
-      }
-    ]
-  },
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },

@@ -53,11 +53,14 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
     flatpak remote-add --user --if-not-exists --subset=verified flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
     flatpak install -y flathub \
-        com.github.dynobo.normcap \
-        com.moonlight_stream.Moonlight \
         dev.vencord.Vesktop \
         io.podman_desktop.PodmanDesktop \
         md.obsidian.Obsidian
+
+    if [[ "$is_desktop" != 1 ]]; then
+        flatpak install -y flathub \
+            com.moonlight_stream.Moonlight
+    fi
 
 } &
 
@@ -111,11 +114,11 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 echo "Installing packages from DNF..."
 packages="@core \
     akmod-v4l2loopback \
+    ansible \
     btop \
     btrfs-assistant \
     calibre \
     code \
-    distrobox \
     docker-compose \
     dynamips \
     fastfetch \
@@ -147,17 +150,18 @@ packages="@core \
     nmap \
     obs-studio \
     okular \
-    pipx \
     podman-docker \
+    poetry \
+    python3-netaddr \
     qbittorrent \
-    rpi-imager \
     scrcpy \
     shellcheck \
     sqlitebrowser \
     strawberry \
     tailscale \
     tmux \
-    vlc"
+    vlc \
+    wireguard-tools"
 
 # LaTeX related items
 packages="${packages} \
@@ -166,7 +170,7 @@ packages="${packages} \
     texlive-nth \
     texlive-scheme-small"
 
-# ASDF Python build dependencies
+# python-build dependencies
 packages="${packages} \
     make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel \
     libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2"
@@ -185,6 +189,7 @@ if [[ "$is_desktop" == 1 ]]; then
         dkms kernel-devel kernel-headers obs-studio-devel"
 else
     packages="${packages} \
+        rpi-imager \
         steam"
 fi
 
@@ -212,15 +217,6 @@ tar -xf $filename -C ${filename%%.*}
 mv ./${filename%%.*}/ "$HOME/.local/share/fonts"
 
 fc-cache -f
-
-# Setup binaries from various sources
-local_bin="$HOME/.local/bin"
-mkdir -p "$local_bin"
-
-# google-java-format
-echo "Setting up google-java-format..."
-wget -O "$local_bin/google-java-format" https://github.com/google/google-java-format/releases/latest/download/google-java-format_linux-x86-64
-chmod u+x "$local_bin/google-java-format"
 
 # Setup Mise
 eval "$(mise activate bash)"
@@ -265,7 +261,6 @@ EOF
 unset is_desktop
 unset filename
 unset packages
-unset local_bin
 
 # Start Zsh
 zsh
