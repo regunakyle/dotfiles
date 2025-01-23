@@ -5,42 +5,18 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# User specific environment; Mimic Fedora Bash behavior
+# User specific environment (Mimic Fedora default Bash behavior)
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-
-# source asdf
-source "$HOME/.asdf/asdf.sh"
-
-# ASDF java: Set JAVA_HOME
-if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]]; then
-  source ~/.asdf/plugins/java/set-java-home.zsh
-fi
+# Setup Antidote
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load
 
 # Point all Docker services to the Podman socket
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
-
-# source antidote
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-
-# The following lines were added by compinstall
-zstyle :compinstall filename '$HOME/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
-antidote load
 
 # zsh-users/zsh-history-substring-search
 bindkey '^[[1;5A' history-substring-search-up   # Ctrl+Up

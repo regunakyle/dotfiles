@@ -74,15 +74,18 @@ $packages = @(
     "DuongDieuPhap.ImageGlass",
     "Git.Git",
     "gerardog.gsudo",
-    "Microsoft.PowerToys",
+    "JanDeDobbeleer.OhMyPosh",
+    "jdx.mise",
+    "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
     "Mozilla.Firefox",
     "Notepad++.Notepad++",
     "okibcn.nano",
     "PeterPawlowski.foobar2000",
     "qBittorrent.qBittorrent",
+    "RaspberryPiFoundation.RaspberryPiImager",
     "TheDocumentFoundation.LibreOffice",
-    "version-fox.vfox",
+    "twpayne.chezmoi",
     "VideoLAN.VLC"
 )
 
@@ -90,8 +93,9 @@ foreach ($package in $packages) {
     winget install --id=$package -e --accept-package-agreements --accept-source-agreements --source winget
 }
 
-# Add vfox to shell
-if (-not (Test-Path -Path $PROFILE)) { New-Item -Type File -Path $PROFILE -Force }; Add-Content -Path $PROFILE -Value 'Invoke-Expression "$(vfox activate pwsh)"'
+# Setup chezmoi
+chezmoi init --apply --force regunakyle
+oh-my-posh font install NerdFontsSymbolsOnly
 
 # SSH server for ProxyJump
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0

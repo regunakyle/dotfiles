@@ -21,15 +21,6 @@
     "model": "nomic-embed-text",
     "apiBase": "http://192.168.1.51:11435"
   },
-  // // Very slow, disable if needed
-  // "reranker": {
-  //   "name": "huggingface-tei",
-  //   "params": {
-  //     "apiBase": "http://192.168.1.51:8080",
-  //     "truncate": true,
-  //     "truncation_direction": "Right"
-  //   }
-  // },
   "tabAutocompleteOptions": {
     "maxPromptTokens": 2048,
     "debounceDelay": 500

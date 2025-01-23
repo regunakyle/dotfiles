@@ -16,7 +16,7 @@
 - Use [Podman](https://podman.io/) with Docker compatibility
 - Use [Sarasa Gothic](https://github.com/be5invis/Sarasa-Gothic) and [Nerd Font Symbols](https://github.com/ryanoasis/nerd-fonts)
 - Use the Zsh shell with [Antidote](https://github.com/mattmc3/antidote) and [plugins](dot_zsh_plugins.txt)
-- Use [asdf](https://github.com/asdf-vm/asdf) and plugins
+- Use [mise](https://mise.jdx.dev/) and plugins
 - Use [Chezmoi](https://github.com/twpayne/chezmoi) as dotfile manager
 
 ### Desktop setup

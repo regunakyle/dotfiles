@@ -1,3 +1,16 @@
 README.md
 LICENSE.md
-scripts*
+scripts
+
+{{ if eq .chezmoi.os "windows" }}
+*
+!.config
+!Documents
+
+.config/*
+!.config/mise
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
+Documents
+{{ end }}

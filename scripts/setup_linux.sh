@@ -101,6 +101,7 @@ fi
 sudo dnf copr enable -y zeno/scrcpy
 sudo dnf config-manager setopt google-chrome.enabled=1
 sudo dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+sudo dnf config-manager addrepo --from-repofile=https://mise.jdx.dev/rpm/mise.repo
 
 # VSCode repo
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -129,15 +130,18 @@ packages="@core \
     gstreamer1-plugin-openh264 \
     gwenview \
     hadolint \
+    helm \
     hugo \
     inkscape \
     iperf3 \
     kate \
     kleopatra \
     kolourpaint \
+    kubernetes-client \
     maven \
     mediawriter \
     meld \
+    mise \
     mozilla-openh264 \
     neovim \
     nmap \
@@ -184,6 +188,10 @@ else
         steam"
 fi
 
+# Suppress podman-docker messages
+sudo mkdir -p /etc/containers
+sudo touch /etc/containers/nodocker
+
 sudo dnf install -y $packages
 
 # Enable Podman socket for Docker compatiblity
@@ -214,23 +222,13 @@ echo "Setting up google-java-format..."
 wget -O "$local_bin/google-java-format" https://github.com/google/google-java-format/releases/latest/download/google-java-format_linux-x86-64
 chmod u+x "$local_bin/google-java-format"
 
-# Get asdf
-echo "Setting up asdf and Chezmoi..."
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch \
-    "$(git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/asdf-vm/asdf.git '*.*.*' | tail --lines=1 | cut --delimiter='/' --fields=3)"
+# Setup Mise
+eval "$(mise activate bash)"
+mise use -g chezmoi
 
-source "$HOME/.asdf/asdf.sh"
+chezmoi init --apply --force regunakyle
 
-asdf plugin-add chezmoi
-asdf plugin-add java
-asdf plugin-add k9s
-asdf plugin-add nodejs
-asdf plugin-add python
-
-asdf install chezmoi latest
-asdf global chezmoi latest
-
-chezmoi init --apply regunakyle
+mise install
 
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
@@ -246,14 +244,8 @@ cat <<'EOF' >>~/.bashrc
 # Point all Docker services to the Podman socket
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
-# Source asdf
-source "$HOME/.asdf/asdf.sh"
-source "$HOME/.asdf/completions/asdf.bash"
-
-# ASDF java: Set JAVA_HOME
-if [[ $(command -v asdf &>/dev/null && asdf list java 2>/dev/null | grep "^\s*\*") ]]; then
-  source ~/.asdf/plugins/java/set-java-home.bash
-fi
+# Activate Mise
+eval "$(mise activate bash)"
 
 # History substring search 
 bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up

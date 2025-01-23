@@ -9,6 +9,7 @@
   },
   "[dockerfile][gitignore][ignore][properties][shellscript]": {
     "editor.formatOnSave": true,
+    // Note to self: shfmt does not support zsh syntax
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[lua]": {
@@ -118,7 +119,7 @@
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.languageServerMode": "full",
   "redhat.telemetry.enabled": false,
-  "rst.preview.pythonPath": "~/.asdf/shims/python",
+  "rst.preview.pythonPath": "~/.local/share/mise/shims/python",
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 16,

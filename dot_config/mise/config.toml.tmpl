@@ -1,0 +1,16 @@
+[tools]
+java = "temurin-21"
+python = "3.11"
+usage = "latest"
+{{ if eq .chezmoi.os "linux" }}
+chezmoi = "latest"
+k9s = "latest"
+node = "lts"
+{{ end }}
+
+[settings]
+
+{{ if eq .chezmoi.os "linux" }}
+[settings.python]
+compile = true
+{{ end }}
