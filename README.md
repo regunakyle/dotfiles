@@ -15,14 +15,15 @@
 - Use [Fcitx5](https://fcitx-im.org/wiki/Special:MyLanguage/Fcitx_5) with Quick Classic as input method
 - Use [Podman](https://podman.io/) with Docker compatibility
 - Use [Sarasa Gothic](https://github.com/be5invis/Sarasa-Gothic) and [Nerd Font Symbols](https://github.com/ryanoasis/nerd-fonts)
+- Launch Tmux by default; Use [gpakosz/.tmux](https://github.com/gpakosz/.tmux) config files
 - Use the Zsh shell with [Antidote](https://github.com/mattmc3/antidote) and [plugins](dot_zsh_plugins.txt)
-- Use [mise](https://mise.jdx.dev/) and plugins
+- Use [Mise](https://mise.jdx.dev/) and plugins
 - Use [Chezmoi](https://github.com/twpayne/chezmoi) as dotfile manager
 
 ### Desktop setup
 
 - [PCPartPicker list](https://pcpartpicker.com/list/TPWsN6)
-- [Solaar](https://github.com/pwr-Solaar/Solaar) for my G703 gaming mouse
+- [Solaar](https://github.com/pwr-Solaar/Solaar) for my Logitech mouse
 - Play games on a high performance VFIO Windows VM ([blog entry in Chinese](https://regunakyle.github.io/regunakyle/posts/002_win10_to_linux/))
   - Use [Looking Glass](https://looking-glass.io/) to control the VM
 

@@ -246,7 +246,7 @@ bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
 bind '"\e[1;5B":history-substring-search-forward' # Ctrl+Down
 
 # Launch Tmux on start
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux
 fi
 EOF
