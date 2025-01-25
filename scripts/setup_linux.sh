@@ -152,6 +152,7 @@ packages="@core \
     okular \
     podman-docker \
     poetry \
+    python3-docutils \
     python3-netaddr \
     qbittorrent \
     scrcpy \

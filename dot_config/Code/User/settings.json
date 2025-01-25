@@ -114,7 +114,6 @@
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.languageServerMode": "full",
   "redhat.telemetry.enabled": false,
-  "rst.preview.pythonPath": "~/.local/share/mise/shims/python",
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 16,

@@ -24,12 +24,14 @@ code --install-extension mechatroner.rainbow-csv
 code --install-extension medo64.render-crlf
 code --install-extension mhutchie.git-graph
 code --install-extension mikestead.dotenv
+code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
 code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension pflannery.vscode-versionlens
 code --install-extension pranaygp.vscode-css-peek
+code --install-extension redhat.ansible
 code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
 code --install-extension ritwickdey.liveserver
