@@ -71,9 +71,6 @@ sudo dnf install -y \
     wireshark \
     zsh
 
-# Change default shell to Zsh
-sudo chsh -s "$(which zsh)" "$(whoami)"
-
 # Add user to Wireshark group for non-root usage
 sudo usermod -aG wireshark "$(whoami)"
 
@@ -247,6 +244,11 @@ eval "$(mise activate bash)"
 # History substring search 
 bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
 bind '"\e[1;5B":history-substring-search-forward' # Ctrl+Down
+
+# Launch Tmux on start
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 EOF
 
 popd
@@ -263,5 +265,5 @@ unset is_desktop
 unset filename
 unset packages
 
-# Start Zsh
-zsh
+# Start Tmux
+exec tmux

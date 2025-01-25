@@ -1,0 +1,7 @@
+[".tmux.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/regunakyle/.tmux/refs/heads/override/.tmux.conf"
+
+[".tmux.conf.local"]
+type = "file"
+url = "https://raw.githubusercontent.com/regunakyle/.tmux/refs/heads/override/.tmux.conf.local"

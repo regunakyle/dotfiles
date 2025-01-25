@@ -65,7 +65,6 @@ catch {
     exit 1
 }
 
-
 # Install packages
 Write-Host "Installing common packages..."
 $packages = @(
@@ -93,7 +92,7 @@ foreach ($package in $packages) {
     winget install --id=$package -e --accept-package-agreements --accept-source-agreements --source winget
 }
 
-# Setup chezmoi
+# Setup Chezmoi
 chezmoi init --apply --force regunakyle
 oh-my-posh font install NerdFontsSymbolsOnly
 
@@ -137,5 +136,6 @@ if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
 }
 
 Write-Host "Installation finished! You should reboot now to avoid stability problems."
+Write-Host "You should also install Mise plugins manually in Powershell Core."
 
 Pop-Location 
