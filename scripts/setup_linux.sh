@@ -68,8 +68,7 @@ sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/Pac
 sudo dnf install -y \
     @virtualization \
     fedora-workstation-repositories \
-    wireshark \
-    zsh
+    wireshark
 
 # Add user to Wireshark group for non-root usage
 sudo usermod -aG wireshark "$(whoami)"
@@ -100,7 +99,6 @@ fi
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
 sudo dnf config-manager setopt google-chrome.enabled=1
-sudo dnf config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 sudo dnf config-manager addrepo --from-repofile=https://mise.jdx.dev/rpm/mise.repo
 
 # VSCode repo
@@ -159,7 +157,8 @@ packages="@core \
     tailscale \
     tmux \
     vlc \
-    wireguard-tools"
+    wireguard-tools \
+    zsh"
 
 # LaTeX related items
 packages="${packages} \
@@ -216,11 +215,10 @@ mv ./${filename%%.*}/ "$HOME/.local/share/fonts"
 
 fc-cache -f
 
-# Setup Mise
-eval "$(mise activate bash)"
+# Setup Mise and Chezmoi
 mise use -g chezmoi
 
-chezmoi init --apply --force regunakyle
+mise exec chezmoi -- chezmoi init --apply --force regunakyle
 
 mise install
 
