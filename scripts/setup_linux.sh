@@ -122,6 +122,7 @@ packages="@core \
     filezilla \
     gnome-calculator \
     git-all \
+    git-delta \
     gns3-gui \
     gns3-server \
     google-chrome-stable \

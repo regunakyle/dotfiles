@@ -11,12 +11,20 @@ mergeOptions = --squash --no-commit
 [commit]
 gpgsign = true
 verbose = true
+[core]
+pager = delta
+[delta]
+dark = true
+navigate = true
+side-by-side = true
 [diff]
 algorithm = histogram
 [fetch]
 fsckobjects = true
 [init]
 defaultbranch = main
+[interactive]
+diffFilter = delta --color-only
 [merge]
 conflictstyle = zdiff3
 [pull]

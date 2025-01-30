@@ -16,7 +16,6 @@ code --install-extension github.vscode-github-actions
 code --install-extension GrapeCity.gc-excelviewer
 code --install-extension Gruntfuggly.todo-tree
 code --install-extension IBM.output-colorizer
-code --install-extension icrawl.discord-vscode
 code --install-extension james-yu.latex-workshop
 code --install-extension josevseb.google-java-format-for-vs-code
 code --install-extension lokalise.i18n-ally
