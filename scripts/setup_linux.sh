@@ -147,7 +147,6 @@ packages="@core \
     obs-studio \
     okular \
     podman-docker \
-    poetry \
     python3-docutils \
     python3-netaddr \
     qbittorrent \
@@ -157,6 +156,7 @@ packages="@core \
     strawberry \
     tailscale \
     tmux \
+    uv \
     vlc \
     wireguard-tools \
     zsh"

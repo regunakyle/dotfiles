@@ -5,7 +5,7 @@
       "title": "qwen2.5-coder 32b instruct",
       "provider": "openai",
       "model": "Qwen_Qwen2.5-Coder-32B-Instruct-exl2",
-      "apiBase": "http://192.168.1.51:11434/v1"
+      "apiBase": "http://192.168.1.51:5000/v1"
     }
   ],
   "tabAutocompleteModel": [
@@ -13,13 +13,13 @@
       "title": "qwen2.5-coder 32b instruct",
       "provider": "openai",
       "model": "Qwen_Qwen2.5-Coder-32B-Instruct-exl2",
-      "apiBase": "http://192.168.1.51:11434/v1"
+      "apiBase": "http://192.168.1.51:5000/v1"
     }
   ],
   "embeddingsProvider": {
     "provider": "ollama",
     "model": "nomic-embed-text",
-    "apiBase": "http://192.168.1.51:11435"
+    "apiBase": "http://192.168.1.51:11434"
   },
   "tabAutocompleteOptions": {
     "maxPromptTokens": 2048,
