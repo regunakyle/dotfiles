@@ -1,7 +1,6 @@
 #!/bin/bash
 
 code --install-extension alefragnani.project-manager
-code --install-extension asvetliakov.vscode-neovim
 code --install-extension charliermarsh.ruff
 code --install-extension codezombiech.gitignore
 code --install-extension continue.continue
@@ -11,6 +10,7 @@ code --install-extension eamodio.gitlens
 code --install-extension ecmel.vscode-html-css
 code --install-extension esbenp.prettier-vscode
 code --install-extension exiasr.hadolint
+code --install-extension expo.vscode-expo-tools
 code --install-extension foxundermoon.shell-format
 code --install-extension github.vscode-github-actions
 code --install-extension GrapeCity.gc-excelviewer
@@ -23,6 +23,7 @@ code --install-extension mechatroner.rainbow-csv
 code --install-extension medo64.render-crlf
 code --install-extension mhutchie.git-graph
 code --install-extension mikestead.dotenv
+code --install-extension msjsdiag.vscode-react-native
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter

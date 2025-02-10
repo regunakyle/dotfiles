@@ -21,6 +21,8 @@ side-by-side = true
 algorithm = histogram
 [fetch]
 fsckobjects = true
+[gpg]
+format = ssh
 [init]
 defaultbranch = main
 [interactive]
@@ -46,4 +48,5 @@ fsckobjects = true
 [user]
 email = 60984878+regunakyle@users.noreply.github.com
 name = Reguna
-signingkey = 675CF7D52953746BBBC13243349A2D36A167C308!
+signingkey = /home/eleung/.ssh/id_ed25519_github_sign.pub
+

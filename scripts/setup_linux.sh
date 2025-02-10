@@ -134,7 +134,6 @@ packages="@core \
     inkscape \
     iperf3 \
     kate \
-    kleopatra \
     kolourpaint \
     kubernetes-client \
     maven \
@@ -142,13 +141,13 @@ packages="@core \
     meld \
     mise \
     mozilla-openh264 \
-    neovim \
     nmap \
     obs-studio \
     okular \
     podman-docker \
     python3-docutils \
     python3-netaddr \
+    python3-sdkmanager \
     qbittorrent \
     scrcpy \
     shellcheck \
@@ -200,8 +199,12 @@ sudo dnf install -y $packages
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
 
+# For Android development
+mkdir -p "$HOME/Android/Sdk"
+
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
+# TODO: Automate this with custom COPR repo
 echo "Setting up Sarasa Fixed Slab HC and Nerd Font..."
 filename=$(curl -fsSL "https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest" |
     jq -c '.assets | map(select(.name | test("SarasaFixedSlabHC-TTF-[0-9\\.]+") ))[0].browser_download_url' |
@@ -234,6 +237,13 @@ EOF
 
 cat <<'EOF' >>~/.bashrc
 
+# User specific environment
+export ANDROID_HOME=$HOME/Android/Sdk
+
+PATH="$ANDROID_HOME/emulator:$PATH"
+PATH="$ANDROID_HOME/platform-tools:$PATH"
+export PATH
+
 # Point all Docker services to the Podman socket
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
@@ -257,7 +267,7 @@ wait
 
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
-After that, you may want to config fcitx5, SSH/GPG, VSCode and Windows 10 VM.
+After that, you may want to config fcitx5, SSH, VSCode and Windows 10 VM.
 EOF
 
 unset is_desktop

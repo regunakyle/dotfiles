@@ -5,10 +5,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# User specific environment (Mimic Fedora default Bash behavior)
+# User specific environment 
+export ANDROID_HOME=$HOME/Android/Sdk
+
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+PATH="$ANDROID_HOME/emulator:$PATH"
+PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH
 
 # Setup Antidote
