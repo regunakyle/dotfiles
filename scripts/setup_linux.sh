@@ -47,6 +47,9 @@ sudo dnf upgrade -y
 # Disable searching for missing programs from DNF repo
 sudo sed -ie 's/SoftwareSourceSearch=true/SoftwareSourceSearch=false/g' /etc/PackageKit/CommandNotFound.conf
 
+# Delete built-in Fedora flatpak remote
+sudo flatpak remote-delete fedora
+
 {
     # Setup flatpak in background
     echo "Setting up Flathub and installing flatpaks..."

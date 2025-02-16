@@ -92,9 +92,6 @@
     ]
   },
   "editor.wordWrap": "on",
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
   "extensions.ignoreRecommendations": true,
   "files.exclude": {
     "**/.venv": true,
