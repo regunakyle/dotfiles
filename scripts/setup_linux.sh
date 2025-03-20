@@ -270,7 +270,7 @@ wait
 
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
-After that, you may want to config fcitx5, SSH, VSCode and Windows 10 VM.
+After that, you may want to config fcitx5, SSH, VSCode, BTRFS snapshots and Windows 10 VM.
 EOF
 
 unset is_desktop

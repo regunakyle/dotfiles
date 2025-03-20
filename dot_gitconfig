@@ -2,6 +2,8 @@
 fpush = push --force-with-lease
 # https://orbital.rodeo/~mike/20130302-git-serve/
 quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+# https://stackoverflow.com/a/30720302
+out = log @{push}..
 [branch]
 sort = -committerdate
 [branch "main"]
