@@ -1,6 +1,7 @@
 #!/bin/bash
 
 code --install-extension alefragnani.project-manager
+code --install-extension bierner.markdown-mermaid
 code --install-extension charliermarsh.ruff
 code --install-extension codezombiech.gitignore
 code --install-extension continue.continue
