@@ -32,7 +32,7 @@
   ],
   "tabAutocompleteOptions": {
     "maxPromptTokens": 2048,
-    "debounceDelay": 500
+    "debounceDelay": 350
   },
   "embeddingsProvider": {
     "provider": "ollama",
