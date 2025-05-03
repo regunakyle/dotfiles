@@ -144,6 +144,7 @@ packages="@core \
     meld \
     mise \
     mozilla-openh264 \
+    ncdu \
     nmap \
     obs-studio \
     okular \
