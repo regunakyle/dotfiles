@@ -1,0 +1,40 @@
+name: tabbyAPI
+version: 1.0.0
+schema: v1
+models:
+  - name: Qwen2.5-coder 32b Instruct
+    provider: openai
+    model: Qwen_Qwen2.5-Coder-32B-Instruct-exl2
+    apiBase: http://192.168.1.51:5000/v1
+    defaultCompletionOptions:
+      temperature: 0.7
+      topP: 0.8
+      topK: 20
+    roles:
+      - chat
+      - edit
+      - apply
+      - summarize
+
+  - name: Qwen2.5-coder 32b Instruct (Autocomplete)
+    provider: openai
+    model: Qwen_Qwen2.5-Coder-32B-Instruct-exl2
+    apiBase: http://192.168.1.51:5000/v1
+    defaultCompletionOptions:
+      contextLength: 32768
+      maxTokens: 200
+      temperature: 0.7
+      topP: 0.8
+      topK: 20
+    roles:
+      - autocomplete
+
+  - name: Nomic Embed Text
+    provider: openai
+    model: nomic-embed-text
+    apiBase: http://192.168.1.51:5000/v1
+    roles:
+      - embed
+    embedOptions:
+      maxChunkSize: 256
+      maxBatchSize: 5
