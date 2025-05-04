@@ -1,5 +1,6 @@
 getantidote/use-omz
 
+# https://github.com/ohmyzsh/ohmyzsh/issues/4963
 ohmyzsh/ohmyzsh path:lib
 
 romkatv/powerlevel10k kind:fpath
