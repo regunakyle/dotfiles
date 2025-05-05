@@ -2,13 +2,13 @@
 
 code --install-extension alefragnani.project-manager
 code --install-extension bierner.markdown-mermaid
+code --install-extension bradlc.vscode-tailwindcss
 code --install-extension charliermarsh.ruff
 code --install-extension codezombiech.gitignore
 code --install-extension continue.continue
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension eamodio.gitlens
-code --install-extension ecmel.vscode-html-css
 code --install-extension esbenp.prettier-vscode
 code --install-extension exiasr.hadolint
 code --install-extension expo.vscode-expo-tools
@@ -25,21 +25,17 @@ code --install-extension medo64.render-crlf
 code --install-extension mhutchie.git-graph
 code --install-extension mikestead.dotenv
 code --install-extension msjsdiag.vscode-react-native
-code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
 code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension pflannery.vscode-versionlens
-code --install-extension pranaygp.vscode-css-peek
-code --install-extension redhat.ansible
 code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
 code --install-extension ritwickdey.liveserver
 code --install-extension ryu1kn.partial-diff
 code --install-extension shengchen.vscode-checkstyle
 code --install-extension streetsidesoftware.code-spell-checker
-code --install-extension stylelint.vscode-stylelint
 code --install-extension tamasfe.even-better-toml
 code --install-extension tht13.rst-vscode
 code --install-extension timonwong.shellcheck
