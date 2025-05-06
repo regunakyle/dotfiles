@@ -27,6 +27,14 @@ bindkey '^[[1;5A' history-substring-search-up   # Ctrl+Up
 bindkey '^[[1;5B' history-substring-search-down # Ctrl+Down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
+# Useful alias
+cpr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+mvr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+}
+
 autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

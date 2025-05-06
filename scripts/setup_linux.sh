@@ -70,7 +70,6 @@ sudo flatpak remote-delete fedora
 # Install packages (that need configurations with root) early
 sudo dnf install -y \
     @virtualization \
-    fedora-workstation-repositories \
     wireshark
 
 # Add user to Wireshark group for non-root usage
@@ -257,6 +256,14 @@ eval "$(mise activate bash)"
 # History substring search 
 bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
 bind '"\e[1;5B":history-substring-search-forward' # Ctrl+Down
+
+# Useful alias
+cpr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+mvr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+}
 
 # Launch Tmux on start
 if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
