@@ -104,6 +104,7 @@
   "gitlens.telemetry.enabled": false,
   "java.checkstyle.configuration": "/google_checks.xml",
   "jupyter.askForKernelRestart": false,
+  "latex-workshop.formatting.latex": "latexindent",
   "notebook.formatOnSave.enabled": true,
   "partialDiff.enableTelemetry": false,
   "python.analysis.typeCheckingMode": "strict",
