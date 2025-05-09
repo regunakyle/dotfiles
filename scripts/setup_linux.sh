@@ -161,6 +161,7 @@ packages="@core \
     uv \
     vlc \
     wireguard-tools \
+    xxhash \
     zsh"
 
 # LaTeX related items
@@ -253,10 +254,6 @@ export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 # Activate Mise
 eval "$(mise activate bash)"
 
-# History substring search 
-bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
-bind '"\e[1;5B":history-substring-search-forward' # Ctrl+Down
-
 # Useful alias
 cpr() {
     rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
@@ -265,9 +262,14 @@ mvr() {
     rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
 }
 
-# Launch Tmux on start
-if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
+# If an interactive shell (that is not spawned by Tmux/Screen/VSCode)
+if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    # History substring search
+    bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
+    bind '"\e[1;5B":history-substring-search-forward'  # Ctrl+Down
+
+    # Launch Tmux on start
+    exec tmux
 fi
 EOF
 

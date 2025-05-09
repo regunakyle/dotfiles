@@ -111,6 +111,7 @@
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.languageServerMode": "full",
   "redhat.telemetry.enabled": false,
+  "remote.SSH.localServerDownload": "always",
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 16,

@@ -4,7 +4,6 @@ code --install-extension alefragnani.project-manager
 code --install-extension bierner.markdown-mermaid
 code --install-extension bradlc.vscode-tailwindcss
 code --install-extension charliermarsh.ruff
-code --install-extension codezombiech.gitignore
 code --install-extension continue.continue
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension dbaeumer.vscode-eslint
