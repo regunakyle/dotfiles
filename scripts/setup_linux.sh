@@ -205,6 +205,8 @@ systemctl --user enable --now podman.socket
 
 # For Android development
 mkdir -p "$HOME/Android/Sdk"
+yes | sdkmanager --licenses
+sdkmanager "platform-tools"
 
 # Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
 # https://wiki.archlinux.org/title/fonts#Manual_installation
@@ -244,7 +246,6 @@ cat <<'EOF' >>~/.bashrc
 # User specific environment
 export ANDROID_HOME=$HOME/Android/Sdk
 
-PATH="$ANDROID_HOME/emulator:$PATH"
 PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH
 

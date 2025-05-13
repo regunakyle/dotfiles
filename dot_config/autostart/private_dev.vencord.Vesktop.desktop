@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Network;
+Comment=Vesktop is a custom Discord desktop app
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=startvesktop --file-forwarding dev.vencord.Vesktop @@u %U @@
+GenericName=Internet Messenger
+Icon=dev.vencord.Vesktop
+Keywords=discord;vencord;electron;chat;
+MimeType=x-scheme-handler/discord;
+Name=Vesktop
+StartupWMClass=Vesktop
+Terminal=false
+Type=Application
+X-AppImage-Version=1.5.6
+X-Desktop-File-Install-Version=0.28
+X-Flatpak=dev.vencord.Vesktop

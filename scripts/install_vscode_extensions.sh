@@ -1,49 +1,54 @@
 #!/bin/bash
 
-code --install-extension alefragnani.project-manager
-code --install-extension bierner.markdown-mermaid
-code --install-extension bradlc.vscode-tailwindcss
-code --install-extension charliermarsh.ruff
-code --install-extension continue.continue
-code --install-extension DavidAnson.vscode-markdownlint
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension eamodio.gitlens
-code --install-extension esbenp.prettier-vscode
-code --install-extension exiasr.hadolint
-code --install-extension expo.vscode-expo-tools
-code --install-extension foxundermoon.shell-format
-code --install-extension github.vscode-github-actions
-code --install-extension GrapeCity.gc-excelviewer
-code --install-extension Gruntfuggly.todo-tree
-code --install-extension IBM.output-colorizer
-code --install-extension james-yu.latex-workshop
-code --install-extension josevseb.google-java-format-for-vs-code
-code --install-extension lokalise.i18n-ally
-code --install-extension mechatroner.rainbow-csv
-code --install-extension medo64.render-crlf
-code --install-extension mhutchie.git-graph
-code --install-extension mikestead.dotenv
-code --install-extension msjsdiag.vscode-react-native
-code --install-extension ms-python.python
-code --install-extension ms-toolsai.jupyter
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode-remote.remote-ssh
-code --install-extension redhat.vscode-xml
-code --install-extension redhat.vscode-yaml
-code --install-extension ritwickdey.liveserver
-code --install-extension ryu1kn.partial-diff
-code --install-extension shengchen.vscode-checkstyle
-code --install-extension streetsidesoftware.code-spell-checker
-code --install-extension tamasfe.even-better-toml
-code --install-extension tht13.rst-vscode
-code --install-extension timonwong.shellcheck
-code --install-extension tomoki1207.pdf
-code --install-extension usernamehw.errorlens
-code --install-extension vincaslt.highlight-matching-tag
-code --install-extension VisualStudioExptTeam.vscodeintellicode
-code --install-extension vitest.explorer
-code --install-extension vmware.vscode-boot-dev-pack
-code --install-extension vscjava.vscode-java-pack
-code --install-extension vscode-icons-team.vscode-icons
-code --install-extension YoavBls.pretty-ts-errors
-code --install-extension yzhang.markdown-all-in-one
+extensions=(
+    "alefragnani.project-manager"
+    "bierner.markdown-mermaid"
+    "bradlc.vscode-tailwindcss"
+    "charliermarsh.ruff"
+    "continue.continue"
+    "DavidAnson.vscode-markdownlint"
+    "dbaeumer.vscode-eslint"
+    "eamodio.gitlens"
+    "esbenp.prettier-vscode"
+    "exiasr.hadolint"
+    "expo.vscode-expo-tools"
+    "foxundermoon.shell-format"
+    "github.vscode-github-actions"
+    "GrapeCity.gc-excelviewer"
+    "Gruntfuggly.todo-tree"
+    "IBM.output-colorizer"
+    "james-yu.latex-workshop"
+    "josevseb.google-java-format-for-vs-code"
+    "mechatroner.rainbow-csv"
+    "medo64.render-crlf"
+    "mhutchie.git-graph"
+    "mikestead.dotenv"
+    "ms-python.python"
+    "ms-toolsai.jupyter"
+    "ms-vscode-remote.remote-containers"
+    "ms-vscode-remote.remote-ssh"
+    "orta.vscode-jest"
+    "redhat.vscode-xml"
+    "redhat.vscode-yaml"
+    "ritwickdey.liveserver"
+    "ryu1kn.partial-diff"
+    "shengchen.vscode-checkstyle"
+    "streetsidesoftware.code-spell-checker"
+    "tamasfe.even-better-toml"
+    "tht13.rst-vscode"
+    "timonwong.shellcheck"
+    "tomoki1207.pdf"
+    "usernamehw.errorlens"
+    "vincaslt.highlight-matching-tag"
+    "VisualStudioExptTeam.vscodeintellicode"
+    "vitest.explorer"
+    "vmware.vscode-boot-dev-pack"
+    "vscjava.vscode-java-pack"
+    "vscode-icons-team.vscode-icons"
+    "YoavBls.pretty-ts-errors"
+    "yzhang.markdown-all-in-one"
+)
+
+for extension in "${extensions[@]}"; do
+    code --install-extension "$extension"
+done
