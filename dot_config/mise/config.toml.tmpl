@@ -2,7 +2,7 @@
 java = "temurin-21"
 python = "3.11"
 usage = "latest"
-{{ if eq .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "linux" }}
 chezmoi = "latest"
 k9s = "latest"
 node = "lts"
@@ -11,7 +11,7 @@ node = "lts"
 [settings]
 idiomatic_version_file_enable_tools = []
 
-{{ if eq .chezmoi.os "linux" }}
+{{ if eq .chezmoi.os "linux" -}}
 [settings.python]
 compile = true
 {{ end }}

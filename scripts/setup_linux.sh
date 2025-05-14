@@ -205,6 +205,7 @@ systemctl --user enable --now podman.socket
 
 # For Android development
 mkdir -p "$HOME/Android/Sdk"
+export ANDROID_HOME=$HOME/Android/Sdk
 yes | sdkmanager --licenses
 sdkmanager "platform-tools"
 

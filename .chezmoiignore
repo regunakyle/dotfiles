@@ -14,4 +14,9 @@ scripts
 
 {{ if eq .chezmoi.os "linux" }}
 Documents
+
+{{ if eq .chassisType "laptop" }}
+.looking-glass-client.ini
+{{ end }}
+
 {{ end }}

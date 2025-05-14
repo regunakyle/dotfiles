@@ -75,6 +75,7 @@ $packages = @(
     "gerardog.gsudo",
     "JanDeDobbeleer.OhMyPosh",
     "jdx.mise",
+    "MartiCliment.UniGetUI",
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
     "Mozilla.Firefox",
