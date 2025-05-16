@@ -130,7 +130,6 @@ packages="@core \
     google-chrome-stable \
     gstreamer1-plugin-openh264 \
     gwenview \
-    hadolint \
     helm \
     hugo \
     inkscape \
@@ -148,7 +147,6 @@ packages="@core \
     obs-studio \
     okular \
     podman-docker \
-    python3-docutils \
     python3-netaddr \
     python3-sdkmanager \
     qbittorrent \
