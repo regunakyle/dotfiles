@@ -30,7 +30,7 @@ models:
     roles:
       - autocomplete
 
-  - name: Nomic Embed Text
+  - name: Nomic Embed Text (Ollama)
     provider: ollama
     apiBase: http://192.168.1.51:11434
     model: nomic-embed-text

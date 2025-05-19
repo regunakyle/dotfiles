@@ -118,11 +118,9 @@ packages="@core \
     code \
     docker-compose \
     dynamips \
-    fastfetch \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
-    gnome-calculator \
     git-all \
     git-delta \
     gns3-gui \
@@ -132,7 +130,6 @@ packages="@core \
     gwenview \
     helm \
     hugo \
-    inkscape \
     iperf3 \
     kate \
     kolourpaint \
@@ -149,12 +146,12 @@ packages="@core \
     podman-docker \
     python3-netaddr \
     python3-sdkmanager \
+    qalculate-qt \
     qbittorrent \
     scrcpy \
     shellcheck \
     sqlitebrowser \
     strawberry \
-    tailscale \
     tmux \
     uv \
     vlc \
@@ -189,7 +186,8 @@ if [[ "$is_desktop" == 1 ]]; then
 else
     packages="${packages} \
         rpi-imager \
-        steam"
+        steam \
+        tailscale"
 fi
 
 # Suppress podman-docker messages
