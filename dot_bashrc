@@ -1,0 +1,60 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+
+# User specific environment
+export PATH="$PATH:/home/eleung/.local/share/JetBrains/Toolbox/scripts"
+export ANDROID_HOME=$HOME/Android/Sdk
+
+PATH="$ANDROID_HOME/platform-tools:$PATH"
+export PATH
+
+# Point all Docker services to the Podman socket
+export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+
+# Activate Mise
+eval "$(mise activate bash)"
+
+# Useful alias
+cpr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+mvr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+}
+
+# If an interactive shell
+if [[ $- == *i* ]]; then
+    # History substring search
+    bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
+    bind '"\e[1;5B":history-substring-search-forward'  # Ctrl+Down
+
+    # If shell not spawned by Tmux/Screen/VSCode
+    if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+        # Launch Tmux on start
+        exec tmux
+    fi
+
+fi

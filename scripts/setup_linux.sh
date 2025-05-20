@@ -232,45 +232,6 @@ mise install
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 
-# Add variables to Bash start files in case Bash is called for some unknown reason
-cat <<'EOF' >>~/.bash_profile
-# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
-export XMODIFIERS=@im=fcitx
-EOF
-
-cat <<'EOF' >>~/.bashrc
-
-# User specific environment
-export ANDROID_HOME=$HOME/Android/Sdk
-
-PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH
-
-# Point all Docker services to the Podman socket
-export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
-
-# Activate Mise
-eval "$(mise activate bash)"
-
-# Useful alias
-cpr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
-}
-mvr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
-}
-
-# If an interactive shell (that is not spawned by Tmux/Screen/VSCode)
-if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    # History substring search
-    bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
-    bind '"\e[1;5B":history-substring-search-forward'  # Ctrl+Down
-
-    # Launch Tmux on start
-    exec tmux
-fi
-EOF
-
 popd
 
 echo "Waiting for flatpak installation to finish..."
@@ -278,7 +239,7 @@ wait
 
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
-After that, you may want to config fcitx5, SSH, VSCode, BTRFS snapshots and Windows 10 VM.
+After that, you may want to config SSH, VSCode, Intellij, BTRFS snapshots and Windows 10 VM.
 EOF
 
 unset is_desktop
