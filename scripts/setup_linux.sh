@@ -70,10 +70,14 @@ sudo flatpak remote-delete fedora
 # Install packages (that need configurations with root) early
 sudo dnf install -y \
     @virtualization \
-    wireshark
+    wireshark \
+    zsh
 
 # Add user to Wireshark group for non-root usage
 sudo usermod -aG wireshark "$(whoami)"
+
+# Change default shell to Zsh
+sudo chsh -s "$(which zsh)" "$(whoami)"
 
 if [[ "$is_desktop" == 1 ]]; then
     # Enable libvirtd for VM autoboot
@@ -156,8 +160,7 @@ packages="@core \
     uv \
     vlc \
     wireguard-tools \
-    xxhash \
-    zsh"
+    xxhash"
 
 # LaTeX related items
 packages="${packages} \
