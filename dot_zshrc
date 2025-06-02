@@ -16,6 +16,9 @@ fi
 PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH
 
+# Disable automatic updates of Oh My Zsh
+zstyle ':omz:update' mode disabled
+
 # Setup Antidote
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
