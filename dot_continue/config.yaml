@@ -23,7 +23,7 @@ models:
     apiBase: http://192.168.1.51:5000/v1
     defaultCompletionOptions:
       contextLength: 32768
-      maxTokens: 200
+      maxTokens: 300
       temperature: 0.7
       topP: 0.8
       topK: 20
@@ -36,3 +36,11 @@ models:
     model: nomic-embed-text
     roles:
       - embed
+
+# https://docs.continue.dev/customize/context-providers#built-in-context-providers
+context:
+  - provider: file
+  - provider: folder
+  - provider: currentFile
+  - provider: code
+  - provider: codebase
