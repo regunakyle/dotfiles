@@ -1,22 +1,9 @@
-export PATH="$PATH:/home/eleung/.local/share/JetBrains/Toolbox/scripts"
-export ANDROID_HOME=$HOME/Android/Sdk
+# This should be the last sourced bashrc file
 
-PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH
-
-# Point all Docker services to the Podman socket
-export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+source ~/.commonrc
 
 # Activate Mise
 eval "$(mise activate bash)"
-
-# Useful alias
-cpr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
-}
-mvr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
-}
 
 # If an interactive shell
 if [[ $- == *i* ]]; then

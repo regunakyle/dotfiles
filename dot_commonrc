@@ -1,0 +1,20 @@
+# This should be safe to be sourced anywhere
+
+PATH="$PATH:/home/eleung/.local/share/JetBrains/Toolbox/scripts"
+
+export ANDROID_HOME=$HOME/Android/Sdk
+PATH="$ANDROID_HOME/platform-tools:$PATH"
+
+export PATH
+
+# Point all Docker services to the Podman socket
+export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+
+# Useful alias/functions
+# https://wiki.archlinux.org/title/Rsync#As_cp/mv_alternative
+cpr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+mvr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+}

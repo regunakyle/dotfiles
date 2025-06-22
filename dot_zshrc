@@ -5,39 +5,24 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# User specific environment 
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH="$PATH:/home/eleung/.local/share/JetBrains/Toolbox/scripts"
-
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH
+source ~/.commonrc
 
 # Disable automatic updates of Oh My Zsh
 zstyle ':omz:update' mode disabled
 
 # Setup Antidote
+# Mise is loaded here
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
-
-# Point all Docker services to the Podman socket
-export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
 # zsh-users/zsh-history-substring-search
 bindkey '^[[1;5A' history-substring-search-up   # Ctrl+Up
 bindkey '^[[1;5B' history-substring-search-down # Ctrl+Down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-
-# Useful alias
-cpr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
-}
-mvr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
-}
 
 autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
