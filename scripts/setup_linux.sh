@@ -109,6 +109,7 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 # DNF install
 echo "Installing packages from DNF..."
 packages="@core \
+    age \
     akmod-v4l2loopback \
     ansible \
     btop \

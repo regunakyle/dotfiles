@@ -1,4 +1,10 @@
-{{ if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.os "linux" "darwin" -}}
+encryption = "age"
+[age]
+identity = "/home/eleung/.ssh/id_ed25519_chezmoi"
+recipient = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINzyG89VfsculJFE1Rde2k+38VgG8qUfMh3P+nlcVQg+ eleung@fedora"
+
+
 [diff]
 command = "delta"
 pager = "delta"
