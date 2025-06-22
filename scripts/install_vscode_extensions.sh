@@ -23,7 +23,6 @@ extensions=(
     "redhat.ansible"
     "redhat.vscode-xml"
     "redhat.vscode-yaml"
-    "ritwickdey.liveserver"
     "ryu1kn.partial-diff"
     "streetsidesoftware.code-spell-checker"
     "tamasfe.even-better-toml"

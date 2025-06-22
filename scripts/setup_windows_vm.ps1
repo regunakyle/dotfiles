@@ -5,7 +5,6 @@
 
 TODO: 
 - Add error handling
-- Automate winget installation with https://github.com/microsoft/winget-cli/discussions/1738#discussioncomment-5484927
 #>
 
 if (Test-Path env:TEMP) {
@@ -97,9 +96,11 @@ foreach ($package in $packages) {
 chezmoi init --apply --force regunakyle
 oh-my-posh font install NerdFontsSymbolsOnly
 
-# SSH server for ProxyJump
+# SSH server
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
+Set-Service -Name sshd -StartupType 'Automatic'
 
 # Confirm the Firewall rule is configured. It should be created automatically by setup.
 if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {

@@ -53,7 +53,7 @@ sudo flatpak remote-delete fedora
 {
     # Setup flatpak in background
     echo "Setting up Flathub and installing flatpaks..."
-    flatpak remote-add --user --if-not-exists --subset=verified flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
     flatpak install -y flathub \
         dev.vencord.Vesktop \
@@ -70,11 +70,7 @@ sudo flatpak remote-delete fedora
 # Install packages (that need configurations with root) early
 sudo dnf install -y \
     @virtualization \
-    wireshark \
     zsh
-
-# Add user to Wireshark group for non-root usage
-sudo usermod -aG wireshark "$(whoami)"
 
 # Change default shell to Zsh
 sudo chsh -s "$(which zsh)" "$(whoami)"
@@ -93,13 +89,12 @@ sudo dnf install -y \
 # Multimedia related
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 if [[ "$is_desktop" != 1 ]]; then
-    sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
-    sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-    sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-    sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+    sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
+    sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+    sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+    sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 fi
 
 # Add 3rd party repos
@@ -121,16 +116,12 @@ packages="@core \
     calibre \
     code \
     docker-compose \
-    dynamips \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
     git-all \
     git-delta \
-    gns3-gui \
-    gns3-server \
     google-chrome-stable \
-    gstreamer1-plugin-openh264 \
     gwenview \
     helm \
     hugo \
@@ -142,27 +133,22 @@ packages="@core \
     mediawriter \
     meld \
     mise \
-    mozilla-openh264 \
     ncdu \
     nmap \
     obs-studio \
     okular \
     podman-docker \
-    python3-netaddr \
     python3-sdkmanager \
     qalculate-qt \
     qbittorrent \
     scrcpy \
-    shellcheck \
     sqlitebrowser \
     strawberry \
     tmux \
     uv \
-    vlc \
-    wireguard-tools \
-    xxhash"
+    vlc"
 
-# LaTeX related items
+# LaTeX related items for resume
 packages="${packages} \
     texlive-latexindent \
     texlive-lipsum \
@@ -242,7 +228,7 @@ wait
 
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
-After that, you may want to config SSH, VSCode, Intellij, BTRFS snapshots and Windows 10 VM.
+After that, you may want to config SSH, VSCode, BTRFS snapshots and Windows 10 VM.
 EOF
 
 unset is_desktop
