@@ -139,6 +139,7 @@ packages="@core \
     obs-studio \
     okular \
     podman-docker \
+    python3-docutils \
     python3-sdkmanager \
     qalculate-qt \
     qbittorrent \

@@ -9,6 +9,7 @@ extensions=(
     "esbenp.prettier-vscode"
     "foxundermoon.shell-format"
     "github.vscode-github-actions"
+    "GrapeCity.gc-excelviewer"
     "Gruntfuggly.todo-tree"
     "IBM.output-colorizer"
     "james-yu.latex-workshop"
@@ -27,6 +28,7 @@ extensions=(
     "ryu1kn.partial-diff"
     "streetsidesoftware.code-spell-checker"
     "tamasfe.even-better-toml"
+    "tht13.rst-vscode" # Requires python3-docutils
     "timonwong.shellcheck"
     "tomoki1207.pdf"
     "usernamehw.errorlens"
@@ -40,7 +42,6 @@ extensions_extra=(
     "charliermarsh.ruff"
     "dbaeumer.vscode-eslint"
     "expo.vscode-expo-tools"
-    "GrapeCity.gc-excelviewer"
     "josevseb.google-java-format-for-vs-code"
     "ms-python.python"
     "ms-toolsai.jupyter"
@@ -56,3 +57,9 @@ extensions_extra=(
 for extension in "${extensions[@]}"; do
     code --install-extension "$extension"
 done
+
+if [ $# -eq 0 ]; then
+    for extension in "${extensions_extra[@]}"; do
+        code --install-extension "$extension"
+    done
+fi
