@@ -2,14 +2,14 @@
 
 source ~/.commonrc
 
+# fzf bindings for bash
+eval "$(fzf --bash)"
+
 # Activate Mise
 eval "$(mise activate bash)"
 
 # If an interactive shell
 if [[ $- == *i* ]]; then
-    # History substring search
-    bind '"\e[1;5A":history-substring-search-backward' # Ctrl+Up
-    bind '"\e[1;5B":history-substring-search-forward'  # Ctrl+Down
 
     # If shell not spawned by Tmux/Screen/VSCode
     if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then

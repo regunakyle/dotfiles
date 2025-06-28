@@ -5,12 +5,17 @@ ohmyzsh/ohmyzsh path:lib
 
 romkatv/powerlevel10k kind:fpath
 
+# Mise is initiated here
 ohmyzsh/ohmyzsh path:plugins/mise
 ohmyzsh/ohmyzsh path:plugins/chezmoi
 ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/docker-compose
+ohmyzsh/ohmyzsh path:plugins/fzf
+ohmyzsh/ohmyzsh path:plugins/k9s
+{{- if eq .chassisType "laptop" }}
+ohmyzsh/ohmyzsh path:plugins/tailscale
+{{- end }}
 
 zsh-users/zsh-completions kind:fpath path:src
 zsh-users/zsh-autosuggestions
-zsh-users/zsh-history-substring-search
 zsh-users/zsh-syntax-highlighting

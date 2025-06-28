@@ -69,11 +69,13 @@ Write-Host "Installing common packages..."
 $packages = @(
     "7zip.7zip",
     "Apple.iTunes",
+    "BurntSushi.ripgrep.MSVC",
     "DuongDieuPhap.ImageGlass",
     "Git.Git",
     "gerardog.gsudo",
     "JanDeDobbeleer.OhMyPosh",
     "jdx.mise",
+    "junegunn.fzf",
     "MartiCliment.UniGetUI",
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
@@ -92,9 +94,15 @@ foreach ($package in $packages) {
     winget install --id=$package -e --accept-package-agreements --accept-source-agreements --source winget
 }
 
+# fzf bindings
+pwsh -command "Install-Module -Name PSFzf -Repository PSGallery -Scope CurrentUser -Force"
+pwsh -command "Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'"
+
 # Setup Chezmoi
 chezmoi init --apply --force regunakyle
 oh-my-posh font install NerdFontsSymbolsOnly
+
+pwsh -command "mise install"
 
 # SSH server
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
@@ -138,6 +146,5 @@ if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
 }
 
 Write-Host "Installation finished! You should reboot now to avoid stability problems."
-Write-Host "You should also install Mise plugins manually in Powershell Core."
 
 Pop-Location 

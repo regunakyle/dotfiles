@@ -120,6 +120,7 @@ packages="@core \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
+    fzf \
     git-all \
     git-delta \
     google-chrome-stable \
@@ -134,6 +135,7 @@ packages="@core \
     mediawriter \
     meld \
     mise \
+    mkcert \
     ncdu \
     nmap \
     obs-studio \
@@ -143,10 +145,12 @@ packages="@core \
     python3-sdkmanager \
     qalculate-qt \
     qbittorrent \
+    ripgrep \
     scrcpy \
     sqlitebrowser \
     strawberry \
     tmux \
+    tokei \
     uv \
     vlc"
 

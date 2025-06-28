@@ -10,6 +10,9 @@ export PATH
 # Point all Docker services to the Podman socket
 export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
+# fzf use ripgrep
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
+
 # Useful alias/functions
 # https://wiki.archlinux.org/title/Rsync#As_cp/mv_alternative
 cpr() {

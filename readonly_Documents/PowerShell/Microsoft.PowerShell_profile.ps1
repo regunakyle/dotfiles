@@ -8,3 +8,5 @@ function call_pip {
 }
 
 Set-Alias pip call_pip
+
+$Env:FZF_DEFAULT_COMMAND = "rg --files --hidden --glob `"!.git/*`""

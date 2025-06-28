@@ -19,12 +19,9 @@ zstyle ':omz:update' mode disabled
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
-# zsh-users/zsh-history-substring-search
-bindkey '^[[1;5A' history-substring-search-up   # Ctrl+Up
-bindkey '^[[1;5B' history-substring-search-down # Ctrl+Down
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-
-autoload -Uz promptinit && promptinit && prompt powerlevel10k
+# Actually loads p10k
+autoload -Uz promptinit && promptinit
+prompt powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
