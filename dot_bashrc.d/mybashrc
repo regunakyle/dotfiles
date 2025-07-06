@@ -2,17 +2,16 @@
 
 source ~/.commonrc
 
-# fzf bindings for bash
-eval "$(fzf --bash)"
-
 # Activate Mise
 eval "$(mise activate bash)"
 
 # If an interactive shell
 if [[ $- == *i* ]]; then
+    # fzf bindings for bash
+    eval "$(fzf --bash)"
 
     # If shell not spawned by Tmux/Screen/VSCode
-    if [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ] && command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    if [ -z "$VSCODE_RESOLVING_ENVIRONMENT" ] && command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         # Launch Tmux on start
         exec tmux
     fi
