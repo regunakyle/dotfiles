@@ -19,3 +19,6 @@ cpr() {
 mvr() {
     rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
 }
+ssh-no-verify() {
+    ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "$@"
+}
