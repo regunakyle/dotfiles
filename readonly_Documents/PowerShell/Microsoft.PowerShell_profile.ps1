@@ -9,4 +9,6 @@ function call_pip {
 
 Set-Alias pip call_pip
 
+# fzf bindings
 $Env:FZF_DEFAULT_COMMAND = "rg --files --hidden --glob `"!.git/*`""
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'

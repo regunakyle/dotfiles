@@ -70,6 +70,7 @@ $packages = @(
     "7zip.7zip",
     "Apple.iTunes",
     "BurntSushi.ripgrep.MSVC",
+    "Discord.Discord",
     "DuongDieuPhap.ImageGlass",
     "Git.Git",
     "gerardog.gsudo",
@@ -87,6 +88,7 @@ $packages = @(
     "RaspberryPiFoundation.RaspberryPiImager",
     "TheDocumentFoundation.LibreOffice",
     "twpayne.chezmoi",
+    "Valve.Steam"
     "VideoLAN.VLC"
 )
 
@@ -94,15 +96,17 @@ foreach ($package in $packages) {
     winget install --id=$package -e --accept-package-agreements --accept-source-agreements --source winget
 }
 
+# Reload PATH
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+
 # fzf bindings
 pwsh -command "Install-Module -Name PSFzf -Repository PSGallery -Scope CurrentUser -Force"
-pwsh -command "Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'"
 
 # Setup Chezmoi
 chezmoi init --apply --force regunakyle
 oh-my-posh font install NerdFontsSymbolsOnly
 
-pwsh -command "mise install"
+mise install
 
 # SSH server
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
@@ -129,22 +133,8 @@ while (!$install.HasExited) {
 }
 Remove-Item .\tws-latest-windows-x64.exe
 
-if ((Get-CimInstance win32_VideoController).Name | Select-String "Nvidia") {
-    Write-Host "Installing desktop packages..."
-    $packages = @(
-        "Discord.Discord",
-        "Valve.Steam"
-    )
-
-    foreach ($package in $packages) {
-        winget install --id=$package -e --accept-package-agreements --accept-source-agreements --source winget
-    }
-
-    # https://github.com/microsoft/winget-pkgs/issues/140696
-    Write-Host "You should install the Nvidia App manually."
-
-}
-
+# https://github.com/microsoft/winget-pkgs/issues/140696
+Write-Host "You should install the Nvidia App and PsFzf manually."
 Write-Host "Installation finished! You should reboot now to avoid stability problems."
 
 Pop-Location 
