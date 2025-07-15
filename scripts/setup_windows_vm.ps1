@@ -82,6 +82,7 @@ $packages = @(
     "Microsoft.WindowsTerminal",
     "Mozilla.Firefox",
     "Notepad++.Notepad++",
+    "OBSProject.OBSStudio",
     "okibcn.nano",
     "PeterPawlowski.foobar2000",
     "qBittorrent.qBittorrent",
@@ -134,7 +135,7 @@ while (!$install.HasExited) {
 Remove-Item .\tws-latest-windows-x64.exe
 
 # https://github.com/microsoft/winget-pkgs/issues/140696
-Write-Host "You should install the Nvidia App and PsFzf manually."
+Write-Host "You should install the Nvidia App manually."
 Write-Host "Installation finished! You should reboot now to avoid stability problems."
 
 Pop-Location 

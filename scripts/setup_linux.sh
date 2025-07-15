@@ -99,6 +99,8 @@ fi
 
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
+sudo dnf copr enable -y regunakyle/sarasa-gothic
+sudo dnf copr enable -y regunakyle/symbols-nerd-font
 sudo dnf config-manager setopt google-chrome.enabled=1
 sudo dnf config-manager addrepo --from-repofile=https://mise.jdx.dev/rpm/mise.repo
 
@@ -146,9 +148,11 @@ packages="@core \
     qalculate-qt \
     qbittorrent \
     ripgrep \
+    sarasa-gothic \
     scrcpy \
     sqlitebrowser \
     strawberry \
+    symbols-nerd-font \
     tmux \
     tokei \
     uv \
@@ -199,23 +203,6 @@ mkdir -p "$HOME/Android/Sdk"
 export ANDROID_HOME=$HOME/Android/Sdk
 yes | sdkmanager --licenses
 sdkmanager "platform-tools"
-
-# Setup Sarasa Fixed Slab HC and Symbols Nerd Font Mono
-# https://wiki.archlinux.org/title/fonts#Manual_installation
-# TODO: Automate this with custom COPR repo
-echo "Setting up Sarasa Fixed Slab HC and Nerd Font..."
-filename=$(curl -fsSL "https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest" |
-    jq -c '.assets | map(select(.name | test("SarasaFixedSlabHC-TTF-[0-9\\.]+") ))[0].browser_download_url' |
-    xargs curl -JLOw '%{filename_effective}')
-7z x -o"$HOME/.local/share/fonts/${filename%.*}" "$filename"
-
-filename=NerdFontsSymbolsOnly.tar.xz
-wget -O $filename https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$filename
-mkdir ${filename%%.*}
-tar -xf $filename -C ${filename%%.*}
-mv ./${filename%%.*}/ "$HOME/.local/share/fonts"
-
-fc-cache -f
 
 # Setup Mise and Chezmoi
 mise use -g chezmoi
