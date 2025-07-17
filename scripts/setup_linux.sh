@@ -119,6 +119,7 @@ packages="@core \
     calibre \
     code \
     docker-compose \
+    easyeffects \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
