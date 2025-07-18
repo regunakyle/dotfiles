@@ -19,6 +19,7 @@ extensions=(
     "mikestead.dotenv"
     "ms-azuretools.vscode-containers"
     "ms-kubernetes-tools.vscode-kubernetes-tools"
+    "ms-playwright.playwright"
     "ms-vscode.live-server"
     "ms-vscode-remote.remote-containers"
     "ms-vscode-remote.remote-ssh"
