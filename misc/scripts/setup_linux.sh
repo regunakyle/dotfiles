@@ -99,14 +99,14 @@ fi
 
 # Add 3rd party repos
 sudo dnf copr enable -y zeno/scrcpy
+sudo dnf copr enable -y jdxcode/mise
 sudo dnf copr enable -y regunakyle/sarasa-gothic
 sudo dnf copr enable -y regunakyle/symbols-nerd-font
 sudo dnf config-manager setopt google-chrome.enabled=1
-sudo dnf config-manager addrepo --from-repofile=https://mise.jdx.dev/rpm/mise.repo
 
 # VSCode repo
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
 
 # DNF install
 echo "Installing packages from DNF..."
