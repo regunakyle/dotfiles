@@ -46,6 +46,7 @@ extensions_extra=(
     "josevseb.google-java-format-for-vs-code"
     "ms-python.python"
     "ms-toolsai.jupyter"
+    "mylesmurphy.prettify-ts"
     "orta.vscode-jest"
     "shengchen.vscode-checkstyle"
     "VisualStudioExptTeam.vscodeintellicode"
