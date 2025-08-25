@@ -148,6 +148,7 @@ packages="@core \
     python3-sdkmanager \
     qalculate-qt \
     qbittorrent \
+    remmina \
     ripgrep \
     sarasa-gothic \
     scrcpy \
