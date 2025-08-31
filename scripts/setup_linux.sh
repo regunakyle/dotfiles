@@ -91,10 +91,10 @@ sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 if [[ "$is_desktop" != 1 ]]; then
-    sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
-    sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-    sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-    sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+    sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
+    sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+    sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+    sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 fi
 
 # Add 3rd party repos
