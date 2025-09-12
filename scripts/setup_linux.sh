@@ -56,6 +56,7 @@ sudo flatpak remote-delete fedora
     flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
     flatpak install -y flathub \
+        com.github.wwmm.easyeffects \
         dev.vencord.Vesktop \
         io.podman_desktop.PodmanDesktop \
         md.obsidian.Obsidian
@@ -119,7 +120,6 @@ packages="@core \
     calibre \
     code \
     docker-compose \
-    easyeffects \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
     filezilla \
