@@ -158,7 +158,8 @@ packages="@core \
     tmux \
     tokei \
     uv \
-    vlc"
+    vlc \
+    waypipe"
 
 # LaTeX related items for resume
 packages="${packages} \
