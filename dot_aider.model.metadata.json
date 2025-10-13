@@ -1,8 +1,14 @@
 {
-  "openai/qwen2.5-coder": {
+   "openai/qwen2.5-coder": {
+    "max_input_tokens": 32768,
+    "max_output_tokens": 32768,
+    "max_tokens": 32768,
+    "mode": "chat"
+  },
+   "openai/qwen3-coder": {
     "max_input_tokens": 32768,
     "max_output_tokens": 32768,
     "max_tokens": 32768,
     "mode": "chat"
   }
-}
+ }

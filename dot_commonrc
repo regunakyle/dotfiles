@@ -6,7 +6,7 @@ PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH
 
 # Point all Docker services to the Podman socket
-export DOCKER_HOST="unix:///run/user/$UID/podman/podman.sock"
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
 # fzf use ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
