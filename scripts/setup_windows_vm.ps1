@@ -77,6 +77,7 @@ $packages = @(
     "JanDeDobbeleer.OhMyPosh",
     "jdx.mise",
     "junegunn.fzf",
+    "LedgerHQ.LedgerLive",
     "MartiCliment.UniGetUI",
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
@@ -89,7 +90,7 @@ $packages = @(
     "RaspberryPiFoundation.RaspberryPiImager",
     "TheDocumentFoundation.LibreOffice",
     "twpayne.chezmoi",
-    "Valve.Steam"
+    "Valve.Steam",
     "VideoLAN.VLC"
 )
 
