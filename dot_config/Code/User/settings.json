@@ -48,6 +48,7 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  "continue.enableNextEdit": false,
   "cSpell.enabledFileTypes": {
     "*": false,
     "asciidoc": true,
