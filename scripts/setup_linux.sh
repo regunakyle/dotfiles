@@ -159,7 +159,8 @@ packages="@core \
     tokei \
     uv \
     vlc \
-    waypipe"
+    waypipe \
+    yq"
 
 # LaTeX related items for resume
 packages="${packages} \
