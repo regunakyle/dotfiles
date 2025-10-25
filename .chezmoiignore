@@ -17,6 +17,7 @@ Documents
 
 {{ if eq .chassisType "laptop" }}
 .looking-glass-client.ini
+.config/obs-studio
 {{ end }}
 
 {{ end }}
