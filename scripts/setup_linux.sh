@@ -145,7 +145,6 @@ packages="@core \
     okular \
     podman-docker \
     python3-docutils \
-    python3-sdkmanager \
     qalculate-qt \
     qbittorrent \
     remmina \
@@ -201,12 +200,6 @@ sudo dnf install -y $packages
 
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
-
-# For Android development
-mkdir -p "$HOME/Android/Sdk"
-export ANDROID_HOME=$HOME/Android/Sdk
-yes | sdkmanager --licenses
-sdkmanager "platform-tools"
 
 # Setup Mise and Chezmoi
 mise use -g chezmoi

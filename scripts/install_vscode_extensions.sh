@@ -3,8 +3,10 @@
 extensions=(
     "alefragnani.project-manager"
     "bierner.markdown-mermaid"
+    "charliermarsh.ruff"
     "continue.continue"
     "DavidAnson.vscode-markdownlint"
+    "dbaeumer.vscode-eslint"
     "eamodio.gitlens"
     "esbenp.prettier-vscode"
     "foxundermoon.shell-format"
@@ -20,9 +22,12 @@ extensions=(
     "ms-azuretools.vscode-containers"
     "ms-kubernetes-tools.vscode-kubernetes-tools"
     "ms-playwright.playwright"
+    "ms-python.python"
+    "ms-toolsai.jupyter"
     "ms-vscode.live-server"
     "ms-vscode-remote.remote-containers"
     "ms-vscode-remote.remote-ssh"
+    "mylesmurphy.prettify-ts"
     "redhat.ansible"
     "redhat.vscode-xml"
     "redhat.vscode-yaml"
@@ -34,34 +39,14 @@ extensions=(
     "tomoki1207.pdf"
     "usernamehw.errorlens"
     "vincaslt.highlight-matching-tag"
-    "vscode-icons-team.vscode-icons"
-    "yzhang.markdown-all-in-one"
-)
-
-extensions_extra=(
-    "bradlc.vscode-tailwindcss"
-    "charliermarsh.ruff"
-    "dbaeumer.vscode-eslint"
-    "expo.vscode-expo-tools"
-    "josevseb.google-java-format-for-vs-code"
-    "ms-python.python"
-    "ms-toolsai.jupyter"
-    "mylesmurphy.prettify-ts"
-    "orta.vscode-jest"
-    "shengchen.vscode-checkstyle"
     "VisualStudioExptTeam.vscodeintellicode"
     "vitest.explorer"
-    "vmware.vscode-boot-dev-pack"
-    "vscjava.vscode-java-pack"
+    "vscode-icons-team.vscode-icons"
     "YoavBls.pretty-ts-errors"
+    "yzhang.markdown-all-in-one"
 )
 
 for extension in "${extensions[@]}"; do
     code --install-extension "$extension"
 done
 
-if [ $# -eq 0 ]; then
-    for extension in "${extensions_extra[@]}"; do
-        code --install-extension "$extension"
-    done
-fi
