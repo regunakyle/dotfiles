@@ -1,13 +1,16 @@
-{{ if eq .chezmoi.os "linux" "darwin" -}}
 encryption = "age"
+
 [age]
+{{- if eq .chezmoi.os "linux" "darwin" }}
 identity = "/home/eleung/.ssh/id_ed25519_chezmoi"
+{{- else if eq .chezmoi.os "windows" }}
+identity = "C:/Users/eleung/.ssh/id_ed25519_chezmoi"
+{{- end }}
 recipient = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINzyG89VfsculJFE1Rde2k+38VgG8qUfMh3P+nlcVQg+ eleung@fedora"
 
 [diff]
 command = "delta"
 pager = "delta"
-{{- end }}
 
 [edit]
 command = "nano"
