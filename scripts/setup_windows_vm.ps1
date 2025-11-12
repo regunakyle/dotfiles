@@ -69,6 +69,7 @@ Write-Host "Installing common packages..."
 $packages = @(
     "7zip.7zip",
     "Apple.iTunes",
+    "AutoHotkey.AutoHotkey",
     "BurntSushi.ripgrep.MSVC",
     "dandavison.delta",
     "Discord.Discord",
@@ -84,6 +85,7 @@ $packages = @(
     "MartiCliment.UniGetUI",
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
+    "Microsoft.VisualStudioCode",
     "Mozilla.Firefox",
     "Notepad++.Notepad++",
     "OBSProject.OBSStudio",
@@ -102,7 +104,7 @@ foreach ($package in $packages) {
 }
 
 # Reload PATH
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User") 
 
 # fzf bindings
 pwsh -command "Install-Module -Name PSFzf -Repository PSGallery -Scope CurrentUser -Force"
@@ -123,7 +125,8 @@ Set-Service -Name sshd -StartupType 'Automatic'
 if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
     Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
     New-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
-} else {
+}
+else {
     Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
 }
 

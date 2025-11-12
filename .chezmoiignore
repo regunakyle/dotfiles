@@ -1,6 +1,7 @@
 README.md
 LICENSE.md
 scripts
+.vscode
 
 {{ if eq .chezmoi.os "windows" }}
 *
@@ -8,6 +9,7 @@ scripts
 !Documents
 !.gitconfig
 !AppData
+!.continue
 
 .config/*
 !.config/mise
