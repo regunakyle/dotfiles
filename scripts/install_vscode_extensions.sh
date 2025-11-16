@@ -39,7 +39,6 @@ extensions=(
     "tomoki1207.pdf"
     "usernamehw.errorlens"
     "vincaslt.highlight-matching-tag"
-    "VisualStudioExptTeam.vscodeintellicode"
     "vitest.explorer"
     "vscode-icons-team.vscode-icons"
     "YoavBls.pretty-ts-errors"
