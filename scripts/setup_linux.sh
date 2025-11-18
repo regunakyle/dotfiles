@@ -151,6 +151,7 @@ packages="@core \
     ripgrep \
     sarasa-gothic \
     scrcpy \
+    shellcheck \
     sqlitebrowser \
     strawberry \
     symbols-nerd-font \
