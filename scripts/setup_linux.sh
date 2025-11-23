@@ -59,12 +59,8 @@ sudo flatpak remote-delete fedora
         com.github.wwmm.easyeffects \
         dev.vencord.Vesktop \
         io.podman_desktop.PodmanDesktop \
-        md.obsidian.Obsidian
-
-    if [[ "$is_desktop" != 1 ]]; then
-        flatpak install -y flathub \
-            com.moonlight_stream.Moonlight
-    fi
+        md.obsidian.Obsidian \
+        com.moonlight_stream.Moonlight
 
 } &
 
@@ -212,6 +208,34 @@ mise install
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 
+# Setup JetBrains
+# https://github.com/nagygergo/jetbrains-toolbox-install/blob/master/jetbrains-toolbox.sh
+TMP_DIR="/tmp"
+INSTALL_DIR="$HOME/.local/share/JetBrains/Toolbox"
+SYMLINK_DIR="$HOME/.local/bin"
+
+echo "### INSTALL JETBRAINS TOOLBOX ###"
+
+echo -e "\e[94mFetching the URL of the latest version...\e[39m"
+ARCHIVE_URL=$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' | grep -Po '"linux":.*?[^\\]",' | awk -F ':' '{print $3,":"$4}'| sed 's/[", ]//g')
+ARCHIVE_FILENAME=$(basename "$ARCHIVE_URL")
+
+echo -e "\e[94mDownloading $ARCHIVE_FILENAME...\e[39m"
+rm "$TMP_DIR/$ARCHIVE_FILENAME" 2>/dev/null || true
+wget -q --show-progress -cO "$TMP_DIR/$ARCHIVE_FILENAME" "$ARCHIVE_URL"
+
+echo -e "\e[94mExtracting to $INSTALL_DIR...\e[39m"
+mkdir -p "$INSTALL_DIR"
+rm "$INSTALL_DIR/jetbrains-toolbox" 2>/dev/null || true
+tar -xzf "$TMP_DIR/$ARCHIVE_FILENAME" -C "$INSTALL_DIR" --strip-components=1
+rm "$TMP_DIR/$ARCHIVE_FILENAME"
+chmod +x "$INSTALL_DIR/bin/jetbrains-toolbox"
+
+echo -e "\e[94mSymlinking to $SYMLINK_DIR/jetbrains-toolbox...\e[39m"
+mkdir -p $SYMLINK_DIR
+rm "$SYMLINK_DIR/jetbrains-toolbox" 2>/dev/null || true
+ln -s "$INSTALL_DIR/bin/jetbrains-toolbox" "$SYMLINK_DIR/jetbrains-toolbox"
+
 popd
 
 echo "Waiting for flatpak installation to finish..."
@@ -219,12 +243,17 @@ wait
 
 cat <<EOF
 Install finished! You should reboot now to ensure everything works correctly.
-After that, you may want to config SSH, VSCode, BTRFS snapshots and Windows 10 VM.
+After that, you may want to config SSH, VSCode, JetBrains, BTRFS snapshots and Windows 10 VM.
 EOF
 
 unset is_desktop
 unset filename
 unset packages
+unset TMP_DIR
+unset INSTALL_DIR
+unset SYMLINK_DIR
+unset ARCHIVE_URL
+unset ARCHIVE_FILENAME
 
 # Start Tmux
 exec tmux
