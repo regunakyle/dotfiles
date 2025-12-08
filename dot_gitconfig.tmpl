@@ -2,8 +2,8 @@
 fpush = push --force-with-lease
 # https://orbital.rodeo/~mike/20130302-git-serve/
 quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
-# https://stackoverflow.com/a/30720302
-out = log @{push}..
+# https://stackoverflow.com/a/34467298
+tree = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 [branch]
 sort = -committerdate
 [branch "master"]
