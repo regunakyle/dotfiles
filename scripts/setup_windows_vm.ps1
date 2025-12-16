@@ -71,6 +71,7 @@ $packages = @(
     "Apple.iTunes",
     "AutoHotkey.AutoHotkey",
     "BurntSushi.ripgrep.MSVC",
+    "Citrix.Workspace",
     "dandavison.delta",
     "Discord.Discord",
     "DuongDieuPhap.ImageGlass",
