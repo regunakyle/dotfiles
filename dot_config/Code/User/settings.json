@@ -16,14 +16,6 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-azuretools.vscode-containers"
   },
-  "[java]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code"
-  },
-  "[lua]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "sumneko.lua"
-  },
   "[markdown]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
@@ -87,9 +79,7 @@
     "**/.ruff_cache": true
   },
   "gitlens.telemetry.enabled": false,
-  "java.checkstyle.configuration": "/google_checks.xml",
-  "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "automatic",
+  "javascript.preferGoToSourceDefinition": true,
   "jupyter.askForKernelRestart": false,
   "latex-workshop.formatting.latex": "latexindent",
   "notebook.formatOnSave.enabled": true,
@@ -102,6 +92,7 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.persistentSessionReviveProcess": "never",
+  "typescript.preferGoToSourceDefinition": true,
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "vsicons.dontShowNewVersionMessage": true,
   "workbench.colorCustomizations": {
