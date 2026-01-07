@@ -1,5 +1,10 @@
 # This should be safe to be sourced anywhere
 
+export ANDROID_HOME="$HOME/Android/Sdk"
+PATH="$ANDROID_HOME/platform-tools:$PATH"
+
+export PATH
+
 # Point all Docker usage to the Podman socket
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 

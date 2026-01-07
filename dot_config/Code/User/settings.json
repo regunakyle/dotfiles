@@ -39,6 +39,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "chat.disableAIFeatures": true,
   "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
   "continue.enableNextEdit": false,
   "cSpell.enabledFileTypes": {

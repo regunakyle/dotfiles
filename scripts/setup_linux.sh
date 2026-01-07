@@ -110,7 +110,6 @@ echo "Installing packages from DNF..."
 packages="@core \
     age \
     akmod-v4l2loopback \
-    ansible \
     btop \
     btrfs-assistant \
     calibre \
@@ -124,12 +123,10 @@ packages="@core \
     git-delta \
     google-chrome-stable \
     gwenview \
-    helm \
     hugo \
     iperf3 \
     kate \
     kolourpaint \
-    kubernetes-client \
     maven \
     mediawriter \
     meld \
@@ -141,6 +138,7 @@ packages="@core \
     okular \
     podman-docker \
     python3-docutils \
+    python3-sdkmanager \
     qalculate-qt \
     qbittorrent \
     remmina \
@@ -198,6 +196,12 @@ sudo dnf install -y $packages
 # Enable Podman socket for Docker compatiblity
 systemctl --user enable --now podman.socket
 
+# For Android development
+mkdir -p "$HOME/Android/Sdk"
+export ANDROID_HOME=$HOME/Android/Sdk
+yes | sdkmanager --licenses
+sdkmanager "platform-tools"
+
 # Setup Mise and Chezmoi
 mise use -g chezmoi
 
@@ -207,34 +211,6 @@ mise install
 
 # Get antidote
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
-
-# Setup JetBrains
-# https://github.com/nagygergo/jetbrains-toolbox-install/blob/master/jetbrains-toolbox.sh
-TMP_DIR="/tmp"
-INSTALL_DIR="$HOME/.local/share/JetBrains/Toolbox"
-SYMLINK_DIR="$HOME/.local/bin"
-
-echo "### INSTALL JETBRAINS TOOLBOX ###"
-
-echo -e "\e[94mFetching the URL of the latest version...\e[39m"
-ARCHIVE_URL=$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' | grep -Po '"linux":.*?[^\\]",' | awk -F ':' '{print $3,":"$4}'| sed 's/[", ]//g')
-ARCHIVE_FILENAME=$(basename "$ARCHIVE_URL")
-
-echo -e "\e[94mDownloading $ARCHIVE_FILENAME...\e[39m"
-rm "$TMP_DIR/$ARCHIVE_FILENAME" 2>/dev/null || true
-wget -q --show-progress -cO "$TMP_DIR/$ARCHIVE_FILENAME" "$ARCHIVE_URL"
-
-echo -e "\e[94mExtracting to $INSTALL_DIR...\e[39m"
-mkdir -p "$INSTALL_DIR"
-rm "$INSTALL_DIR/jetbrains-toolbox" 2>/dev/null || true
-tar -xzf "$TMP_DIR/$ARCHIVE_FILENAME" -C "$INSTALL_DIR" --strip-components=1
-rm "$TMP_DIR/$ARCHIVE_FILENAME"
-chmod +x "$INSTALL_DIR/bin/jetbrains-toolbox"
-
-echo -e "\e[94mSymlinking to $SYMLINK_DIR/jetbrains-toolbox...\e[39m"
-mkdir -p $SYMLINK_DIR
-rm "$SYMLINK_DIR/jetbrains-toolbox" 2>/dev/null || true
-ln -s "$INSTALL_DIR/bin/jetbrains-toolbox" "$SYMLINK_DIR/jetbrains-toolbox"
 
 popd
 
@@ -249,11 +225,6 @@ EOF
 unset is_desktop
 unset filename
 unset packages
-unset TMP_DIR
-unset INSTALL_DIR
-unset SYMLINK_DIR
-unset ARCHIVE_URL
-unset ARCHIVE_FILENAME
 
 # Start Tmux
 exec tmux
