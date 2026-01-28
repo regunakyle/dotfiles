@@ -4,9 +4,22 @@ fpush = push --force-with-lease
 quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 # https://stackoverflow.com/a/34467298
 tree = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+# https://stackoverflow.com/a/28502292
+sync = !"f() { \
+  if [ -z \"$1\" ]; then \
+    echo \"Error: Branch name required. Usage: git sync <branch>\"; \
+    return 1; \
+  fi; \
+  git fetch upstream && \
+  git stash && \
+  git rebase upstream/$1 $1 && \
+  git stash pop; \
+}; f"
 [branch]
 sort = -committerdate
 [branch "master"]
+mergeOptions = --no-ff --no-commit
+[branch "main"]
 mergeOptions = --no-ff --no-commit
 [branch "dev"]
 mergeOptions = --squash --no-commit

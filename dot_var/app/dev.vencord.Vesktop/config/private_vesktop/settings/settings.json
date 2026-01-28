@@ -13,7 +13,7 @@
     "winNativeTitleBar": false,
     "plugins": {
         "ChatInputButtonAPI": {
-            "enabled": false
+            "enabled": true
         },
         "CommandsAPI": {
             "enabled": true
@@ -431,7 +431,9 @@
             "enabled": false
         },
         "ShowHiddenChannels": {
-            "enabled": false
+            "enabled": true,
+            "showMode": 0,
+            "hideUnreads": true
         },
         "ShowHiddenThings": {
             "enabled": false
@@ -446,7 +448,7 @@
             "enabled": false
         },
         "SilentTyping": {
-            "enabled": false
+            "enabled": true
         },
         "SortFriendRequests": {
             "enabled": false
@@ -581,6 +583,9 @@
         },
         "ImageFilename": {
             "enabled": false
+        },
+        "MoreQuickReactions": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -593,6 +598,10 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1757438912873
+        "settingsSyncVersion": 1767940679512
+    },
+    "uiElements": {
+        "chatBarButtons": {},
+        "messagePopoverButtons": {}
     }
 }

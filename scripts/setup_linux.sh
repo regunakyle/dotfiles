@@ -110,7 +110,6 @@ echo "Installing packages from DNF..."
 packages="@core \
     age \
     akmod-v4l2loopback \
-    ansible \
     btop \
     btrfs-assistant \
     calibre \
@@ -124,12 +123,10 @@ packages="@core \
     git-delta \
     google-chrome-stable \
     gwenview \
-    helm \
     hugo \
     iperf3 \
     kate \
     kolourpaint \
-    kubernetes-client \
     maven \
     mediawriter \
     meld \
@@ -143,7 +140,6 @@ packages="@core \
     python3-docutils \
     qalculate-qt \
     qbittorrent \
-    remmina \
     ripgrep \
     sarasa-gothic \
     scrcpy \
@@ -246,14 +242,15 @@ Install finished! You should reboot now to ensure everything works correctly.
 After that, you may want to config SSH, VSCode, JetBrains, BTRFS snapshots and Windows 10 VM.
 EOF
 
-unset is_desktop
-unset filename
-unset packages
 unset TMP_DIR
 unset INSTALL_DIR
 unset SYMLINK_DIR
 unset ARCHIVE_URL
 unset ARCHIVE_FILENAME
+
+unset is_desktop
+unset filename
+unset packages
 
 # Start Tmux
 exec tmux
