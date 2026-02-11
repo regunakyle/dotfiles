@@ -15,6 +15,15 @@ sync = !"f() { \
   git rebase upstream/$1 $1 && \
   git stash pop; \
 }; f"
+stashout = !"f() { \
+  if [ -z \"$1\" ]; then \
+    echo \"Error: Branch name required. Usage: git stashout <branch>\"; \
+    return 1; \
+  fi; \
+  git stash && \
+  git checkout $1 && \
+  git stash pop; \
+}; f"
 [branch]
 sort = -committerdate
 [branch "master"]
