@@ -148,10 +148,8 @@ packages="@core \
     strawberry \
     symbols-nerd-font \
     tmux \
-    tokei \
     uv \
     vlc \
-    waypipe \
     yq"
 
 # LaTeX related items for resume

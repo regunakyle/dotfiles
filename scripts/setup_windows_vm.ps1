@@ -69,7 +69,6 @@ Write-Host "Installing common packages..."
 $packages = @(
     "7zip.7zip",
     "Apple.iTunes",
-    "AutoHotkey.AutoHotkey",
     "BurntSushi.ripgrep.MSVC",
     "Citrix.Workspace",
     "dandavison.delta",
@@ -82,7 +81,6 @@ $packages = @(
     "jdx.mise",
     "jftuga.less",
     "junegunn.fzf",
-    "LedgerHQ.LedgerLive",
     "MartiCliment.UniGetUI",
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
@@ -130,17 +128,6 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 else {
     Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
 }
-
-# Trader Workstation from IBKR
-Write-Host "Installing Trader Workstation..."
-Invoke-WebRequest https://download2.interactivebrokers.com/installers/tws/latest/tws-latest-windows-x64.exe `
-    -OutFile tws-latest-windows-x64.exe
-$install = Start-Process -FilePath .\tws-latest-windows-x64.exe -ArgumentList "-q" -PassThru
-while (!$install.HasExited) {
-    Write-Host "Waiting for TWS installation to complete..."
-    Start-Sleep -Seconds 3
-}
-Remove-Item .\tws-latest-windows-x64.exe
 
 # https://github.com/microsoft/winget-pkgs/issues/140696
 Write-Host "You should install the Nvidia App manually."

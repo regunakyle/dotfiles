@@ -1,0 +1,6 @@
+/.venv/
+/venv/
+/node_modules/
+/target/
+.DS_Store
+*.log

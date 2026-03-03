@@ -38,6 +38,11 @@ verbose = true
 [core]
 pager = delta
 autocrlf = input
+{{- if eq .chezmoi.os "linux" }}
+excludesFile = /home/eleung/.gitignore
+{{- else if eq .chezmoi.os "windows" }}
+excludesFile = "C:/Users/eleung/.gitignore"
+{{ end }}
 [delta]
 dark = true
 navigate = true
