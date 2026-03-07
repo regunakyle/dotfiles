@@ -131,7 +131,6 @@ packages="@core \
     mediawriter \
     meld \
     mise \
-    mkcert \
     ncdu \
     nmap \
     obs-studio \
@@ -179,7 +178,6 @@ if [[ "$is_desktop" == 1 ]]; then
 else
     packages="${packages} \
         rpi-imager \
-        steam \
         tailscale"
 fi
 

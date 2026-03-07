@@ -84,7 +84,6 @@ $packages = @(
     "MartiCliment.UniGetUI",
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
-    "Microsoft.VisualStudioCode",
     "Mozilla.Firefox",
     "Notepad++.Notepad++",
     "OBSProject.OBSStudio",

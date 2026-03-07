@@ -29,7 +29,4 @@
 
 ### Laptop setup
 
-- Lenovo ThinkPad T14s Gen 3 (AMD) ([21CQ000JUS](https://psref.lenovo.com/Detail/ThinkPad/ThinkPad_T14s_Gen_3_AMD?M=21CQ000JUS))
-  - SSD upgraded to 1TB
-  - Monitor upgraded to a 100% sRGB, 120Hz, 2560×1600 panel ([N140GLE-GT1](https://www.panelook.com/N140GLE-GT1_Innolux_14.0_LCM_parameter_59738.html))
-    - Note: I do not recommend upgrading the monitor by yourself
+- ASUS Zenbook S 16 (UM5606WA)
