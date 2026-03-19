@@ -22,6 +22,7 @@ extensions=(
     "ms-azuretools.vscode-containers"
     "ms-playwright.playwright"
     "ms-python.python"
+    "ms-toolsai.datawrangler"
     "ms-toolsai.jupyter"
     "ms-vscode.live-server"
     "ms-vscode-remote.remote-containers"
