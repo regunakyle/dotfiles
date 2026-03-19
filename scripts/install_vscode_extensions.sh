@@ -4,7 +4,6 @@ extensions=(
     "alefragnani.project-manager"
     "bierner.markdown-mermaid"
     "charliermarsh.ruff"
-    "continue.continue"
     "DavidAnson.vscode-markdownlint"
     "dbaeumer.vscode-eslint"
     "eamodio.gitlens"
