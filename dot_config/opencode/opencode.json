@@ -20,6 +20,5 @@
   },
   "model": "llama.cpp/qwen",
   "small_model": "llama.cpp/qwen",
-  "default_agent": "plan",
-  "autoupdate": "notify"
+  "autoupdate": false
 }

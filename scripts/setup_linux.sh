@@ -89,9 +89,7 @@ sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=Pack
 
 if [[ "$is_desktop" != 1 ]]; then
     sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
-    sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
     sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-    sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 fi
 
 # Add 3rd party repos
@@ -127,11 +125,9 @@ packages="@core \
     iperf3 \
     kate \
     kolourpaint \
-    maven \
     mediawriter \
     meld \
     mise \
-    ncdu \
     nmap \
     obs-studio \
     okular \
@@ -148,8 +144,7 @@ packages="@core \
     symbols-nerd-font \
     tmux \
     uv \
-    vlc \
-    yq"
+    vlc"
 
 # LaTeX related items for resume
 packages="${packages} \
