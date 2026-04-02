@@ -8,7 +8,7 @@ sync = !"f() { \
     echo \"Error: Branch name required. Usage: git sync <branch>\"; \
     return 1; \
   fi; \
-  git fetch upstream && \
+  git fetch --prune upstream && \
   git stash && \
   git rebase upstream/$1 $1 && \
   git stash pop; \
