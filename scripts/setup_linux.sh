@@ -115,6 +115,7 @@ packages="@core \
     docker-compose \
     fcitx5-chinese-addons \
     fcitx5-table-extra \
+    fd-find \
     filezilla \
     fzf \
     git-all \

@@ -91,6 +91,7 @@ $packages = @(
     "PeterPawlowski.foobar2000",
     "qBittorrent.qBittorrent",
     "RaspberryPiFoundation.RaspberryPiImager",
+    "sharkdp.fd",
     "TheDocumentFoundation.LibreOffice",
     "twpayne.chezmoi",
     "Valve.Steam",
