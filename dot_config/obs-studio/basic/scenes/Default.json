@@ -203,7 +203,7 @@
             "name": "Scene"
         }
     ],
-    "name": "Untitled",
+    "name": "Default",
     "sources": [
         {
             "prev_ver": 536870916,
@@ -456,11 +456,11 @@
                         "id": 11,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 3229.0,
+                            "x": 2935.0,
                             "y": 0.0
                         },
                         "pos_rel": {
-                            "x": 1.2120370864868164,
+                            "x": 0.93981480598449707,
                             "y": -1.0
                         },
                         "scale": {
@@ -648,7 +648,7 @@
             "id": "text_ft2_source",
             "versioned_id": "text_ft2_source_v2",
             "settings": {
-                "text": "Personal Best: 3900\nReset: 1",
+                "text": "Personal Best: 7900 (Current)\nReset: 1",
                 "font": {
                     "face": "Sarasa Fixed HC",
                     "style": "Regular",
@@ -705,7 +705,7 @@
     "transition_duration": 300,
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -8,
+    "scaling_level": -30,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "virtual-camera": {

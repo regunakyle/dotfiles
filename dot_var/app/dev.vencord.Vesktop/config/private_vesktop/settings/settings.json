@@ -136,7 +136,17 @@
             "enabled": false
         },
         "CustomRPC": {
-            "enabled": false
+            "enabled": true,
+            "type": 1,
+            "appID": "1495313567765762188",
+            "appName": "Vesktop Rich Presence",
+            "details": "Nightreign (Flawless Challenge)",
+            "detailsURL": "https://www.twitch.tv/regunakyle",
+            "state": "https://www.twitch.tv/regunakyle",
+            "stateURL": "https://www.twitch.tv/regunakyle",
+            "streamLink": "https://www.twitch.tv/regunakyle",
+            "imageBig": "https://static-cdn.jtvnw.net/jtv_user_pictures/ff97fb8f-4c03-49b6-a5d0-6ba8bf50230a-profile_image-70x70.png",
+            "imageBigURL": "https://www.twitch.tv/regunakyle"
         },
         "CustomIdle": {
             "enabled": false
@@ -199,7 +209,9 @@
             "enabled": false
         },
         "GameActivityToggle": {
-            "enabled": false
+            "enabled": true,
+            "location": "PANEL",
+            "oldIcon": false
         },
         "GifPaste": {
             "enabled": false
@@ -591,6 +603,12 @@
         },
         "NoDefaultHangStatus": {
             "enabled": false
+        },
+        "CharacterCounter": {
+            "enabled": false
+        },
+        "ConcatenatedComponentExtractor": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -603,7 +621,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1773573078763
+        "settingsSyncVersion": 1777303503963
     },
     "uiElements": {
         "chatBarButtons": {},
