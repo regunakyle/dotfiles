@@ -136,7 +136,7 @@
             "enabled": false
         },
         "CustomRPC": {
-            "enabled": true,
+            "enabled": false,
             "type": 1,
             "appID": "1495313567765762188",
             "appName": "Vesktop Rich Presence",
@@ -209,7 +209,7 @@
             "enabled": false
         },
         "GameActivityToggle": {
-            "enabled": true,
+            "enabled": false,
             "location": "PANEL",
             "oldIcon": false
         },
@@ -621,7 +621,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1777303503963
+        "settingsSyncVersion": 1777615176657
     },
     "uiElements": {
         "chatBarButtons": {},

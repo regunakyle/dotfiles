@@ -1,4 +1,6 @@
 {
-  "packages": [],
+  "packages": ["npm:@juicesharp/rpiv-web-tools@1.2.1"],
+  "defaultProvider": "llama.cpp",
+  "defaultModel": "llama.cpp",
   "lastChangelogVersion": "0.74.0"
 }

@@ -1,6 +1,6 @@
 {
   "providers": {
-    "ollama": {
+    "llama.cpp": {
       "baseUrl": "http://192.168.1.51:8080/v1",
       "api": "openai-completions",
       "apiKey": "llama.cpp",
