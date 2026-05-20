@@ -9,8 +9,8 @@
           "id": "llama.cpp",
           "name": "llama.cpp",
           "reasoning": true,
-          "input": ["text", "image"],
-          "contextWindow": 144360,
+          "input": ["text"],
+          "contextWindow": 51200,
           "maxTokens": 32768
         }
       ]

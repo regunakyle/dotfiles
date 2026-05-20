@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "network": {
+    "allowLocalBinding": true,
+    "allowAllUnixSockets": true,
+    "allowedDomains": ["*"],
+    "deniedDomains": []
+  },
+  "filesystem": {
+    "denyRead": ["~/.ssh", "~/.keys"],
+    "allowRead": ["."],
+    "allowWrite": [".", "/tmp"],
+    "denyWrite": [".env", ".env.*"]
+  }
+}
