@@ -68,6 +68,7 @@
     ]
   },
   "editor.wordWrap": "on",
+  "extensions.autoUpdate": false,
   "extensions.ignoreRecommendations": true,
   "files.exclude": {
     "**/.venv": true,

@@ -57,7 +57,6 @@ sudo flatpak remote-delete fedora
 
     flatpak install -y flathub \
         com.github.wwmm.easyeffects \
-        dev.vencord.Vesktop \
         io.podman_desktop.PodmanDesktop \
         md.obsidian.Obsidian \
         com.moonlight_stream.Moonlight
@@ -112,6 +111,7 @@ packages="@core \
     btrfs-assistant \
     calibre \
     code \
+    discord \
     docker-compose \
     fcitx5-chinese-addons \
     fcitx5-table-extra \

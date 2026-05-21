@@ -10,7 +10,7 @@
           "name": "llama.cpp",
           "reasoning": true,
           "input": ["text"],
-          "contextWindow": 51200,
+          "contextWindow": 67840,
           "maxTokens": 32768
         }
       ]
