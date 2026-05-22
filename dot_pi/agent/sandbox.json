@@ -7,9 +7,9 @@
     "deniedDomains": []
   },
   "filesystem": {
-    "denyRead": ["~/.ssh", "~/.keys"],
-    "allowRead": ["."],
-    "allowWrite": [".", "/tmp"],
-    "denyWrite": [".env", ".env.*"]
+    "denyRead": ["~/.ssh", "~/.keys", "~/.aws", "~/.gnupg"],
+    "allowRead": [".", "~/.pi"],
+    "allowWrite": [".", "/tmp", "~/.pi"],
+    "denyWrite": [".env", ".env.*", "*.pem", "*.key"]
   }
 }

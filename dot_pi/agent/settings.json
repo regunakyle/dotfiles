@@ -1,7 +1,6 @@
 {
   "packages": [
     "npm:pi-rewind@0.5.0",
-    "git:github.com/BenjaminBilbro/pi-subagent@221c382",
     "npm:pi-sandbox@0.4.3",
     "npm:@juicesharp/rpiv-web-tools@1.10.2"
   ],
