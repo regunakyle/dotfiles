@@ -8,6 +8,10 @@ export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --e
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# https://github.com/huggingface/pi-llama
+# TODO: Figure out why streaming becomes intermittent when using reverse proxy with SSL
+export LLAMA_BASE_URL="http://192.168.1.51:8080/v1"
+
 # Load credentials
 source ~/.keys
 
