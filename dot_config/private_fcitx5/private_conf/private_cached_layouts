@@ -58,6 +58,11 @@ Description="Keyboard - Ukrainian - Ukrainian (Windows)"
 Language=uk
 Label="ua (winkeys)"
 
+[keyboard-ua-winkeysenhanced]
+Description="Keyboard - Ukrainian - Ukrainian (Windows Enhanced)"
+Language=uk
+Label="ua (winkeysenhanced)"
+
 [keyboard-ua-macOS]
 Description="Keyboard - Ukrainian - Ukrainian (macOS)"
 Language=uk
@@ -107,6 +112,11 @@ Label="th (tis)"
 Description="Keyboard - Thai - Thai (Pattachote)"
 Language=th
 Label="th (pat)"
+
+[keyboard-th-mnc]
+Description="Keyboard - Thai - Thai (Manoonchai)"
+Language=th
+Label="th (mnc)"
 
 [keyboard-tz]
 Description="Keyboard - Swahili (Tanzania)"
@@ -533,6 +543,11 @@ Description="Keyboard - Polish - Polish (lefty)"
 Language=pl
 Label="pl (lefty)"
 
+[keyboard-pl-slaviature]
+Description="Keyboard - Polish - Polish (Slavistic Phonetic Alphabet)"
+Language=pl
+Label="pl (slaviature)"
+
 [keyboard-trans]
 Description="Keyboard - International Phonetic Alphabet"
 Language=
@@ -687,6 +702,11 @@ Label="ancient (uga)"
 Description="Keyboard - Ancient - Avestan"
 Language=ae
 Label="ancient (ave)"
+
+[keyboard-ancient-got-alt]
+Description="Keyboard - Ancient - Gothic (Alternative)"
+Language=got
+Label="ancient (got-alt)"
 
 [keyboard-mt]
 Description="Keyboard - Maltese"
@@ -958,6 +978,11 @@ Description="Keyboard - Swedish - Swedish (Svdvorak)"
 Language=sv
 Label="se (svdvorak)"
 
+[keyboard-se-colemak]
+Description="Keyboard - Swedish - Swedish (Colemak)"
+Language=sv
+Label="se (colemak)"
+
 [keyboard-se-mac]
 Description="Keyboard - Swedish - Swedish (Macintosh)"
 Language=sv
@@ -1032,6 +1057,11 @@ Label="pk (urd-crulp)"
 Description="Keyboard - Urdu (Pakistan) - Urdu (Pakistan, NLA)"
 Language=ur
 Label="pk (urd-nla)"
+
+[keyboard-pk-pak_urdu_phonetic]
+Description="Keyboard - Urdu (Pakistan) - Urdu (Pak Urdu Phonetic)"
+Language=ur
+Label="pk (pak_urdu_phonetic)"
 
 [keyboard-pk-ara]
 Description="Keyboard - Urdu (Pakistan) - Arabic (Pakistan)"
@@ -2029,9 +2059,14 @@ Language=en
 Label="us (altgr-intl)"
 
 [keyboard-us-mac]
-Description="Keyboard - English (US) - English (Macintosh)"
+Description="Keyboard - English (US) - English (Macintosh, ABC, ANSI)"
 Language=en
 Label="us (mac)"
+
+[keyboard-us-mac-iso]
+Description="Keyboard - English (US) - English (Macintosh, ABC, ISO)"
+Language=en
+Label="us (mac-iso)"
 
 [keyboard-us-colemak]
 Description="Keyboard - English (US) - English (Colemak)"
@@ -2099,9 +2134,14 @@ Language=en
 Label="us (dvp)"
 
 [keyboard-us-dvorak-mac]
-Description="Keyboard - English (US) - English (Dvorak, Macintosh)"
+Description="Keyboard - English (US) - English (Dvorak, Macintosh, ANSI)"
 Language=en
 Label="us (dvorak-mac)"
+
+[keyboard-us-dvorak-mac-iso]
+Description="Keyboard - English (US) - English (Dvorak, Macintosh, ISO)"
+Language=en
+Label="us (dvorak-mac-iso)"
 
 [keyboard-us-norman]
 Description="Keyboard - English (US) - English (Norman)"
@@ -3672,11 +3712,6 @@ Label=ja
 Description="Keyboard - Japanese - Japanese (Kana)"
 Language=ja
 Label="jp (kana)"
-
-[keyboard-jp-kana86]
-Description="Keyboard - Japanese - Japanese (Kana 86)"
-Language=ja
-Label="jp (kana86)"
 
 [keyboard-jp-OADG109A]
 Description="Keyboard - Japanese - Japanese (OADG 109A)"

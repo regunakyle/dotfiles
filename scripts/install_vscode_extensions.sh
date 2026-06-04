@@ -7,6 +7,7 @@ extensions=(
     "DavidAnson.vscode-markdownlint"
     "dbaeumer.vscode-eslint"
     "eamodio.gitlens"
+    "emeraldwalk.runonsave"
     "esbenp.prettier-vscode"
     "foxundermoon.shell-format"
     "github.vscode-github-actions"

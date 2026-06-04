@@ -14,6 +14,7 @@ Mouse back button action=0
 Mouse forward button action=0
 Open New Tab To The Right Of Current=false
 Output History Limit=100
+PinnedDocuments=
 Recent File List Entry Count=10
 Restore Window Configuration=true
 SDI Mode=false
@@ -159,8 +160,8 @@ RunPrefix=
 SetEditor=false
 
 [MainWindow]
-2 screens: Height=1014
-2 screens: Width=898
+2 screens: Height=771
+2 screens: Width=1400
 ToolBarsMovable=Disabled
 
 [filetree]

@@ -6,7 +6,7 @@
     "npm:@juicesharp/rpiv-ask-user-question@1.15.0",
     "git:github.com/huggingface/pi-llama@8f0f252e9592867783f0c212e98d7cb259671fe6"
   ],
-  "lastChangelogVersion": "0.77.0",
+  "lastChangelogVersion": "0.78.0",
   "defaultProvider": "llama-cpp",
   "defaultModel": "llama.cpp",
   "defaultThinkingLevel": "medium"
