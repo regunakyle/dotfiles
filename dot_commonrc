@@ -9,7 +9,8 @@ export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # https://github.com/huggingface/pi-llama
-# TODO: Figure out why streaming becomes intermittent when using reverse proxy with SSL
+# Note: Nginx will buffer SSE connections (so streaming does not work).
+# See https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering (Note the X-Accel-Buffering part)
 export LLAMA_BASE_URL="http://192.168.1.51:8080/v1"
 
 # Load credentials
@@ -20,9 +21,7 @@ source ~/.keys
 cpr() {
     rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
 }
-mvr() {
-    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
-}
+
 ssh-no-verify() {
     ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "$@"
 }

@@ -2,11 +2,11 @@
   "packages": [
     "npm:pi-rewind@0.5.0",
     "npm:pi-sandbox@0.4.3",
-    "npm:@juicesharp/rpiv-web-tools@1.15.0",
-    "npm:@juicesharp/rpiv-ask-user-question@1.15.0",
-    "git:github.com/huggingface/pi-llama@8f0f252e9592867783f0c212e98d7cb259671fe6"
+    "npm:@juicesharp/rpiv-web-tools@1.19.1",
+    "npm:@juicesharp/rpiv-ask-user-question@1.19.1",
+    "git:github.com/huggingface/pi-llama@ffef1d1bebbfbdcb3298b49ee364cc38e1082638"
   ],
-  "lastChangelogVersion": "0.78.0",
+  "lastChangelogVersion": "0.79.1",
   "defaultProvider": "llama-cpp",
   "defaultModel": "llama.cpp",
   "defaultThinkingLevel": "medium"
