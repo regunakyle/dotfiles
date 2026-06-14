@@ -3,6 +3,7 @@
  *
  * Sends a desktop notification when the agent finishes and is waiting for input.
  * Works on Linux (with notify-send). Tested on Fedora KDE only.
+ * TODO: Also add Windows support
  *
  * Stolen and modified from: https://github.com/mitsuhiko/agent-stuff/blob/a3f8ab1108a48fec9e175f6cd5d9aaa4694ce29d/extensions/notify.ts
  */
