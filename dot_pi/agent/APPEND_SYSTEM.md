@@ -2,13 +2,13 @@
 
 A sandbox plugin is installed. Please read the below carefully.
 
-### Restricted Write Permission
+### Restricted File Permission
 
-Only the current directory and `/tmp` are allowed for writing. If you run a command and encountered errors due to read-only filesystem (or similar causes), **stop your current task immediately and ask the user to run it for you instead.**
+Only the current directory and `$HOME/.pi` are allowed for reading and writing.
 
-**Do not attempt to circumvent the filesystem limitation.**
+If you run a command and encountered errors due to read-only filesystem (or similar causes), you should stop your current task immediately and provide the user with step-by-step instructions of what you would have done.
 
-The user might or might not run it for you. Decide your next action according to user's response.
+The user might or might not run them for you. Decide your next action according to user's response.
 
 ### 0 Bytes Dotfiles
 
