@@ -68,7 +68,7 @@
     ]
   },
   "editor.wordWrap": "on",
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "off",
   "extensions.ignoreRecommendations": true,
   "files.exclude": {
     "**/.venv": true,
@@ -80,7 +80,8 @@
     "**/.ruff_cache": true
   },
   "gitlens.telemetry.enabled": false,
-  "javascript.preferGoToSourceDefinition": true,
+  "js.preferGoToSourceDefinition": true,
+  "js.tsserver.experimental.enableProjectDiagnostics": true,
   "jupyter.askForKernelRestart": false,
   "latex-workshop.formatting.latex": "latexindent",
   "notebook.formatOnSave.enabled": true,
@@ -95,8 +96,8 @@
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
-  "typescript.preferGoToSourceDefinition": true,
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "ts.preferGoToSourceDefinition": true,
+  "ts.tsserver.experimental.enableProjectDiagnostics": true,
   "vsicons.dontShowNewVersionMessage": true,
   "workbench.colorCustomizations": {
     "statusBar.debuggingBackground": "#cc6633",
