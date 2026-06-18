@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "onlyWhenInteractive": true,
+  "title": "Pi Coding Agent",
+  "body": "Ready for input!",
+  "channels": {
+    "terminal": false,
+    "desktop": true,
+    "bell": false,
+    "sound": false
+  },
+  "desktop": {
+    "backend": "auto"
+  }
+}

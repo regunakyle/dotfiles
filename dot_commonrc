@@ -9,9 +9,7 @@ export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # https://github.com/huggingface/pi-llama
-# Note: Nginx will buffer SSE connections (so streaming does not work).
-# See https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering (Note the X-Accel-Buffering part)
-export LLAMA_BASE_URL="http://192.168.1.51:8080/v1"
+export LLAMA_BASE_URL="https://llama.2406.eleung.me/v1"
 
 # Load credentials
 source ~/.keys
