@@ -30,6 +30,8 @@ The list of files generated:
 - .vscode
 - .zprofile
 - .zshrc
+- .claude/agents
+- .claude/commands
 
 You should ignore these files in the current directory **if they are 0 byte in size**, as they are **very likely not related to the project itself**.
 

@@ -10,9 +10,10 @@
     "npm:@juicesharp/rpiv-ask-user-question@1.20.0",
     "npm:@gotgenes/pi-subagents@16.3.1"
   ],
-  "lastChangelogVersion": "0.79.6",
+  "lastChangelogVersion": "0.79.10",
   "defaultProvider": "llama-cpp",
   "defaultModel": "llama.cpp",
   "defaultThinkingLevel": "medium",
-  "theme": "dark"
+  "theme": "dark",
+  "hideThinkingBlock": false
 }
