@@ -53,5 +53,7 @@ for f in ~/.bashrc.d/*; do
 done
 EOF
 
+git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
+
 echo ""
 echo "Installation complete!"
