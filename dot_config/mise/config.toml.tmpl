@@ -4,7 +4,7 @@ python = "3.13"
 node = "24"
 usage = "latest"
 pi = "latest"
-{{- if eq .chezmoi.os "linux" }}
+{{- if and (eq .chezmoi.os "linux") (ne .isWsl "yes") }}
 chezmoi = "latest"
 dive = "latest"
 {{- end }}

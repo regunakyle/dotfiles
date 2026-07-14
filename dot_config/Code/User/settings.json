@@ -1,8 +1,4 @@
 {
-  "[bibtex][latex]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
-  },
   "[css][html][javascript][javascriptreact][json][jsonc][jsx-tags][scss][typescript][typescriptreact][github-actions-workflow][dockercompose]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -46,7 +42,6 @@
     "asciidoc": true,
     "git-commit": true,
     "git-rebase": true,
-    "latex": true,
     "markdown": true,
     "restructuredtext": true
   },
@@ -83,7 +78,6 @@
   "js.preferGoToSourceDefinition": true,
   "js.tsserver.experimental.enableProjectDiagnostics": true,
   "jupyter.askForKernelRestart": false,
-  "latex-workshop.formatting.latex": "latexindent",
   "notebook.formatOnSave.enabled": true,
   "notebook.output.wordWrap": true,
   "partialDiff.enableTelemetry": false,

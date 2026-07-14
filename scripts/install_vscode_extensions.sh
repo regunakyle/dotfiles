@@ -24,7 +24,6 @@ extensions=(
     "ggml-org.llama-vscode"
     "github.vscode-github-actions"
     "Gruntfuggly.todo-tree"
-    "james-yu.latex-workshop"
     "mechatroner.rainbow-csv"
     "medo64.render-crlf"
     "Mescius.spreadjs-xlsx-editor"

@@ -147,13 +147,6 @@ packages="@core \
     uv \
     vlc"
 
-# LaTeX related items for resume
-packages="${packages} \
-    texlive-latexindent \
-    texlive-lipsum \
-    texlive-nth \
-    texlive-scheme-small"
-
 # python-build dependencies
 packages="${packages} \
     make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel \

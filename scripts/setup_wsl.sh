@@ -11,14 +11,15 @@
 set -euo pipefail
 
 echo "Updating package database..."
-sudo pacman -Syu --noconfirm
+pacman -Syu --noconfirm
 
 echo "Installing packages..."
-sudo pacman -S --noconfirm \
+pacman -S --noconfirm \
     7zip \
     age \
     bubblewrap \
     chezmoi \
+    dive \
     fd \
     fzf \
     git \
@@ -39,10 +40,7 @@ sudo pacman -S --noconfirm \
     zsh
 
 # Python build dependencies
-pacman -S --needed base-devel openssl zlib xz tk zstd
-
-# LaTeX
-pacman -S texlive-binextra texlive-latexextra texlive-plaingeneric
+pacman -S --needed --noconfirm base-devel openssl zlib xz tk zstd
 
 # Setup
 chezmoi init --apply --force regunakyle
