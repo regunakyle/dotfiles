@@ -5,8 +5,9 @@
 # 2. Running as root
 #
 # Note to self:
-# - Need to manually ignore Mise config in Windows side, otherwise Linux Mise will complain
+# - Need to manually ignore Mise config in Windows side: `mise trust --ignore /mnt/c/Users/eleung/.config/mise/config.toml`
 # - Manually mount a second storage drive to WSL if needed; Use a schedule task (on boot) to mount it automatically
+#   See https://learn.microsoft.com/en-us/windows/wsl/wsl2-mount-disk#mounting-an-unpartitioned-disk
 
 set -euo pipefail
 
@@ -51,6 +52,11 @@ cat > ~/.bash_profile << 'EOF'
 for f in ~/.bashrc.d/*; do
   [ -r "$f" ] && source "$f"
 done
+EOF
+
+cat > /etc/wsl.conf << 'EOF'
+[interop]
+appendWindowsPath=true
 EOF
 
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote

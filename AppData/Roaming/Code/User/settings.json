@@ -89,7 +89,7 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
+  //"todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
   "ts.preferGoToSourceDefinition": true,
   "ts.tsserver.experimental.enableProjectDiagnostics": true,
   "vsicons.dontShowNewVersionMessage": true,
