@@ -19,7 +19,7 @@ scripts
 Documents
 AppData
 
-{{ if eq .chassisType "laptop" }}
+{{ if ne .chassisType "desktop" }}
 .looking-glass-client.ini
 .config/obs-studio
 {{ end }}

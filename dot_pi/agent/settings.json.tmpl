@@ -1,17 +1,17 @@
 {
   "packages": [
-    "git:github.com/huggingface/pi-llama@a307df2e23b9ad213bd925c1db9a12d540146d4e",
+    "git:github.com/huggingface/pi-llama@8a876fca45c7824a50cd74f01ea11e0bab7964a2",
     "npm:pi-rewind@0.5.0",
 {{- if eq .chezmoi.os "linux" }}
     "npm:pi-sandbox@0.4.3",
-{{ end }}
+{{- end }}
     "npm:@diegopetrucci/pi-review@0.1.4",
     "npm:@diegopetrucci/pi-notify@0.1.7",
     "npm:@juicesharp/rpiv-btw@1.20.0",
     "npm:@juicesharp/rpiv-web-tools@1.20.0",
     "npm:@juicesharp/rpiv-ask-user-question@1.20.0"
   ],
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.80.6",
   "defaultProvider": "llama-cpp",
   "defaultModel": "llama.cpp",
   "defaultThinkingLevel": "medium",

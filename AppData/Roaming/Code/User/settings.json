@@ -40,7 +40,7 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "chat.disableAIFeatures": true,
-  "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  // "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
   "cSpell.enabledFileTypes": {
     "*": false,
     "asciidoc": true,

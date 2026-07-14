@@ -29,7 +29,7 @@ pager = delta
 autocrlf = input
 {{- if eq .chezmoi.os "windows" }}
 fileMode = false
-{{ end }}
+{{- end }}
 [delta]
 dark = true
 navigate = true
@@ -61,7 +61,11 @@ fsckobjects = true
 email = contact@ericleung.dev
 name = Eric Leung
 {{- if eq .chezmoi.os "linux" }}
+{{- if eq .isWsl "yes" }}
+signingkey = "/root/.ssh/id_ed25519_chezmoi"
+{{- else }}
 signingkey = /home/eleung/.ssh/id_ed25519_github_sign.pub
+{{- end }}
 {{- else if eq .chezmoi.os "windows" }}
 signingkey = "C:/Users/eleung/.ssh/id_ed25519_github_sign.pub"
-{{ end }}
+{{- end }}

@@ -1,7 +1,9 @@
 # This should be safe to be sourced anywhere
 
+{{- if ne .isWsl "yes" }}
 # Point all Docker usage to the Podman socket
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+{{- end }}
 
 # Uses fd for fzf
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --color always"
