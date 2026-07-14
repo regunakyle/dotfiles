@@ -76,7 +76,6 @@ $packages = @(
     "DuongDieuPhap.ImageGlass",
     "FiloSottile.age",
     "Git.Git",
-    "gerardog.gsudo",
     "JanDeDobbeleer.OhMyPosh",
     "jdx.mise",
     "jftuga.less",

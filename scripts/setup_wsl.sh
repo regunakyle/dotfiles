@@ -3,6 +3,10 @@
 # Assumptions:
 # 1. Arch Linux on WSL2
 # 2. Running as root
+#
+# Note to self:
+# - Need to manually ignore Mise config in Windows side, otherwise Linux Mise will complain
+# - Manually mount a second storage drive to WSL if needed; Use a schedule task (on boot) to mount it automatically
 
 set -euo pipefail
 

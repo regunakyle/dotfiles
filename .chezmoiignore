@@ -3,7 +3,7 @@ LICENSE.md
 scripts
 .vscode
 
-{{ if eq .chezmoi.os "windows" }}
+{{- if eq .chezmoi.os "windows" }}
 *
 !.config
 !.pi
@@ -13,15 +13,15 @@ scripts
 
 .config/*
 !.config/mise
-{{ end }}
+{{- end }}
 
-{{ if eq .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "linux" }}
 Documents
 AppData
 
-{{ if ne .chassisType "desktop" }}
+{{- if ne .chassisType "desktop" }}
 .looking-glass-client.ini
 .config/obs-studio
-{{ end }}
+{{- end }}
 
-{{ end }}
+{{- end }}
