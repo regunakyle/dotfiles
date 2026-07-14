@@ -6,6 +6,7 @@ scripts
 {{ if eq .chezmoi.os "windows" }}
 *
 !.config
+!.pi
 !Documents
 !.gitconfig
 !AppData

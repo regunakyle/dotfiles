@@ -1,12 +1,12 @@
 [tools]
 java = "temurin-25"
 python = "3.13"
+node = "24"
 usage = "latest"
+pi = "latest"
 {{- if eq .chezmoi.os "linux" }}
 chezmoi = "latest"
-node = "24"
 dive = "latest"
-pi = "latest"
 {{ end }}
 
 [settings]

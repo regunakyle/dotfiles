@@ -1,7 +1,19 @@
 #!/bin/bash
 
-extensions=(
+host=(
     "alefragnani.project-manager"
+    "ibm.output-colorizer"
+    "mikestead.dotenv"
+    "ms-vscode-remote.remote-containers"
+    "ms-vscode-remote.remote-ssh"
+    "tomoki1207.pdf"
+    "usernamehw.errorlens"
+    "vincaslt.highlight-matching-tag"
+    "vscode-icons-team.vscode-icons"
+    "yoavbls.pretty-ts-errors"
+)
+
+extensions=(
     "charliermarsh.ruff"
     "DavidAnson.vscode-markdownlint"
     "dbaeumer.vscode-eslint"
@@ -12,20 +24,16 @@ extensions=(
     "ggml-org.llama-vscode"
     "github.vscode-github-actions"
     "Gruntfuggly.todo-tree"
-    "IBM.output-colorizer"
     "james-yu.latex-workshop"
     "mechatroner.rainbow-csv"
     "medo64.render-crlf"
     "Mescius.spreadjs-xlsx-editor"
     "mhutchie.git-graph"
-    "mikestead.dotenv"
     "ms-azuretools.vscode-containers"
     "ms-python.python"
     "ms-toolsai.datawrangler"
     "ms-toolsai.jupyter"
     "ms-vscode.live-server"
-    "ms-vscode-remote.remote-containers"
-    "ms-vscode-remote.remote-ssh"
     "mylesmurphy.prettify-ts"
     "redhat.vscode-xml"
     "redhat.vscode-yaml"
@@ -34,16 +42,11 @@ extensions=(
     "tamasfe.even-better-toml"
     "tht13.rst-vscode" # Requires python3-docutils
     "timonwong.shellcheck"
-    "tomoki1207.pdf"
-    "usernamehw.errorlens"
-    "vincaslt.highlight-matching-tag"
     "vitest.explorer"
-    "vscode-icons-team.vscode-icons"
-    "YoavBls.pretty-ts-errors"
     "yzhang.markdown-all-in-one"
 )
 
-for extension in "${extensions[@]}"; do
+for extension in "${host[@]}" "${extensions[@]}"; do
     code --install-extension "$extension"
 done
 

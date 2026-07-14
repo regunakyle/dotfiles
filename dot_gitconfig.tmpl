@@ -27,6 +27,9 @@ verbose = true
 [core]
 pager = delta
 autocrlf = input
+{{- if eq .chezmoi.os "windows" }}
+fileMode = false
+{{ end }}
 [delta]
 dark = true
 navigate = true
