@@ -21,7 +21,6 @@ extensions=(
     "emeraldwalk.runonsave"
     "esbenp.prettier-vscode"
     "foxundermoon.shell-format"
-    "ggml-org.llama-vscode"
     "github.vscode-github-actions"
     "Gruntfuggly.todo-tree"
     "mechatroner.rainbow-csv"
