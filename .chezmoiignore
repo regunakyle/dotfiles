@@ -13,6 +13,7 @@ scripts
 
 .config/*
 !.config/mise
+!.config/git
 {{- end }}
 
 {{- if eq .chezmoi.os "linux" }}
