@@ -9,7 +9,6 @@ $extensions = @(
     "mikestead.dotenv"
     "ms-azuretools.vscode-containers"    
     "ms-toolsai.jupyter-keymap"
-    "ms-vscode-remote.remote-containers"
     "ms-vscode-remote.remote-ssh"
     "ms-vscode-remote.remote-wsl"
     "redhat.vscode-xml"

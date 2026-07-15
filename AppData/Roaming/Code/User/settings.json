@@ -3,14 +3,10 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[gitignore][ignore][properties][shellscript]": {
+  "[dockerfile][gitignore][ignore][properties][shellscript]": {
     "editor.formatOnSave": true,
     // Note to self: shfmt does not support zsh syntax
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[dockerfile]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "ms-azuretools.vscode-containers"
   },
   "[markdown]": {
     "editor.formatOnSave": true,
@@ -36,7 +32,6 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "chat.disableAIFeatures": true,
-  // "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
   "cSpell.enabledFileTypes": {
     "*": false,
     "asciidoc": true,
@@ -89,7 +84,6 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  //"todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
   "ts.preferGoToSourceDefinition": true,
   "ts.tsserver.experimental.enableProjectDiagnostics": true,
   "vsicons.dontShowNewVersionMessage": true,
