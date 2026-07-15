@@ -62,7 +62,7 @@ email = contact@ericleung.dev
 name = Eric Leung
 {{- if eq .chezmoi.os "linux" }}
 {{- if eq .isWsl "yes" }}
-signingkey = "/root/.ssh/id_ed25519_chezmoi"
+signingkey = /root/.ssh/id_ed25519_github_sign.pub
 {{- else }}
 signingkey = /home/eleung/.ssh/id_ed25519_github_sign.pub
 {{- end }}
