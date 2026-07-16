@@ -38,6 +38,7 @@ pacman -S --noconfirm \
     tmux \
     uv \
     which \
+    xdg-utils \
     zsh
 
 # Python build dependencies
@@ -56,7 +57,7 @@ EOF
 
 cat > /etc/wsl.conf << 'EOF'
 [interop]
-appendWindowsPath=true
+appendWindowsPath=false
 EOF
 
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
