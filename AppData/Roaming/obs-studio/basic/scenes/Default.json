@@ -1,7 +1,7 @@
 {
     "name": "Default",
     "DesktopAudioDevice1": {
-        "prev_ver": 536936449,
+        "prev_ver": 537001985,
         "name": "Desktop Audio",
         "uuid": "c0e014f2-878c-4268-a18a-d7c8aa17ff80",
         "id": "wasapi_output_capture",
@@ -12,7 +12,7 @@
         "mixers": 255,
         "sync": 0,
         "flags": 0,
-        "volume": 1.0,
+        "volume": 0.5674176812171936,
         "balance": 0.5,
         "enabled": true,
         "muted": false,
@@ -32,7 +32,7 @@
         "private_settings": {}
     },
     "AuxAudioDevice1": {
-        "prev_ver": 536936449,
+        "prev_ver": 537001985,
         "name": "Mic/Aux",
         "uuid": "24ca35bf-4749-4701-b54a-4bdbe9422052",
         "id": "wasapi_input_capture",
@@ -42,11 +42,11 @@
         },
         "mixers": 255,
         "sync": 0,
-        "flags": 0,
+        "flags": 2,
         "volume": 1.0,
         "balance": 0.5,
         "enabled": true,
-        "muted": true,
+        "muted": false,
         "push-to-mute": false,
         "push-to-mute-delay": 0,
         "push-to-talk": false,
@@ -63,12 +63,14 @@
         "private_settings": {},
         "filters": [
             {
-                "prev_ver": 536936449,
+                "prev_ver": 537001985,
                 "name": "NVIDIA Audio Effects",
                 "uuid": "dd2f0d54-e755-4ac9-9685-5c698e07e37b",
                 "id": "nvidia_audiofx_filter",
                 "versioned_id": "nvidia_audiofx_filter",
-                "settings": {},
+                "settings": {
+                    "intensity": 0.85
+                },
                 "mixers": 255,
                 "sync": 0,
                 "flags": 0,
@@ -87,7 +89,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 536936449,
+                "prev_ver": 537001985,
                 "name": "Gain",
                 "uuid": "7a10259d-b4b8-47b6-92cc-70a913f33dc4",
                 "id": "gain_filter",
@@ -113,7 +115,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 536936449,
+                "prev_ver": 537001985,
                 "name": "Noise Gate",
                 "uuid": "e3450c0e-3bda-4b9d-99f2-d9e497f3fac4",
                 "id": "noise_gate_filter",
@@ -140,7 +142,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 536936449,
+                "prev_ver": 537001985,
                 "name": "Compressor",
                 "uuid": "3daac331-8ae6-4aec-a6d0-e9ec3a241e88",
                 "id": "compressor_filter",
@@ -168,7 +170,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 536936449,
+                "prev_ver": 537001985,
                 "name": "Limiter",
                 "uuid": "4cc783fe-8ead-4e9b-8aad-e2b8b4f5512b",
                 "id": "limiter_filter",
@@ -197,14 +199,16 @@
     },
     "sources": [
         {
-            "prev_ver": 536936449,
+            "prev_ver": 537001985,
             "name": "Game Capture",
             "uuid": "68a3491c-9da7-454b-b0f4-668224a8b40c",
             "id": "game_capture",
             "versioned_id": "game_capture",
             "settings": {
                 "window": "ELDEN RING NIGHTREIGN:ELDEN RING NIGHTREIGN:nightreign.exe",
-                "capture_mode": "window"
+                "capture_audio": false,
+                "capture_mode": "window",
+                "capture_overlays": true
             },
             "mixers": 255,
             "sync": 0,
@@ -231,16 +235,16 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 536936449,
+            "prev_ver": 537001985,
             "name": "Input Overlay",
             "uuid": "e503815b-7f6e-4d59-9b16-e8ba8c5e0911",
             "id": "input-overlay",
             "versioned_id": "input-overlay",
             "settings": {
+                "io.controller_id": "0 Xbox 360 Controller - XBox 360 Controller",
                 "io.input_source": "This computer",
-                "io.overlay_image": "C:/Users/eleung/Downloads/input-overlay-5.0.6-presets/xbox-controller/xbox-controller-black.png",
-                "io.layout_file": "C:/Users/eleung/Downloads/input-overlay-5.0.6-presets/xbox-controller/xbox-controller.json",
-                "io.controller_id": "0 Xbox 360 Controller - XBox 360 Controller"
+                "io.overlay_image": "C:/ProgramData/obs-studio/plugins/input-overlay/input-overlay-5.0.6-presets/xbox-controller/xbox-controller.png",
+                "io.layout_file": "C:/ProgramData/obs-studio/plugins/input-overlay/input-overlay-5.0.6-presets/xbox-controller/xbox-controller.json"
             },
             "mixers": 0,
             "sync": 0,
@@ -260,15 +264,156 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 536936449,
+            "prev_ver": 537001985,
+            "name": "Browser",
+            "uuid": "42105c3e-c607-4c74-952f-9584c15a2132",
+            "id": "browser_source",
+            "versioned_id": "browser_source",
+            "settings": {
+                "url": "wheelofnames.com/s/t3r-gfc",
+                "width": 700,
+                "height": 700
+            },
+            "mixers": 255,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {
+                "libobs.mute": [],
+                "libobs.unmute": [],
+                "libobs.push-to-mute": [],
+                "libobs.push-to-talk": [],
+                "ObsBrowser.Refresh": []
+            },
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
+        },
+        {
+            "prev_ver": 537001985,
+            "name": "Text (GDI+)",
+            "uuid": "f798e178-b928-4c1d-8b30-40f577c24739",
+            "id": "text_gdiplus",
+            "versioned_id": "text_gdiplus_v3",
+            "settings": {
+                "text": "Random Flawless (Resets: 1)\nPersonal Best: 6650"
+            },
+            "mixers": 0,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {},
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
+        },
+        {
+            "prev_ver": 537001985,
+            "name": "Text (GDI+) 2",
+            "uuid": "c3f8904d-53f7-46dc-bf31-38b9cbbdffe1",
+            "id": "text_gdiplus",
+            "versioned_id": "text_gdiplus_v3",
+            "settings": {
+                "text": "AFK"
+            },
+            "mixers": 0,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {},
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
+        },
+        {
+            "prev_ver": 537001985,
             "name": "Scene 1",
             "uuid": "42a34b3c-f28e-4a39-9a55-038a21d80ebf",
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 2,
+                "id_counter": 6,
                 "custom_size": false,
                 "items": [
+                    {
+                        "name": "Text (GDI+) 2",
+                        "source_uuid": "c3f8904d-53f7-46dc-bf31-38b9cbbdffe1",
+                        "visible": false,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 3840.0,
+                            "y": 2160.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 6,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 869.0,
+                            "y": 495.0
+                        },
+                        "pos_rel": {
+                            "x": -0.9731481671333313,
+                            "y": -0.5416666269302368
+                        },
+                        "scale": {
+                            "x": 4.8973212242126465,
+                            "y": 4.8977274894714355
+                        },
+                        "scale_rel": {
+                            "x": 4.8973212242126465,
+                            "y": 4.8977274894714355
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 300
+                        },
+                        "hide_transition": {
+                            "duration": 300
+                        },
+                        "private_settings": {}
+                    },
                     {
                         "name": "Game Capture",
                         "source_uuid": "68a3491c-9da7-454b-b0f4-668224a8b40c",
@@ -345,20 +490,130 @@
                         "id": 2,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 2316.0,
-                            "y": 1236.0
+                            "x": 3008.0,
+                            "y": 1655.0
                         },
                         "pos_rel": {
-                            "x": 0.36666667461395264,
-                            "y": 0.14444446563720703
+                            "x": 1.0074074268341064,
+                            "y": 0.5324074029922485
                         },
                         "scale": {
-                            "x": 0.744140625,
-                            "y": 0.7439613342285156
+                            "x": 0.40625,
+                            "y": 0.40660226345062256
                         },
                         "scale_rel": {
-                            "x": 0.744140625,
-                            "y": 0.7439613342285156
+                            "x": 0.40625,
+                            "y": 0.40660226345062256
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 300
+                        },
+                        "hide_transition": {
+                            "duration": 300
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "Browser",
+                        "source_uuid": "42105c3e-c607-4c74-952f-9584c15a2132",
+                        "visible": false,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 3840.0,
+                            "y": 2160.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 3,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 86.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -1.6981481313705444,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 3.085714340209961,
+                            "y": 3.085714340209961
+                        },
+                        "scale_rel": {
+                            "x": 3.085714340209961,
+                            "y": 3.085714340209961
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 300
+                        },
+                        "hide_transition": {
+                            "duration": 300
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "Text (GDI+)",
+                        "source_uuid": "f798e178-b928-4c1d-8b30-40f577c24739",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 3840.0,
+                            "y": 2160.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 5,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": 2891.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": 0.8990740776062012,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 0.31444665789604187,
+                            "y": 0.31439393758773804
+                        },
+                        "scale_rel": {
+                            "x": 0.31444665789604187,
+                            "y": 0.31439393758773804
                         },
                         "bounds": {
                             "x": 0.0,
@@ -394,10 +649,16 @@
             "push-to-talk-delay": 0,
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
+                "libobs.show_scene_item.6": [],
+                "libobs.hide_scene_item.6": [],
                 "libobs.show_scene_item.1": [],
                 "libobs.hide_scene_item.1": [],
                 "libobs.show_scene_item.2": [],
-                "libobs.hide_scene_item.2": []
+                "libobs.hide_scene_item.2": [],
+                "libobs.show_scene_item.3": [],
+                "libobs.hide_scene_item.3": [],
+                "libobs.show_scene_item.5": [],
+                "libobs.hide_scene_item.5": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
@@ -444,7 +705,7 @@
     "saved_projectors": [],
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -7,
+    "scaling_level": -8,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "virtual-camera": {
