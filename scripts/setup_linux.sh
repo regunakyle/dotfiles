@@ -109,7 +109,6 @@ packages="@core \
     akmod-v4l2loopback \
     btop \
     btrfs-assistant \
-    calibre \
     code \
     discord \
     docker-compose \
