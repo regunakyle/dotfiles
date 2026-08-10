@@ -14,6 +14,7 @@ scripts
 .config/*
 !.config/mise
 !.config/git
+!.config/rpiv-web-tools
 {{- end }}
 
 {{- if eq .chezmoi.os "linux" }}
