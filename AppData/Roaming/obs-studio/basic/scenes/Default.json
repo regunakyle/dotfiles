@@ -1,7 +1,7 @@
 {
     "name": "Default",
     "DesktopAudioDevice1": {
-        "prev_ver": 537001985,
+        "prev_ver": 537001986,
         "name": "Desktop Audio",
         "uuid": "c0e014f2-878c-4268-a18a-d7c8aa17ff80",
         "id": "wasapi_output_capture",
@@ -32,7 +32,7 @@
         "private_settings": {}
     },
     "AuxAudioDevice1": {
-        "prev_ver": 537001985,
+        "prev_ver": 537001986,
         "name": "Mic/Aux",
         "uuid": "24ca35bf-4749-4701-b54a-4bdbe9422052",
         "id": "wasapi_input_capture",
@@ -63,7 +63,7 @@
         "private_settings": {},
         "filters": [
             {
-                "prev_ver": 537001985,
+                "prev_ver": 537001986,
                 "name": "NVIDIA Audio Effects",
                 "uuid": "dd2f0d54-e755-4ac9-9685-5c698e07e37b",
                 "id": "nvidia_audiofx_filter",
@@ -89,7 +89,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 537001985,
+                "prev_ver": 537001986,
                 "name": "Gain",
                 "uuid": "7a10259d-b4b8-47b6-92cc-70a913f33dc4",
                 "id": "gain_filter",
@@ -115,7 +115,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 537001985,
+                "prev_ver": 537001986,
                 "name": "Noise Gate",
                 "uuid": "e3450c0e-3bda-4b9d-99f2-d9e497f3fac4",
                 "id": "noise_gate_filter",
@@ -142,7 +142,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 537001985,
+                "prev_ver": 537001986,
                 "name": "Compressor",
                 "uuid": "3daac331-8ae6-4aec-a6d0-e9ec3a241e88",
                 "id": "compressor_filter",
@@ -170,7 +170,7 @@
                 "private_settings": {}
             },
             {
-                "prev_ver": 537001985,
+                "prev_ver": 537001986,
                 "name": "Limiter",
                 "uuid": "4cc783fe-8ead-4e9b-8aad-e2b8b4f5512b",
                 "id": "limiter_filter",
@@ -199,7 +199,7 @@
     },
     "sources": [
         {
-            "prev_ver": 537001985,
+            "prev_ver": 537001986,
             "name": "Game Capture",
             "uuid": "68a3491c-9da7-454b-b0f4-668224a8b40c",
             "id": "game_capture",
@@ -235,7 +235,7 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 537001985,
+            "prev_ver": 537001986,
             "name": "Input Overlay",
             "uuid": "e503815b-7f6e-4d59-9b16-e8ba8c5e0911",
             "id": "input-overlay",
@@ -264,7 +264,7 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 537001985,
+            "prev_ver": 537001986,
             "name": "Browser",
             "uuid": "42105c3e-c607-4c74-952f-9584c15a2132",
             "id": "browser_source",
@@ -298,13 +298,13 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 537001985,
+            "prev_ver": 537001986,
             "name": "Text (GDI+)",
             "uuid": "f798e178-b928-4c1d-8b30-40f577c24739",
             "id": "text_gdiplus",
             "versioned_id": "text_gdiplus_v3",
             "settings": {
-                "text": "Random Flawless (Resets: 2)\nPersonal Best: 6650"
+                "text": "Random Flawless (Resets: 5)\nPersonal Best: 6650"
             },
             "mixers": 0,
             "sync": 0,
@@ -324,7 +324,7 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 537001985,
+            "prev_ver": 537001986,
             "name": "Text (GDI+) 2",
             "uuid": "c3f8904d-53f7-46dc-bf31-38b9cbbdffe1",
             "id": "text_gdiplus",
@@ -350,7 +350,7 @@
             "private_settings": {}
         },
         {
-            "prev_ver": 537001985,
+            "prev_ver": 537001986,
             "name": "Scene 1",
             "uuid": "42a34b3c-f28e-4a39-9a55-038a21d80ebf",
             "id": "scene",
@@ -705,7 +705,7 @@
     "saved_projectors": [],
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -8,
+    "scaling_level": -16,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "virtual-camera": {

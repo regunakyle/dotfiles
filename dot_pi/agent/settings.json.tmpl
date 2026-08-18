@@ -2,19 +2,19 @@
   "packages": [
     "npm:pi-rewind@0.5.0",
 {{- if eq .chezmoi.os "linux" }}
-    "npm:pi-sandbox@0.6.2",
+    "npm:pi-sandbox@0.6.5",
 {{- end }}
-    "npm:@diegopetrucci/pi-review@0.1.11",
+    "npm:@diegopetrucci/pi-review@0.1.12",
 {{- if ne .isWsl "yes" }}
-    "npm:@diegopetrucci/pi-notify@0.1.14",
+    "npm:@diegopetrucci/pi-notify@0.1.16",
 {{- end }}
-    "npm:@juicesharp/rpiv-btw@2.3.1",
-    "npm:@juicesharp/rpiv-web-tools@2.3.1",
-    "npm:@juicesharp/rpiv-ask-user-question@2.3.1"
+    "npm:@juicesharp/rpiv-btw@2.6.1",
+    "npm:@juicesharp/rpiv-web-tools@2.6.1",
+    "npm:@juicesharp/rpiv-ask-user-question@2.6.1"
   ],
-  "lastChangelogVersion": "0.84.1",
+  "lastChangelogVersion": "0.84.2",
   "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-flash",
+  "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "theme": "dark",
