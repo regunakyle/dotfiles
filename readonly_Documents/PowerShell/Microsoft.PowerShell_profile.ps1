@@ -2,6 +2,8 @@ mise activate pwsh | Out-String | Invoke-Expression
 
 Set-Alias which gcm
 
+$env:OBSIDIAN_PATH = "$HOME/Documents/Obsidian"
+
 # fzf bindings
 $env:FZF_DEFAULT_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --color always"
 $env:FZF_DEFAULT_OPTS = "--ansi"
