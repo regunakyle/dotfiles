@@ -20,6 +20,7 @@ pacman -S --noconfirm \
     age \
     bubblewrap \
     chezmoi \
+    curl \
     dive \
     fd \
     fzf \
@@ -37,6 +38,7 @@ pacman -S --noconfirm \
     socat \
     tmux \
     uv \
+    wget \
     which \
     xdg-utils \
     zsh
