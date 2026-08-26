@@ -4,17 +4,17 @@
 {{- if eq .chezmoi.os "linux" }}
     "npm:pi-sandbox@0.6.5",
 {{- end }}
-    "npm:@diegopetrucci/pi-review@0.1.12",
+    "npm:@diegopetrucci/pi-review@0.1.13",
 {{- if ne .isWsl "yes" }}
-    "npm:@diegopetrucci/pi-notify@0.1.16",
+    "npm:@diegopetrucci/pi-notify@0.1.17",
 {{- end }}
-    "npm:@juicesharp/rpiv-btw@2.6.1",
-    "npm:@juicesharp/rpiv-web-tools@2.6.1",
-    "npm:@juicesharp/rpiv-ask-user-question@2.6.1"
+    "npm:@juicesharp/rpiv-btw@2.7.1",
+    "npm:@juicesharp/rpiv-web-tools@2.7.1",
+    "npm:@juicesharp/rpiv-ask-user-question@2.7.1"
   ],
   "lastChangelogVersion": "0.84.3",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro",
+  "defaultProvider": "zai",
+  "defaultModel": "glm-5.3",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "theme": "dark",
