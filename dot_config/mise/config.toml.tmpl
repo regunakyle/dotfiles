@@ -8,6 +8,9 @@ pi = "latest"
 chezmoi = "latest"
 dive = "latest"
 {{- end }}
+{{- if eq .chezmoi.os "windows" }}
+uv = "latest"
+{{- end }}
 
 [settings]
 idiomatic_version_file_enable_tools = []

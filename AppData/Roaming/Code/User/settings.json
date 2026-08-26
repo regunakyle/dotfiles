@@ -69,7 +69,6 @@
     "**/.pytest_cache": true,
     "**/.ruff_cache": true
   },
-  "gitlens.telemetry.enabled": false,
   "js.preferGoToSourceDefinition": true,
   "js.tsserver.experimental.enableProjectDiagnostics": true,
   "jupyter.askForKernelRestart": false,

@@ -18,5 +18,8 @@
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "theme": "dark",
-  "hideThinkingBlock": false
+  "hideThinkingBlock": false,
+{{- if eq .chezmoi.os "windows" }}
+  "defaultTools": ["read", "powershell", "edit", "write"]
+{{- end }}
 }
