@@ -7,6 +7,16 @@ export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 export OBSIDIAN_PATH="$HOME/Documents/Obsidian"
 {{- end }}
 
+{{- if eq .isWsl "yes" }}
+# Note: Run these in Powershell first
+# ```
+# setx WINHOME $HOME
+# setx WSLENV (("$env:WSLENV".TrimEnd(':') + ":WINHOME/up:").TrimStart(':'))
+# ```
+# Does not work in VSCode terminals
+export OBSIDIAN_PATH="$WINHOME/Documents/Obsidian"
+{{- end }}
+
 # Uses fd for fzf
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --color always"
 export FZF_DEFAULT_OPTS="--ansi"
