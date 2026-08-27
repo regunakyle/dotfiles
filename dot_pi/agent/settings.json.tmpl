@@ -8,18 +8,22 @@
 {{- if ne .isWsl "yes" }}
     "npm:@diegopetrucci/pi-notify@0.1.17",
 {{- end }}
-    "npm:@juicesharp/rpiv-btw@2.7.1",
+    "npm:@ff-labs/pi-fff@0.10.5",
     "npm:@juicesharp/rpiv-web-tools@2.7.1",
     "npm:@juicesharp/rpiv-ask-user-question@2.7.1"
   ],
+{{- if eq .chezmoi.os "windows" }}
+  "defaultTools": ["read", "powershell", "edit", "write"],
+{{- end }}
+  "externalEditor": "nano",
   "lastChangelogVersion": "0.84.3",
+  "branchSummary": {
+    "skipPrompt": true
+  },
   "defaultProvider": "zai",
   "defaultModel": "glm-5.3",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "theme": "dark",
-  "hideThinkingBlock": false,
-{{- if eq .chezmoi.os "windows" }}
-  "defaultTools": ["read", "powershell", "edit", "write"]
-{{- end }}
+  "hideThinkingBlock": false
 }

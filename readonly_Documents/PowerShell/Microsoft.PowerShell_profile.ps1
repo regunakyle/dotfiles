@@ -13,6 +13,9 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 
 $env:VIRTUAL_ENV_DISABLE_PROMPT = $false
 
+# https://pi.dev/packages/@ff-labs/pi-fff
+$env:PI_FFF_MODE = "override"
+
 # Mise Python shenanigans
 function call_pip {
     python -m pip $args
