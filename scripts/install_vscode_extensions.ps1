@@ -1,6 +1,7 @@
 $extensions = @(
-    "charliermarsh.ruff"
     "alefragnani.project-manager"
+    "charliermarsh.ruff"
+    "DavidAnson.vscode-markdownlint"
     "esbenp.prettier-vscode"
     "ibm.output-colorizer"
     "mechatroner.rainbow-csv"
@@ -24,6 +25,7 @@ $extensions = @(
     "vincaslt.highlight-matching-tag"
     "vscode-icons-team.vscode-icons"
     "yoavbls.pretty-ts-errors"
+    "yzhang.markdown-all-in-one"
 )
 
 foreach ($extension in $extensions) {
