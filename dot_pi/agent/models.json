@@ -1,0 +1,20 @@
+{
+  "providers": {
+    "tabbyAPI": {
+      "baseUrl": "http://192.168.1.51:5000/v1",
+      "api": "openai-completions",
+      "apiKey": "apiKey",
+      "models": [
+        {
+          "id": "Qwen3.8-27B-exl3",
+          "name": "Qwen 3.8 27B",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 160000,
+          "maxTokens": 80000,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        }
+      ]
+    }
+  }
+}
