@@ -13,7 +13,12 @@
     "npm:@juicesharp/rpiv-ask-user-question@2.10.0"
   ],
 {{- if eq .chezmoi.os "windows" }}
-  "defaultTools": ["read", "powershell", "edit", "write"],
+  "defaultTools": [
+    "read",
+    "powershell",
+    "edit",
+    "write"
+  ],
 {{- end }}
   "externalEditor": "nano",
   "lastChangelogVersion": "0.85.1",
@@ -21,7 +26,7 @@
     "skipPrompt": true
   },
   "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-flash",
+  "defaultModel": "deepseek-v4-flash-vision-exp",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "theme": "dark",
