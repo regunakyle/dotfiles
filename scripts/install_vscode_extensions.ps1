@@ -3,6 +3,7 @@ $extensions = @(
     "charliermarsh.ruff"
     "DavidAnson.vscode-markdownlint"
     "esbenp.prettier-vscode"
+    "ggml-org.llama-vscode"
     "ibm.output-colorizer"
     "mechatroner.rainbow-csv"
     "medo64.render-crlf"

@@ -20,6 +20,7 @@ extensions=(
     "emeraldwalk.runonsave"
     "esbenp.prettier-vscode"
     "foxundermoon.shell-format"
+    "ggml-org.llama-vscode"
     "mechatroner.rainbow-csv"
     "medo64.render-crlf"
     "Mescius.spreadjs-xlsx-editor"
