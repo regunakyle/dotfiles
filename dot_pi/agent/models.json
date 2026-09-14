@@ -11,7 +11,7 @@
           "reasoning": true,
           "input": ["text", "image"],
           "contextWindow": 160000,
-          "maxTokens": 80000,
+          "maxTokens": 131072,
           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
         }
       ]
