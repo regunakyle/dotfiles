@@ -25,12 +25,21 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # https://pi.dev/packages/@ff-labs/pi-fff
 export PI_FFF_MODE="override"
 
-# Useful alias/functions
+# Copy files like cp, with rsync progress and resume
 # https://wiki.archlinux.org/title/Rsync#As_cp/mv_alternative
 cpr() {
     rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
 }
 
+# ssh without host key checks (use only for throwaway hosts)
 ssh-no-verify() {
     ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "$@"
+}
+
+# Jump to a parent directory by name
+# https://gist.github.com/GNOMES/6bf65926648e260d8023aebb9ede9573
+dc() {
+    # If the target is the current directory, stay here
+    [ "$1" = "${PWD##*/}" ] && return 0
+    cd "${PWD%/$1/*}/$1/" 2>/dev/null || echo "Directory not found: $1"
 }

@@ -8,8 +8,8 @@
   },
   "filesystem": {
     "denyRead": ["~"],
-    "allowRead": [".", "~/.pi", "~/.local/share/mise/installs/pi"],
-    "allowWrite": [".", "~/.pi"],
+    "allowRead": [".", "~/.pi", "~/.local/share/mise/installs/pi", "/tmp"],
+    "allowWrite": [".", "~/.pi", "/tmp"],
     "denyWrite": []
   }
 }
