@@ -1,18 +1,5 @@
 #!/bin/bash
 
-host=(
-    "alefragnani.project-manager"
-    "ibm.output-colorizer"
-    "mikestead.dotenv"
-    "ms-vscode-remote.remote-containers"
-    "ms-vscode-remote.remote-ssh"
-    "tomoki1207.pdf"
-    "usernamehw.errorlens"
-    "vincaslt.highlight-matching-tag"
-    "vscode-icons-team.vscode-icons"
-    "yoavbls.pretty-ts-errors"
-)
-
 extensions=(
     "charliermarsh.ruff"
     "DavidAnson.vscode-markdownlint"
@@ -41,7 +28,7 @@ extensions=(
     "yzhang.markdown-all-in-one"
 )
 
-for extension in "${host[@]}" "${extensions[@]}"; do
+for extension in "${extensions[@]}"; do
     code --install-extension "$extension"
 done
 

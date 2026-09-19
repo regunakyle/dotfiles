@@ -4,9 +4,7 @@
 {{- if eq .chezmoi.os "linux" }}
     "npm:pi-sandbox@0.6.8",
 {{- end }}
-{{- if ne .isWsl "yes" }}
     "npm:@diegopetrucci/pi-notify@0.1.18",
-{{- end }}
     "git:github.com/earendil-works/pi-review@f1de050504936046c0f85b21fec0e0a93ef394eb",
     "npm:@ff-labs/pi-fff@0.10.6",
     "npm:@juicesharp/rpiv-web-tools@2.10.1",

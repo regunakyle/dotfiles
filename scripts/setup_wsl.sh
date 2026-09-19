@@ -18,6 +18,7 @@ echo "Installing packages..."
 pacman -S --noconfirm \
     7zip \
     age \
+    base-devel \
     bubblewrap \
     chezmoi \
     curl \
@@ -26,25 +27,30 @@ pacman -S --noconfirm \
     fzf \
     git \
     git-delta \
+    htop \
     hugo \
     iperf3 \
+    man-db \
     mise \
     nano \
     nmap \
     openssh \
     python-docutils \
     ripgrep \
+    rsync \
     shellcheck \
     socat \
     tmux \
+    unzip \
     uv \
     wget \
     which \
     xdg-utils \
-    zsh
-
-# Python build dependencies
-pacman -S --needed --noconfirm base-devel openssl zlib xz tk zstd
+    xz \
+    yq \
+    zip \
+    zsh \
+    zstd
 
 # Setup
 chezmoi init --apply --force regunakyle
@@ -61,6 +67,10 @@ cat > /etc/wsl.conf << 'EOF'
 [interop]
 appendWindowsPath=false
 EOF
+
+# For https://github.com/diegopetrucci/pi-extensions/tree/main/extensions/notify
+mkdir -p ~/.local/bin
+ln -sf /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe ~/.local/bin
 
 git clone --depth=1 https://github.com/mattmc3/antidote.git "$HOME"/.antidote
 

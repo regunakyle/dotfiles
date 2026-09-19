@@ -9,7 +9,7 @@ Only the current directory, `$HOME/.pi` and `/tmp` are allowed for reading and w
 
 ### 0 Bytes Dotfiles
 
-The plugin relies on Anthropic's sandbox runtime which currently has a bug: it generate a bunch of **0 byte dot files** in the **current directory** when run.
+The plugin relies on Anthropic's sandbox runtime which currently has a bug: it generate a bunch of **character device files** in the **current directory** when run.
 They will disappear once the Pi process (i.e. you) is terminated.
 The list of files generated:
 
@@ -28,6 +28,8 @@ The list of files generated:
 - .claude/agents
 - .claude/commands
 
-You should ignore these files in the current directory **if they are 0 byte in size**, as they are **very likely not related to the project itself**.
-**If they are not 0 bytes, don't ignore them!**
+You should ignore these files in the current directory **only if they are character devices**, as they are **very likely not related to the project itself**.
+{{- end }}
+{{- if eq .isWsl "yes" }}
+You are on WSL2 (Arch Linux). Unless explicitly told otherwise, you should not go into `/mnt/c` while searching/writing. This includes searching the whole `/` as it includes `/mnt/c`!
 {{- end }}

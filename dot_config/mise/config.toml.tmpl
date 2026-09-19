@@ -4,18 +4,8 @@ python = "3.13"
 node = "24"
 usage = "latest"
 pi = "latest"
-{{- if and (eq .chezmoi.os "linux") (ne .isWsl "yes") }}
+{{- if eq .chezmoi.os "windows" }}
 chezmoi = "latest"
 dive = "latest"
-{{- end }}
-{{- if eq .chezmoi.os "windows" }}
 uv = "latest"
-{{- end }}
-
-[settings]
-idiomatic_version_file_enable_tools = []
-
-{{- if eq .chezmoi.os "linux" }}
-[settings.python]
-compile = true
 {{- end }}
