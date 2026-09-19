@@ -36,6 +36,15 @@ ssh-no-verify() {
     ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "$@"
 }
 
+# Make a directory and enter it
+mkcd() {
+    if [ $# -ne 1 ]; then
+        echo "usage: mkcd <directory>" >&2
+        return 1
+    fi
+    mkdir -p -- "$1" && cd -- "$1"
+}
+
 # Jump to a parent directory by name
 # https://gist.github.com/GNOMES/6bf65926648e260d8023aebb9ede9573
 dc() {

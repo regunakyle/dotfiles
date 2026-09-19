@@ -1,5 +1,6 @@
 {
   "enabled": true,
+  "sandboxUserShell": false,
   "network": {
     "allowLocalBinding": true,
     "allowAllUnixSockets": true,
@@ -8,7 +9,7 @@
   },
   "filesystem": {
     "denyRead": ["~"],
-    "allowRead": [".", "~/.pi", "~/.local/share/mise/installs/pi", "/tmp"],
+    "allowRead": [".", "~/.pi", "~/.local/share/mise", "/tmp"],
     "allowWrite": [".", "~/.pi", "/tmp"],
     "denyWrite": []
   }

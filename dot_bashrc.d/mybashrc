@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # This should be the last sourced bashrc file
 
 source ~/.commonrc

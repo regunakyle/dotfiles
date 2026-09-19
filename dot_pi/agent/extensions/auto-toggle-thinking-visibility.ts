@@ -41,14 +41,17 @@ function setGlobalThinkingVisibility(visible: boolean): void {
  * Wrap InteractiveMode.init() to capture the live instance and to show
  * thinking blocks at startup. init() is the only place that exposes the
  * mode object, because no public extension API toggles this state.
+ *
+ * Returns false when the hook could not be installed, so the caller can
+ * surface a warning instead of failing silently.
  */
-function installStartupHook(): void {
+function installStartupHook(): boolean {
   const proto = (
     piCodingAgent as unknown as {
       InteractiveMode?: { prototype?: InteractiveModeLike };
     }
   ).InteractiveMode?.prototype;
-  if (!proto || typeof proto.init !== "function") return;
+  if (!proto || typeof proto.init !== "function") return false;
 
   const store = proto as unknown as Record<PropertyKey, unknown>;
   const base = (store[INIT_ORIGINAL] as InitFn | undefined) ?? proto.init;
@@ -57,7 +60,7 @@ function installStartupHook(): void {
   const current = proto.init;
   if (current !== store[INIT_WRAPPER] && current !== base) {
     // Another extension wrapped init after us; do not clobber it.
-    return;
+    return false;
   }
 
   const wrapper = async function (
@@ -76,6 +79,7 @@ function installStartupHook(): void {
 
   store[INIT_WRAPPER] = wrapper;
   proto.init = wrapper as InitFn;
+  return true;
 }
 
 /**
@@ -87,7 +91,8 @@ function installStartupHook(): void {
  * so the run keeps the visibility it started with.
  */
 function installBeforeAgentStartHook(pi: ExtensionAPI): void {
-  pi.on("before_agent_start", () => {
+  pi.on("before_agent_start", (_event, ctx) => {
+    if (ctx.mode !== "tui") return;
     setGlobalThinkingVisibility(true);
   });
 }
@@ -100,13 +105,32 @@ function installBeforeAgentStartHook(pi: ExtensionAPI): void {
  * the user can input again.
  */
 function installSettledHook(pi: ExtensionAPI): void {
-  pi.on("agent_settled", () => {
+  pi.on("agent_settled", (_event, ctx) => {
+    if (ctx.mode !== "tui") return;
     setGlobalThinkingVisibility(false);
   });
 }
 
 export default function (pi: ExtensionAPI) {
-  installStartupHook();
+  const hooked = installStartupHook();
+
+  if (!hooked) {
+    pi.on("session_start", (_event, ctx) => {
+      ctx.ui.notify(
+        "auto-toggle-thinking: `InteractiveMode.init` not hookable; extension disabled",
+        "warning",
+      );
+    });
+    return;
+  }
+
   installBeforeAgentStartHook(pi);
   installSettledHook(pi);
+
+  // Drop the captured instance when its session is torn down, so a stale
+  // InteractiveMode is never toggled. The init wrapper re-captures the
+  // next session's instance.
+  pi.on("session_shutdown", () => {
+    mode = undefined;
+  });
 }
