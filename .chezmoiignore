@@ -20,10 +20,4 @@ scripts
 {{- if eq .chezmoi.os "linux" }}
 Documents
 AppData
-
-{{- if ne .chassisType "desktop" }}
-.looking-glass-client.ini
-.config/obs-studio
-{{- end }}
-
 {{- end }}
