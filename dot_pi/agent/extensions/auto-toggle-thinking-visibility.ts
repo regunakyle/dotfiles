@@ -23,14 +23,29 @@ interface InteractiveModeLike {
 const INIT_WRAPPER = Symbol.for("pi.auto-thinking.initWrapper");
 const INIT_ORIGINAL = Symbol.for("pi.auto-thinking.initOriginal");
 
-/** Modes for which the startup visibility switch already ran. */
-const startedModes = new WeakSet<object>();
+/**
+ * Registry for the live InteractiveMode instance, stored on globalThis
+ * under a well-known symbol so it survives extension module
+ * re-evaluation.
+ *
+ * /reload clears pi's extension cache (ResourceLoader.reload() ->
+ * clearExtensionCache()), so jiti re-evaluates the module and resets all
+ * module-level state. InteractiveMode.init() runs only once per process,
+ * so the reloaded module can never re-capture the instance through the
+ * init wrapper alone. The global registry is the only state that both
+ * the first and every later module evaluation can see.
+ */
+const MODE_REGISTRY = Symbol.for("pi.auto-thinking.capturedMode");
 
-/** The live InteractiveMode instance. Captured in the init() wrapper. */
-let mode: InteractiveModeLike | undefined;
+function getCapturedMode(): InteractiveModeLike | undefined {
+  return (globalThis as unknown as Record<PropertyKey, unknown>)[MODE_REGISTRY] as
+    | InteractiveModeLike
+    | undefined;
+}
 
 /** Set the global thinking-block visibility at runtime. */
 function setGlobalThinkingVisibility(visible: boolean): void {
+  const mode = getCapturedMode();
   if (!mode) return;
   if (mode.hideThinkingBlock === !visible) return;
   mode.hideThinkingBlock = !visible;
@@ -41,6 +56,14 @@ function setGlobalThinkingVisibility(visible: boolean): void {
  * Wrap InteractiveMode.init() to capture the live instance and to show
  * thinking blocks at startup. init() is the only place that exposes the
  * mode object, because no public extension API toggles this state.
+ *
+ * The extension factory re-runs on every session rebind (/new, /fork,
+ * /switchSession, /reload), and /reload additionally re-evaluates the
+ * module itself (fresh module state). init() runs only once per process:
+ * the same InteractiveMode instance serves every session. The wrapper
+ * therefore re-wraps the original init around the same base on each
+ * rebind, and records the instance in the global registry so every
+ * module evaluation can reach it.
  *
  * Returns false when the hook could not be installed, so the caller can
  * surface a warning instead of failing silently.
@@ -68,12 +91,9 @@ function installStartupHook(): boolean {
     ...args: unknown[]
   ): Promise<unknown> {
     const result = await base.apply(this, args);
-    mode = this;
-    if (!startedModes.has(this)) {
-      startedModes.add(this);
-      // Startup: show thinking blocks globally.
-      setGlobalThinkingVisibility(true);
-    }
+    (globalThis as unknown as Record<PropertyKey, unknown>)[MODE_REGISTRY] = this;
+    // Startup: show thinking blocks globally.
+    setGlobalThinkingVisibility(true);
     return result;
   };
 
@@ -127,10 +147,9 @@ export default function (pi: ExtensionAPI) {
   installBeforeAgentStartHook(pi);
   installSettledHook(pi);
 
-  // Drop the captured instance when its session is torn down, so a stale
-  // InteractiveMode is never toggled. The init wrapper re-captures the
-  // next session's instance.
-  pi.on("session_shutdown", () => {
-    mode = undefined;
-  });
+  // NOTE: do not clear the captured instance on session_shutdown.
+  // InteractiveMode is created once per process (main.ts) and serves
+  // every session; only the extension instance is rebound. Clearing the
+  // capture here would strand it, because init() never fires again for
+  // the remaining lifetime of the process.
 }

@@ -27,8 +27,8 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const CUSTOM_TYPE = "override-docs-section";
 const SENTENCE =
-  "Be succinct: Use ASD-STE100 Simplified Technical English in your responses. " +
-  "Important: Never run any Git commands that are not read-only, unless the user specifically asked for it.";
+  "NEVER run any Git commands that are not read-only, unless the user specifically asked for it. " +
+  "You MUST use ASD-STE100 Simplified Technical English in your responses!";
 
 /** True only for a brand new chat, and only until the fallback message is injected. */
 let isNewChat = false;

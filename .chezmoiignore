@@ -3,6 +3,9 @@ LICENSE.md
 scripts
 .vscode
 
+pi-reference
+system-prompt.txt
+
 {{- if eq .chezmoi.os "windows" }}
 *
 !.config

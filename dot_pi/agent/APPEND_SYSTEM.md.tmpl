@@ -1,6 +1,7 @@
-The following CLI tools are installed: `rg`, `fd`, `jq`, `yq`. Useful when using the powershell or bash tool.
+The following CLI tools are installed: `rg`, `fd`, `jq`, `yq`. Use them when needed.
 
-{{- if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.os "linux" -}}
+
 ## IMPORTANT: Sandbox Plugin
 
 A sandbox plugin is installed. Please read the below carefully.
@@ -11,8 +12,7 @@ Only the current directory, `$HOME/.pi` and `/tmp` are allowed for reading and w
 
 ### 0 Bytes Dotfiles
 
-The plugin relies on Anthropic's sandbox runtime which currently has a bug: it generate a bunch of **character device files** in the **current directory** when run.
-They will disappear once the Pi process (i.e. you) is terminated.
+The plugin relies on Anthropic's sandbox runtime which currently has a bug: it generate a bunch of **character device files** in the **current directory** when run. They will disappear once the Pi process (i.e. you) is terminated.
 The list of files generated:
 
 - .bash_profile
@@ -30,8 +30,8 @@ The list of files generated:
 - .claude/agents
 - .claude/commands
 
-You should ignore these files in the current directory **only if they are character devices**, as they are **very likely not related to the project itself**.
+You MUST ignore all character device files which matches these names in the current directory!
 {{- end }}
 {{- if eq .isWsl "yes" }}
-You are on WSL2 (Arch Linux). Unless explicitly told otherwise, you should not go into `/mnt/c` while searching/writing. This includes searching the whole `/` as it includes `/mnt/c`!
+You are on WSL2 (Arch Linux). Unless explicitly told otherwise, you MUST not go into `/mnt/c` while searching/writing. This includes searching the whole `/` as it includes `/mnt/c`!
 {{- end }}
