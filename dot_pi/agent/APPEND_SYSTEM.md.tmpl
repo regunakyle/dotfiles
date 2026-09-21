@@ -1,6 +1,7 @@
-The following CLI tools are installed: `rg`, `fd`, `jq`, `yq`. Use them when needed.
+## Available Tools
 
-{{ if eq .chezmoi.os "linux" -}}
+The following CLI tools are installed: `rg`, `fd`, `jq`, `yq`. Use them when needed.
+{{- if eq .chezmoi.os "linux" }}
 
 ## IMPORTANT: Sandbox Plugin
 
@@ -31,7 +32,10 @@ The list of files generated:
 - .claude/commands
 
 You MUST ignore all character device files which matches these names in the current directory!
-{{- end }}
-{{- if eq .isWsl "yes" }}
-You are on WSL2 (Arch Linux). Unless explicitly told otherwise, you MUST not go into `/mnt/c` while searching/writing. This includes searching the whole `/` as it includes `/mnt/c`!
-{{- end }}
+{{- end -}}
+{{ if eq .isWsl "yes" }}
+
+## WSL2 Notes
+
+You are on WSL2 (Arch Linux). You MUST not touch `/mnt/c` while searching/writing, unless explicitly told otherwise (or if you are already inside). This includes searching the whole `/` as it includes `/mnt/c`!
+{{- end -}}

@@ -62,7 +62,7 @@ function buildContent(
   node: string | undefined,
 ): string {
   return [
-    `Current datetime: ${new Date().toISOString()}`,
+    `Current date: ${new Date().toISOString()}`,
     `OS/Arch: ${os.type()} ${os.arch()} (${os.release()})`,
     `Python: ${python ?? "Not found"}`,
     `Node.js: ${node ?? "Not found"}`,
