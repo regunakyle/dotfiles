@@ -23,6 +23,7 @@ pacman -S --noconfirm \
     chezmoi \
     curl \
     dive \
+    duckdb \
     fd \
     fzf \
     git \
@@ -40,6 +41,7 @@ pacman -S --noconfirm \
     rsync \
     shellcheck \
     socat \
+    tldr \
     tmux \
     unzip \
     uv \

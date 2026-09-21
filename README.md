@@ -23,6 +23,7 @@ Custom [Pi](https://github.com/earendil-works/pi) agent extensions and skills in
 | Item | Type | Purpose |
 | --- | --- | --- |
 | `auto-toggle-thinking-visibility.ts` | Extension | Shows the model's thinking blocks while an agent run is in progress, and hides them again when the run settles. |
+| `keep-last-model.ts` | Extension | Keeps the last model used in the process instead of the default model when Pi reapplies the default (`/new`, or a failed model restore on `/resume`/`/fork`). |
 | `load-useful-info.ts` | Extension | Injects the current datetime, OS, and detected Python and Node.js versions as a hidden message on the first turn of a new chat. |
 | `override-docs-section.ts` | Extension | Replaces the built-in `docs` section of the system prompt with custom instructions (read-only Git rule and *ASD-STE100*). |
 | `print-system-prompt.ts` | Extension | Adds a `/system-prompt` command that writes the effective system prompt to `system-prompt.txt` for inspection. |

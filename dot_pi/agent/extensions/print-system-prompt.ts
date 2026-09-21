@@ -72,7 +72,7 @@ async function deleteSessionFile(
 }
 
 export default function (pi: ExtensionAPI) {
-  pi.registerCommand("system-prompt", {
+  pi.registerCommand("print-system-prompt", {
     description: "Print the current system prompt to system-prompt.txt",
     handler: async (_args, ctx) => {
       const outputPath = join(ctx.cwd, "system-prompt.txt");
