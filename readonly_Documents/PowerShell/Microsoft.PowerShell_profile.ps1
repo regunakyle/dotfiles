@@ -1,6 +1,9 @@
+Import-Module "gsudoModule"
+
 mise activate pwsh | Out-String | Invoke-Expression
 
 Set-Alias which gcm
+Set-Alias sudo gsudo
 
 $env:OBSIDIAN_PATH = "$HOME/Documents/Obsidian"
 
