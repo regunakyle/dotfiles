@@ -1,13 +1,6 @@
 # shellcheck disable=all
 # This should be safe to be sourced anywhere
 
-{{- if ne .isWsl "yes" }}
-# Point all Docker usage to the Podman socket
-export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
-
-export OBSIDIAN_PATH="$HOME/Documents/Obsidian"
-{{- end }}
-
 {{- if eq .isWsl "yes" }}
 # Note: Run these in Powershell first
 # ```

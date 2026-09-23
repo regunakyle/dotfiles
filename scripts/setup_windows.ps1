@@ -18,7 +18,6 @@ catch {
 Write-Host "Installing winget packages..."
 $packages = @(
     "gerardog.gsudo",
-    "JanDeDobbeleer.OhMyPosh",
     "jdx.mise",
     "jftuga.less",
     "okibcn.nano",
