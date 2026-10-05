@@ -2,13 +2,13 @@
   "packages": [
     "npm:pi-rewind@0.5.0",
 {{- if eq .chezmoi.os "linux" }}
-    "npm:pi-sandbox@0.6.8",
+    "npm:pi-sandbox@0.7.0",
 {{- end }}
     "npm:@diegopetrucci/pi-notify@0.1.18",
     "git:github.com/earendil-works/pi-review@f1de050504936046c0f85b21fec0e0a93ef394eb",
-    "npm:@ff-labs/pi-fff@0.10.6",
-    "npm:@juicesharp/rpiv-web-tools@2.10.1",
-    "npm:@juicesharp/rpiv-ask-user-question@2.10.1"
+    "npm:@ff-labs/pi-fff@0.11.0",
+    "npm:@juicesharp/rpiv-web-tools@2.12.0",
+    "npm:@juicesharp/rpiv-ask-user-question@2.12.0"
   ],
 {{- if eq .chezmoi.os "windows" }}
   "defaultTools": [
@@ -19,7 +19,7 @@
   ],
 {{- end }}
   "externalEditor": "nano",
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "1.0.3",
   "branchSummary": {
     "skipPrompt": true
   },

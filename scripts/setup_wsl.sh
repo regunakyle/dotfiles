@@ -19,6 +19,7 @@ pacman -S --noconfirm \
     7zip \
     age \
     base-devel \
+    bind \
     bubblewrap \
     chezmoi \
     curl \
@@ -42,6 +43,7 @@ pacman -S --noconfirm \
     shellcheck \
     socat \
     tldr \
+    traceroute \
     tmux \
     unzip \
     uv \
@@ -69,6 +71,10 @@ cat > /etc/wsl.conf << 'EOF'
 [interop]
 appendWindowsPath=false
 EOF
+
+# Generate locales
+sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
 
 # For https://github.com/diegopetrucci/pi-extensions/tree/main/extensions/notify
 mkdir -p ~/.local/bin
