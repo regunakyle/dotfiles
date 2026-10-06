@@ -3,7 +3,7 @@
 The following CLI tools are installed: `rg`, `fd`, `jq`, `yq`. Use them when needed.
 {{- if eq .chezmoi.os "linux" }}
 
-## IMPORTANT: Sandbox Plugin
+## Sandbox Plugin
 
 A sandbox plugin is installed. Please read the below carefully.
 
@@ -11,27 +11,11 @@ A sandbox plugin is installed. Please read the below carefully.
 
 Only the current directory, `$HOME/.pi` and `/tmp` are allowed for reading and writing.
 
-### 0 Bytes Dotfiles
+### Character Device Files
 
-The plugin relies on Anthropic's sandbox runtime which currently has a bug: it generate a bunch of **character device files** in the **current directory** when run. They will disappear once the Pi process (i.e. you) is terminated.
-The list of files generated:
-
-- .bash_profile
-- .bashrc
-- .env
-- .gitconfig
-- .gitmodules
-- .idea
-- .mcp.json
-- .profile
-- .ripgreprc
-- .vscode
-- .zprofile
-- .zshrc
-- .claude/agents
-- .claude/commands
-
-You MUST ignore all character device files which matches these names in the current directory!
+The plugin relies on Anthropic's sandbox runtime which currently has a bug: it generate a bunch of **character device files** in the **current directory** when run.
+Only you (in the sandbox) can see them. They will disappear once the Pi process is terminated.
+You MUST ignore all character device files in the current directory.
 {{- end -}}
 {{ if eq .isWsl "yes" }}
 
