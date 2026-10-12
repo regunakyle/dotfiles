@@ -4,11 +4,11 @@
 {{- if eq .chezmoi.os "linux" }}
     "npm:pi-sandbox@0.7.0",
 {{- end }}
-    "npm:@diegopetrucci/pi-notify@0.1.18",
+    "npm:@diegopetrucci/pi-notify@0.1.19",
     "git:github.com/earendil-works/pi-review@f1de050504936046c0f85b21fec0e0a93ef394eb",
     "npm:@ff-labs/pi-fff@0.11.0",
-    "npm:@juicesharp/rpiv-web-tools@2.12.0",
-    "npm:@juicesharp/rpiv-ask-user-question@2.12.0"
+    "npm:@juicesharp/rpiv-web-tools@2.13.8",
+    "npm:@juicesharp/rpiv-ask-user-question@2.13.8"
   ],
 {{- if eq .chezmoi.os "windows" }}
   "defaultTools": [
@@ -19,13 +19,14 @@
   ],
 {{- end }}
   "externalEditor": "nano",
-  "lastChangelogVersion": "1.0.4",
+  "lastChangelogVersion": "1.1.0",
   "branchSummary": {
     "skipPrompt": true
   },
   "defaultProvider": "zai",
   "defaultModel": "glm-5.3",
   "defaultThinkingLevel": "high",
+  "tuiMode": "regular",
   "enableInstallTelemetry": false,
   "theme": "dark",
   "hideThinkingBlock": false

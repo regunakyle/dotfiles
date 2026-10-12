@@ -25,9 +25,31 @@ cpr() {
     rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
 }
 
-# ssh without host key checks (use only for throwaway hosts)
-ssh-no-verify() {
-    ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" "$@"
+# Remove the stored host key for the target host, then ssh
+# (use for rebuilt or throwaway hosts that get a new key each time)
+ssh_rekey() {
+    local config key
+
+    config=$(command ssh -G "$@") || return
+
+    key=$(awk '
+        $1 == "hostname"     { host = $2 }
+        $1 == "port"         { port = $2 }
+        $1 == "hostkeyalias" { alias = $2 }
+        END {
+            if (alias != "" && alias != "none")
+                print alias
+            else if (port == 22)
+                print host
+            else
+                printf "[%s]:%s\n", host, port
+        }
+    ' <<< "$config")
+
+    [[ -n "$key" ]] || return 1
+
+    command ssh-keygen -R "$key" &&
+        command ssh "$@"
 }
 
 # Make a directory and enter it
