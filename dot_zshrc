@@ -17,8 +17,11 @@ source ~/.commonrc
 zstyle ':omz:update' mode disabled
 
 # Setup Antidote
-# Mise is loaded here
+# Used by the docker plugins in .zsh_plugins.txt (conditional:has_docker)
+# Use command -v: it ignores broken symlinks, unlike $commands[docker]
+has_docker() { command -v docker >/dev/null 2>&1 }
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+# Mise is loaded here
 antidote load
 
 # dc completion: jump to a parent directory by name
