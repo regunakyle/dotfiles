@@ -101,7 +101,7 @@ export default function (pi: ExtensionAPI) {
     // returned before_agent_start messages *after* the user's message, but this appends
     // while the user message is still pending, so the info is persisted and sent
     // *before* the user's first message.
-    await pi.sendMessage(
+    pi.sendMessage(
       {
         customType: CUSTOM_TYPE,
         content: buildContent(python, node),

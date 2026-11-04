@@ -44,6 +44,7 @@ allowedSignersFile = {{ .homeDir -}}/.config/git/allowedSigners
 diffFilter = delta --color-only
 [merge]
 conflictstyle = zdiff3
+autoStash = true
 [pull]
 ff = only
 [push]
@@ -52,11 +53,12 @@ followtags = true
 autoSetupRemote = true
 [rebase]
 abbreviateCommands = true
+autoStash = true
 [submodule]
 recurse = true
 [tag]
 gpgsign = true
-sort = -v:refname
+sort = -creatordate
 [transfer]
 fsckobjects = true
 [user]
