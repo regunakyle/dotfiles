@@ -9,9 +9,7 @@ sync = !"f() { \
     return 1; \
   fi; \
   git fetch --prune upstream && \
-  git stash && \
-  git rebase upstream/$1 $1 && \
-  git stash pop; \
+  git rebase upstream/$1 $1; \
 }; f"
 [branch]
 sort = -committerdate
