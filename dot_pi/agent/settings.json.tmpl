@@ -2,13 +2,15 @@
   "packages": [
     "npm:pi-rewind@0.5.0",
 {{- if eq .chezmoi.os "linux" }}
-    "npm:pi-sandbox@0.8.2",
+    "npm:pi-sandbox@0.9.0",
 {{- end }}
+{{- if ne .chezmoi.os "android" }}
     "npm:@diegopetrucci/pi-notify@0.1.22",
+{{- end }}
     "git:github.com/earendil-works/pi-review@f1de050504936046c0f85b21fec0e0a93ef394eb",
     "npm:@ff-labs/pi-fff@0.11.0",
-    "npm:@juicesharp/rpiv-web-tools@2.15.0",
-    "npm:@juicesharp/rpiv-ask-user-question@2.15.0"
+    "npm:@juicesharp/rpiv-web-tools@2.16.0",
+    "npm:@juicesharp/rpiv-ask-user-question@2.16.0"
   ],
 {{- if eq .chezmoi.os "windows" }}
   "defaultTools": [
@@ -19,7 +21,7 @@
   ],
 {{- end }}
   "externalEditor": "nano",
-  "lastChangelogVersion": "1.6.1",
+  "lastChangelogVersion": "1.7.0",
   "branchSummary": {
     "skipPrompt": true
   },
@@ -28,5 +30,5 @@
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "theme": "dark",
-  "hideThinkingBlock": false
+  "hideThinkingBlock": true
 }

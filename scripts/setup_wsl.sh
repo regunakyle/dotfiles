@@ -24,7 +24,6 @@ pacman -S --noconfirm \
     chezmoi \
     curl \
     dive \
-    duckdb \
     fd \
     fzf \
     git \
@@ -68,6 +67,9 @@ done
 EOF
 
 cat > /etc/wsl.conf << 'EOF'
+[boot]
+systemd=true
+
 [interop]
 appendWindowsPath=false
 EOF

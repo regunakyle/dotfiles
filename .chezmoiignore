@@ -10,7 +10,6 @@ system-prompt.txt
 *
 !.config
 !.pi
-.pi/agent/sandbox.json
 !Documents
 !.gitconfig
 !AppData
@@ -21,7 +20,16 @@ system-prompt.txt
 !.config/rpiv-web-tools
 {{- end }}
 
-{{- if eq .chezmoi.os "linux" }}
+{{- if ne .chezmoi.os "windows" }}
 Documents
 AppData
+{{- end }}
+
+{{- if ne .chezmoi.os "linux" }}
+.pi/agent/sandbox.json
+{{- end }}
+
+{{- if eq .chezmoi.os "android" }}
+.config/mise
+.pi/agent/extensions/notify.json
 {{- end }}

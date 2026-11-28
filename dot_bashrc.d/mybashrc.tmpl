@@ -3,8 +3,10 @@
 
 source ~/.commonrc
 
+{{- if ne .chezmoi.os "android" }}
 # Activate Mise
 eval "$(mise activate bash)"
+{{- end }}
 
 # If an interactive shell
 if [[ $- == *i* ]]; then

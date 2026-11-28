@@ -6,8 +6,10 @@ ohmyzsh/ohmyzsh path:lib
 
 romkatv/powerlevel10k kind:fpath
 
+{{- if ne .chezmoi.os "android" }}
 # Mise is initiated here
 ohmyzsh/ohmyzsh path:plugins/mise
+{{- end }}
 ohmyzsh/ohmyzsh path:plugins/chezmoi
 # Load only when the docker command exists (has_docker is defined in .zshrc)
 ohmyzsh/ohmyzsh path:plugins/docker conditional:has_docker
