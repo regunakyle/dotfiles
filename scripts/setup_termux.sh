@@ -20,10 +20,11 @@ pkg install -y \
     mandoc \
     nmap \
     nodejs-lts \
+    perl \
     python \
     ripgrep \
     rsync \
-    sqlite3 \
+    sqlite \
     tealdeer \
     tmux \
     traceroute \
