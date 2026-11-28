@@ -1,9 +1,9 @@
 # shellcheck shell=bash
-# This should be the last sourced bashrc file
 
 source ~/.commonrc
 
 {{- if ne .chezmoi.os "android" }}
+
 # Activate Mise
 eval "$(mise activate bash)"
 {{- end }}

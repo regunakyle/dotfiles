@@ -59,13 +59,6 @@ pacman -S --noconfirm \
 chezmoi init --apply --force regunakyle
 mise install
 
-# Write .bash_profile to source files from ~/.bashrc.d
-cat > ~/.bash_profile << 'EOF'
-for f in ~/.bashrc.d/*; do
-  [ -r "$f" ] && source "$f"
-done
-EOF
-
 cat > /etc/wsl.conf << 'EOF'
 [boot]
 systemd=true

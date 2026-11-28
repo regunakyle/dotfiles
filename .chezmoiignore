@@ -26,6 +26,7 @@ AppData
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
+.bash_profile
 .pi/agent/sandbox.json
 {{- end }}
 

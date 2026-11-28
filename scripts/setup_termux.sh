@@ -23,6 +23,7 @@ pkg install -y \
     python \
     ripgrep \
     rsync \
+    sqlite3 \
     tealdeer \
     tmux \
     traceroute \
